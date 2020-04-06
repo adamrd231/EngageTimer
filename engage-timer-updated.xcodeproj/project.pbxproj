@@ -13,6 +13,7 @@
 		66CBF16823ED19AA0022F015 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66CBF16723ED19AA0022F015 /* Assets.xcassets */; };
 		66CBF16B23ED19AA0022F015 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66CBF16A23ED19AA0022F015 /* Preview Assets.xcassets */; };
 		66CBF16E23ED19AA0022F015 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CBF16C23ED19AA0022F015 /* LaunchScreen.storyboard */; };
+		66CBF17A23ED1FC50022F015 /* DS-DIGI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 66CBF17923ED1FC40022F015 /* DS-DIGI.TTF */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		66CBF16A23ED19AA0022F015 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		66CBF16D23ED19AA0022F015 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66CBF16F23ED19AA0022F015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66CBF17923ED1FC40022F015 /* DS-DIGI.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGI.TTF"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				66CBF16723ED19AA0022F015 /* Assets.xcassets */,
 				66CBF16C23ED19AA0022F015 /* LaunchScreen.storyboard */,
 				66CBF16F23ED19AA0022F015 /* Info.plist */,
+				66CBF17523ED1DA00022F015 /* Fonts */,
 				66CBF16923ED19AA0022F015 /* Preview Content */,
 			);
 			path = "engage-timer-updated";
@@ -73,6 +76,14 @@
 				66CBF16A23ED19AA0022F015 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		66CBF17523ED1DA00022F015 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				66CBF17923ED1FC40022F015 /* DS-DIGI.TTF */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +147,7 @@
 				66CBF16E23ED19AA0022F015 /* LaunchScreen.storyboard in Resources */,
 				66CBF16B23ED19AA0022F015 /* Preview Assets.xcassets in Resources */,
 				66CBF16823ED19AA0022F015 /* Assets.xcassets in Resources */,
+				66CBF17A23ED1FC50022F015 /* DS-DIGI.TTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
