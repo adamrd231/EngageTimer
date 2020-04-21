@@ -13,19 +13,20 @@ struct ContentView: View {
     //Properties
     // =========
     @State var round = 2
+    @State var time = 10
+    @State var rest = 5
     @State var timeStringDisplay = "3:00"
     @State var restStringDisplay = "1:00"
     @State var noiseTotal = 0
     @State var noise = "Clap"
-    
+
     @State var buttonTitle = "Engage"
     @State var timerIsRunning = false
+
     
-    @State var time = 10
-    @State var rest = 5
-    
+
     @State private var showingAlert = false
-    
+
     let timer = Timer.publish(every: 1, on: .main, in: .common)
     
     // ================================================================
@@ -125,31 +126,30 @@ struct ContentView: View {
         } //Main VStack Closure
     } // View Closure
 
-// =====================================================================
-// Methods
-// =======
-func integerToString (number: Int) -> String {
+    // Methods
+    // =======
+    func integerToString (number: Int) -> String {
 
-    let minutes = number / 60
-    let seconds = String(number % 60)
-    if seconds.count == 1 {
-        let answer = "\(minutes):0\(seconds)"
-        return answer
-    } else {
-        let answer = "\(minutes):\(seconds)"
-        return answer
-    }
-}
-    
-    func stringToInteger (string: String) -> Int {
-        
-        if let seconds = Int(string.suffix(2)), let minutes = Int(string.prefix(2)) {
-            var minutesToSeconds = minutes * 60
-            var answer = minutesToSeconds + seconds
+        let minutes = number / 60
+        let seconds = String(number % 60)
+        if seconds.count == 1 {
+            let answer = "\(minutes):0\(seconds)"
+            return answer
+        } else {
+            let answer = "\(minutes):\(seconds)"
             return answer
         }
-        return 0
     }
+        
+        func stringToInteger (string: String) -> Int {
+            
+            if let seconds = Int(string.suffix(2)), let minutes = Int(string.prefix(2)) {
+                var minutesToSeconds = minutes * 60
+                var answer = minutesToSeconds + seconds
+                return answer
+            }
+            return 0
+        }
 
 // =====================================================================
 struct ContentView_Previews: PreviewProvider {
