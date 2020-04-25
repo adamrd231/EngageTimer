@@ -21,8 +21,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
         Form {
-        
-        VStack {
             // Rounds Stack
             // =============================
 
@@ -114,8 +112,6 @@ struct ContentView: View {
                                 .stroke(Color.black, lineWidth: 2)
                     )
                 }.padding()
-          
-        }.padding()  // End of Main VStack
             }.navigationBarTitle("EngageTimer")
             .navigationBarItems(trailing: Button("Edit") { print("Button Pressed")} )
         }
