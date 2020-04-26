@@ -14,133 +14,124 @@ struct ContentView: View {
     // =========
     @ObservedObject var engageTimer = EngageTimer()
     @State var timer = Timer.publish(every: 1, on: .main, in: .common)
+    @State var editEngageTimerViewIsVisible = false
+    @State var textSize = CGFloat(80)
     
     // ================================================================
     
     // User Interface Views
     var body: some View {
         NavigationView {
-        Form {
+        List {
             // Rounds Stack
             // =============================
-
-                VStack {
-                    Text("ROUND")
-                        .font(.subheadline)
+                HStack {
+                    Text("Round").font(.largeTitle)
                     
-                    // Rounds Remaining
-                    Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: 80)).fixedSize()
-                }
+                    Spacer()
+                    
+                    Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: textSize))
+            }
                     
             // Time Remaining Stack
             // ====================
-                VStack {
-                    // Time description
-                    Text("TIME")
-                        .font(.subheadline)
+                HStack {
+                    Text("Time").font(.largeTitle)
 
-                    // Time Remaining
-                    Text("\(self.engageTimer.timeStringDisplay)").font(.custom("DS-Digital", size: 110)).fixedSize()
+                    Spacer()
+                    
+                    Text("\(self.engageTimer.timeStringDisplay)").font(.custom("DS-Digital", size: textSize))
 
                     // When timer is running, every second runs this code
                         .onReceive(timer) { _ in
                             print("running timer")
-                            if self.engageTimer.time > 0 {
-                                self.engageTimer.time -= 1
-                                self.engageTimer.timeStringDisplay = self.integerToString(number: self.engageTimer.time)
-                                print(self.engageTimer.timeStringDisplay)
-                                
-                            } else if self.engageTimer.rest > 0 {
-                                self.engageTimer.rest -= 1
-                                self.engageTimer.restStringDisplay = self.integerToString(number: self.engageTimer.rest)
-                            } else if self.engageTimer.round > 1 {
-                                self.engageTimer.round -= 1
-                                self.engageTimer.time = 10
-                                self.engageTimer.rest = 5
-                                self.engageTimer.timeStringDisplay = self.integerToString(number: self.engageTimer.time)
-                                self.engageTimer.restStringDisplay = self.integerToString(number: self.engageTimer.rest)
-                            } else {
-                                self.engageTimer.buttonTitle = "ENGAGE"
-                                self.engageTimer.timerIsRunning = false
-                                self.timer.connect().cancel()
-                            }
+                            self.updateTimerDisplay()
                         }
-                } // Close Time Remaining Stack
+                }
                     
             // Rest Stack
             // ==========
-               VStack {
-                   Text("REST")
-                       .font(.subheadline).fixedSize()
-   
-                   // Rest Remaining
-                   Text("\(self.engageTimer.restStringDisplay)").font(.custom("DS-Digital", size: 110)).fixedSize()
+               HStack {
+                   Text("Rest").font(.largeTitle)
+                
+                    Spacer()
+                
+                   Text("\(self.engageTimer.restStringDisplay)").font(.custom("DS-Digital", size: textSize))
                }
        
    
            // Random Noise Choice & Count
            // ===========================
                HStack {
-                   Text("\(self.engageTimer.noise)")
-                       .font(.largeTitle).bold()
-                       .fixedSize()
-                   Text("\(self.engageTimer.noiseTotal)")
-                       .font(.largeTitle)
-               }.padding()
+                   Text("\(self.engageTimer.noise)").font(.largeTitle).bold()
+                
+                    Spacer()
+                
+                    Text("\(self.engageTimer.noiseTotal)").font(.custom("DS-Digital", size: textSize))
+               }
                     
             // Button Action & Design
             // ======================
-                VStack {
-                    // Engage Button
+            VStack (alignment: .center) {
                     Button(action: {
                         self.timer.connect()
                         print("pressed print button")
                         self.engageTimer.timerIsRunning = true
                         self.engageTimer.buttonTitle = "STOP"
-
-                    }) { Text("\(self.engageTimer.buttonTitle)").font(.largeTitle)
+                    }) { Text("\(self.engageTimer.buttonTitle)")
+                        .font(.largeTitle)
                     }
                         .font(.title)
-                        .frame(width: 150)
+                        .frame(width: 300)
                         .padding()
                         .background(Color.white)
                         .cornerRadius(25)
                         .foregroundColor(.black)
                         .padding(5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 30)
-                                .stroke(Color.black, lineWidth: 2)
+                        .overlay(RoundedRectangle(cornerRadius: 30)
+                        .stroke(Color.black, lineWidth: 2)
                     )
-                }.padding()
-            }.navigationBarTitle("EngageTimer")
-            .navigationBarItems(trailing: Button("Edit") { print("Button Pressed")} )
+                }
+            
+            // Navigation Bar Layout and Design
+        }.navigationBarTitle("EngageTimer", displayMode: .inline)
+            .navigationBarItems(trailing: Button("Edit") {
+                self.editEngageTimerViewIsVisible = true
+                print("Button Pressed")
+                
+            } )
+        }.sheet(isPresented: $editEngageTimerViewIsVisible){
+            EditEngageTimerOptionsView()
         }
+        
+        
 } // View Closure
 
-    // Methods
-    // =======
-    func integerToString (number: Int) -> String {
 
-        let minutes = number / 60
-        let seconds = String(number % 60)
-        if seconds.count == 1 {
-            let answer = "\(minutes):0\(seconds)"
-            return answer
-        } else {
-            let answer = "\(minutes):\(seconds)"
-            return answer
-        }
-    }
+// Methods
+// =======
+func updateTimerDisplay() {
+    if self.engageTimer.time > 0 {
+        self.engageTimer.time -= 1
+        self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
+        print(self.engageTimer.timeStringDisplay)
         
-        func stringToInteger (string: String) -> Int {
-            
-            if let seconds = Int(string.suffix(2)), let minutes = Int(string.prefix(2)) {
-                let minutesToSeconds = minutes * 60
-                let answer = minutesToSeconds + seconds
-                return answer
-            }
-            return 0
-        }
+    } else if self.engageTimer.rest > 0 {
+        self.engageTimer.rest -= 1
+        self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
+    } else if self.engageTimer.round > 1 {
+        self.engageTimer.round -= 1
+        self.engageTimer.time = 10
+        self.engageTimer.rest = 5
+        self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
+        self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
+    } else {
+        self.engageTimer.buttonTitle = "ENGAGE"
+        self.engageTimer.timerIsRunning = false
+        self.timer.connect().cancel()
+    }
+}
+
 
 // =====================================================================
 struct ContentView_Previews: PreviewProvider {
