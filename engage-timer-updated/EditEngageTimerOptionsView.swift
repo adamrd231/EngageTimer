@@ -20,12 +20,12 @@ struct EditEngageTimerOptionsView: View {
                 HStack {
                 Text("Rounds")
                  Spacer()
-                    Text("1")
+                    Text("\(self.engageTimer.round)")
                  }
                  Stepper("", onIncrement: {
-                    self.round += 1
+                    self.engageTimer.round += 1
                  }, onDecrement: {
-                    self.round -= 1
+                    self.engageTimer.round -= 1
                  })
 
             .navigationBarTitle("Edit Options")

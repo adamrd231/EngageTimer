@@ -115,7 +115,7 @@ struct EngageTimerView: View {
                 
             } )
         }.sheet(isPresented: $editEngageTimerViewIsVisible){
-            EditEngageTimerOptionsView()
+            EditEngageTimerOptionsView().environmentObject(self.engageTimer)
         }
         
         
