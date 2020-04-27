@@ -48,7 +48,7 @@ struct EngageTimerView: View {
                     // When timer is running, every second runs this code
                         .onReceive(timer) { _ in
                             print("running timer")
-                            self.updateTimerDisplay()
+                            self.runEngageTimer()
                         }
                 }
                     
@@ -124,7 +124,7 @@ struct EngageTimerView: View {
 
 // Methods
 // =======
-func updateTimerDisplay() {
+func runEngageTimer() {
     if self.engageTimer.time > 0 {
         self.engageTimer.time -= 1
         self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
@@ -135,6 +135,8 @@ func updateTimerDisplay() {
         self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
     } else if self.engageTimer.round > 1 {
         self.engageTimer.round -= 1
+        // Update the reset to use the users input numbers
+        // FIX FIX FIX
         self.engageTimer.time = 10
         self.engageTimer.rest = 5
         self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
