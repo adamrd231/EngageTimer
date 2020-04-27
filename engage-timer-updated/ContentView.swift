@@ -23,6 +23,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
         List {
+
             // Rounds Stack
             // =============================
                 HStack {
@@ -94,10 +95,11 @@ struct ContentView: View {
                 }
             
             // Navigation Bar Layout and Design
-        }.navigationBarTitle("EngageTimer", displayMode: .inline)
-            .navigationBarItems(trailing: Button("Edit") {
-                self.editEngageTimerViewIsVisible = true
-                print("Button Pressed")
+        }
+        .navigationBarTitle("EngageTimer", displayMode: .inline)
+        .navigationBarItems(trailing: Button("Edit") {
+        self.editEngageTimerViewIsVisible = true
+        print("Button Pressed")
                 
             } )
         }.sheet(isPresented: $editEngageTimerViewIsVisible){
