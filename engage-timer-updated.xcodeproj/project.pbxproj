@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6629071824575E5F00EFF54D /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629071724575E5F00EFF54D /* TestView.swift */; };
 		66B5A52E2456413D005A2D4F /* EditEngageTimerOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */; };
 		66CBF16223ED19A70022F015 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CBF16123ED19A70022F015 /* AppDelegate.swift */; };
 		66CBF16423ED19A70022F015 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CBF16323ED19A70022F015 /* SceneDelegate.swift */; };
-		66CBF16623ED19A70022F015 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CBF16523ED19A70022F015 /* ContentView.swift */; };
+		66CBF16623ED19A70022F015 /* EngageTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CBF16523ED19A70022F015 /* EngageTimerView.swift */; };
 		66CBF16823ED19AA0022F015 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66CBF16723ED19AA0022F015 /* Assets.xcassets */; };
 		66CBF16B23ED19AA0022F015 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66CBF16A23ED19AA0022F015 /* Preview Assets.xcassets */; };
 		66CBF16E23ED19AA0022F015 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CBF16C23ED19AA0022F015 /* LaunchScreen.storyboard */; };
@@ -19,11 +20,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6629071724575E5F00EFF54D /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEngageTimerOptionsView.swift; sourceTree = "<group>"; };
 		66CBF15E23ED19A70022F015 /* engage-timer-updated.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "engage-timer-updated.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66CBF16123ED19A70022F015 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66CBF16323ED19A70022F015 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		66CBF16523ED19A70022F015 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		66CBF16523ED19A70022F015 /* EngageTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngageTimerView.swift; sourceTree = "<group>"; };
 		66CBF16723ED19AA0022F015 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66CBF16A23ED19AA0022F015 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		66CBF16D23ED19AA0022F015 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -64,7 +66,7 @@
 			children = (
 				66CBF16123ED19A70022F015 /* AppDelegate.swift */,
 				66CBF16323ED19A70022F015 /* SceneDelegate.swift */,
-				66CBF16523ED19A70022F015 /* ContentView.swift */,
+				66CBF16523ED19A70022F015 /* EngageTimerView.swift */,
 				66CBF16723ED19AA0022F015 /* Assets.xcassets */,
 				66CBF16C23ED19AA0022F015 /* LaunchScreen.storyboard */,
 				66CBF16F23ED19AA0022F015 /* Info.plist */,
@@ -72,6 +74,7 @@
 				66CBF16923ED19AA0022F015 /* Preview Content */,
 				66E88EB32453AD590076865F /* EngageTimerModel.swift */,
 				66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */,
+				6629071724575E5F00EFF54D /* TestView.swift */,
 			);
 			path = "engage-timer-updated";
 			sourceTree = "<group>";
@@ -164,11 +167,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6629071824575E5F00EFF54D /* TestView.swift in Sources */,
 				66B5A52E2456413D005A2D4F /* EditEngageTimerOptionsView.swift in Sources */,
 				66CBF16223ED19A70022F015 /* AppDelegate.swift in Sources */,
 				66CBF16423ED19A70022F015 /* SceneDelegate.swift in Sources */,
 				66E88EB42453AD590076865F /* EngageTimerModel.swift in Sources */,
-				66CBF16623ED19A70022F015 /* ContentView.swift in Sources */,
+				66CBF16623ED19A70022F015 /* EngageTimerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

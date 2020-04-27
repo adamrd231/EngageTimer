@@ -9,7 +9,7 @@
 import Foundation
 
 class EngageTimer: ObservableObject {
-    @Published var round = 2
+    @Published var round = 5
     @Published var time = 10
     @Published var rest = 5
     @Published var timeStringDisplay = "0:10"

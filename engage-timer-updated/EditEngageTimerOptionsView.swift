@@ -10,73 +10,35 @@ import SwiftUI
 
 struct EditEngageTimerOptionsView: View {
     
-    @State private var stepperVallue = 10
+    @EnvironmentObject var engageTimer: EngageTimer
+    @State var round = 1
     
     var body: some View {
-    VStack{
-        Form {
-            Section {
+    NavigationView {
+        VStack{
+            Form {
                 HStack {
                 Text("Rounds")
                  Spacer()
-                 Text("2")
+                    Text("1")
                  }
                  Stepper("", onIncrement: {
-                     self.stepperVallue += 1
+                    self.round += 1
                  }, onDecrement: {
-                     self.stepperVallue -= 1
+                    self.round -= 1
                  })
-            }
-            
-            Section {
-                HStack {
-                Text("Time")
-                 Spacer()
-                 Text("1:00")
-                 }
-                 Stepper("", onIncrement: {
-                     self.stepperVallue += 1
-                 }, onDecrement: {
-                     self.stepperVallue -= 1
-                 })
-            }
-            
-            Section {
-                HStack {
-                Text("Rest")
-                 Spacer()
-                 Text("0:30")
-                 }
-                 Stepper("", onIncrement: {
-                     self.stepperVallue += 1
-                 }, onDecrement: {
-                     self.stepperVallue -= 1
-                 })
-            }
-            
-            Section {
-                HStack {
-                Text("Random Noise")
-                 Spacer()
-                 Text("1")
-                 }
-                 Stepper("", onIncrement: {
-                     self.stepperVallue += 1
-                 }, onDecrement: {
-                     self.stepperVallue -= 1
-                 })
-            }
-            
-  
-            
+
+            .navigationBarTitle("Edit Options")
+
         }
         Text("Swipe Down To Cancel").padding()
-        }
-    }
-}
+        } // Form Closure
+        } // Main VStack Closure
+    } // Nav CLosure
+} // View Closure
 
 struct EditEngageTimerOptionsView_Previews: PreviewProvider {
     static var previews: some View {
-        EditEngageTimerOptionsView()
+        EditEngageTimerOptionsView().environmentObject(EngageTimer())
     }
 }

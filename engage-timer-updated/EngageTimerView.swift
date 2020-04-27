@@ -8,14 +8,16 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct EngageTimerView: View {
     
     //Properties
     // =========
-    @ObservedObject var engageTimer = EngageTimer()
+    @EnvironmentObject var engageTimer: EngageTimer
+    
     @State var timer = Timer.publish(every: 1, on: .main, in: .common)
     @State var editEngageTimerViewIsVisible = false
     @State var textSize = CGFloat(80)
+    
     
     // ================================================================
     
@@ -75,10 +77,20 @@ struct ContentView: View {
             // ======================
             VStack (alignment: .center) {
                     Button(action: {
-                        self.timer.connect()
-                        print("pressed print button")
-                        self.engageTimer.timerIsRunning = true
-                        self.engageTimer.buttonTitle = "STOP"
+                        
+                        if self.engageTimer.timerIsRunning == true {
+                            self.engageTimer.buttonTitle = "ENGAGE"
+                            self.engageTimer.timerIsRunning = false
+                            self.cancelTimer()
+                        } else {
+                            self.instanstiateTimer()
+                            self.timer.connect()
+                            print("pressed print button")
+                            self.engageTimer.timerIsRunning = true
+                            self.engageTimer.buttonTitle = "STOP"
+                        }
+                        
+                        
                     }) { Text("\(self.engageTimer.buttonTitle)")
                         .font(.largeTitle)
                     }
@@ -133,12 +145,21 @@ func updateTimerDisplay() {
         self.timer.connect().cancel()
     }
 }
+    
+    func instanstiateTimer() {
+        self.timer = Timer.publish(every: 1, on: .main, in: .common)
+        return
+    }
+    
+    func cancelTimer() {
+        self.timer.connect().cancel()
+    }
 
 
 // =====================================================================
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        EngageTimerView().environmentObject(EngageTimer())
     }
 }
 }
