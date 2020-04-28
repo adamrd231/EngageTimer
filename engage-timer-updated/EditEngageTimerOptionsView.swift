@@ -33,10 +33,10 @@ struct EditEngageTimerOptionsView: View {
                 Spacer()
                     Text("\(self.engageTimer.timeStringDisplay)")
                 Stepper("", onIncrement: {
-                                   self.engageTimer.time += 1
+                                   self.engageTimer.time += 5
                     self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
                                 }, onDecrement: {
-                                   self.engageTimer.time -= 1
+                                   self.engageTimer.time -= 5
                                     self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
                     }).labelsHidden().padding()
                     }
@@ -46,10 +46,10 @@ struct EditEngageTimerOptionsView: View {
                 Spacer()
                     Text("\(self.engageTimer.restStringDisplay)")
                 Stepper("", onIncrement: {
-                                   self.engageTimer.rest += 1
+                                   self.engageTimer.rest += 5
                     self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
                                 }, onDecrement: {
-                                   self.engageTimer.rest -= 1
+                                   self.engageTimer.rest -= 5
                                     self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
                     }).labelsHidden().padding()
                     }
