@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6629071824575E5F00EFF54D /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629071724575E5F00EFF54D /* TestView.swift */; };
+		6629071A2458C80500EFF54D /* sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662907192458C80500EFF54D /* sounds.swift */; };
+		6629071D2458C92600EFF54D /* boxing-bell-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071B2458C92600EFF54D /* boxing-bell-1.wav */; };
+		6629071E2458C92600EFF54D /* boxing-bell-3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071C2458C92600EFF54D /* boxing-bell-3.wav */; };
 		66B5A52E2456413D005A2D4F /* EditEngageTimerOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */; };
 		66CBF16223ED19A70022F015 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CBF16123ED19A70022F015 /* AppDelegate.swift */; };
 		66CBF16423ED19A70022F015 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CBF16323ED19A70022F015 /* SceneDelegate.swift */; };
@@ -21,6 +24,9 @@
 
 /* Begin PBXFileReference section */
 		6629071724575E5F00EFF54D /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		662907192458C80500EFF54D /* sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sounds.swift; sourceTree = "<group>"; };
+		6629071B2458C92600EFF54D /* boxing-bell-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "boxing-bell-1.wav"; sourceTree = "<group>"; };
+		6629071C2458C92600EFF54D /* boxing-bell-3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "boxing-bell-3.wav"; sourceTree = "<group>"; };
 		66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEngageTimerOptionsView.swift; sourceTree = "<group>"; };
 		66CBF15E23ED19A70022F015 /* engage-timer-updated.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "engage-timer-updated.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66CBF16123ED19A70022F015 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +81,9 @@
 				66E88EB32453AD590076865F /* EngageTimerModel.swift */,
 				66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */,
 				6629071724575E5F00EFF54D /* TestView.swift */,
+				662907192458C80500EFF54D /* sounds.swift */,
+				6629071B2458C92600EFF54D /* boxing-bell-1.wav */,
+				6629071C2458C92600EFF54D /* boxing-bell-3.wav */,
 			);
 			path = "engage-timer-updated";
 			sourceTree = "<group>";
@@ -154,6 +163,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				66CBF16E23ED19AA0022F015 /* LaunchScreen.storyboard in Resources */,
+				6629071D2458C92600EFF54D /* boxing-bell-1.wav in Resources */,
+				6629071E2458C92600EFF54D /* boxing-bell-3.wav in Resources */,
 				66CBF16B23ED19AA0022F015 /* Preview Assets.xcassets in Resources */,
 				66CBF16823ED19AA0022F015 /* Assets.xcassets in Resources */,
 				66CBF17A23ED1FC50022F015 /* DS-DIGI.TTF in Resources */,
@@ -172,6 +183,7 @@
 				66CBF16223ED19A70022F015 /* AppDelegate.swift in Sources */,
 				66CBF16423ED19A70022F015 /* SceneDelegate.swift in Sources */,
 				66E88EB42453AD590076865F /* EngageTimerModel.swift in Sources */,
+				6629071A2458C80500EFF54D /* sounds.swift in Sources */,
 				66CBF16623ED19A70022F015 /* EngageTimerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

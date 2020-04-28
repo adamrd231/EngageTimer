@@ -4,6 +4,8 @@
 // Notes
 // find a way to get the layout to fill the whole screen?
 // Add start / stop noise into the app
+// Add random noises to app
+// Add in random noise algorithm
 
 import SwiftUI
 
@@ -47,7 +49,6 @@ struct EngageTimerView: View {
                 Text("\(self.engageTimer.timeStringDisplay)").font(.custom("DS-Digital", size: textSize))
                 // When timer is running, every second runs this code
                     .onReceive(timer) { _ in
-                        print("running timer")
                         self.runEngageTimer()
                     }
             }
@@ -88,13 +89,14 @@ struct EngageTimerView: View {
                         self.fillResetValues()
                         self.instanstiateTimer()
                         self.timer.connect()
+                        playSound(sound: "boxing-bell-1", type: "wav")
                         self.engageTimer.timerIsRunning = true
                         self.engageTimer.buttonTitle = "Stop"
                     }
                 })
                 { Text("\(self.engageTimer.buttonTitle)") }
                     .font(.title)
-                    .frame(width: 300)
+                    .frame(minWidth: 0, maxWidth: .infinity)
                     .background(Color.white)
                     .foregroundColor(.black)
                     .padding(3)
@@ -121,7 +123,7 @@ struct EngageTimerView: View {
                   }
                 }) { Text("\(self.pauseButtonTitle)") }
                       .font(.title)
-                      .frame(width: 300)
+                      .frame(minWidth: 0, maxWidth: .infinity)
                       .background(Color.white)
                       .foregroundColor(.black)
                       .padding(3)
