@@ -10,13 +10,20 @@ import SwiftUI
 
 struct EngageTimerView: View {
     
+    // Notes
+    // Fix time and rest reset in between rounds, state variable to track times?
+    // find a way to get the layout to fill the whole screen?
+    // Add start / stop noise into the app
+    // Pause button?
+    
+    
     //Properties
     // =========
     @EnvironmentObject var engageTimer: EngageTimer
     
     @State var timer = Timer.publish(every: 1, on: .main, in: .common)
     @State var editEngageTimerViewIsVisible = false
-    @State var textSize = CGFloat(80)
+    @State var textSize = CGFloat(70)
     
     
     // ================================================================
@@ -24,15 +31,13 @@ struct EngageTimerView: View {
     // User Interface Views
     var body: some View {
         NavigationView {
-        List {
+        Form {
 
             // Rounds Stack
             // =============================
                 HStack {
                     Text("Round").font(.largeTitle)
-                    
                     Spacer()
-                    
                     Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: textSize))
             }
                     
@@ -40,11 +45,8 @@ struct EngageTimerView: View {
             // ====================
                 HStack {
                     Text("Time").font(.largeTitle)
-
                     Spacer()
-                    
                     Text("\(self.engageTimer.timeStringDisplay)").font(.custom("DS-Digital", size: textSize))
-
                     // When timer is running, every second runs this code
                         .onReceive(timer) { _ in
                             print("running timer")
@@ -56,9 +58,7 @@ struct EngageTimerView: View {
             // ==========
                HStack {
                    Text("Rest").font(.largeTitle)
-                
                     Spacer()
-                
                    Text("\(self.engageTimer.restStringDisplay)").font(.custom("DS-Digital", size: textSize))
                }
        
@@ -67,9 +67,7 @@ struct EngageTimerView: View {
            // ===========================
                HStack {
                    Text("\(self.engageTimer.noise)").font(.largeTitle).bold()
-                
                     Spacer()
-                
                     Text("\(self.engageTimer.noiseTotal)").font(.custom("DS-Digital", size: textSize))
                }
                     
@@ -79,8 +77,6 @@ struct EngageTimerView: View {
                     Button(action: {
                         
                         if self.engageTimer.timerIsRunning == true {
-                            self.engageTimer.buttonTitle = "ENGAGE"
-                            self.engageTimer.timerIsRunning = false
                             self.cancelTimer()
                         } else {
                             self.instanstiateTimer()
@@ -98,18 +94,19 @@ struct EngageTimerView: View {
                         .frame(width: 300)
                         .padding()
                         .background(Color.white)
-                        .cornerRadius(25)
                         .foregroundColor(.black)
                         .padding(5)
-                        .overlay(RoundedRectangle(cornerRadius: 30)
+                        .overlay(RoundedRectangle(cornerRadius: 10)
                         .stroke(Color.black, lineWidth: 2)
                     )
-                }
+            }
             
             // Navigation Bar Layout and Design
         }
-        .navigationBarTitle("EngageTimer", displayMode: .inline)
+        .navigationBarTitle("Engage Timer", displayMode: .large)
         .navigationBarItems(trailing: Button("Edit") {
+        self.engageTimer.buttonTitle = "ENGAGE"
+        self.cancelTimer()
         self.editEngageTimerViewIsVisible = true
         print("Button Pressed")
                 
@@ -128,11 +125,11 @@ func runEngageTimer() {
     if self.engageTimer.time > 0 {
         self.engageTimer.time -= 1
         self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
-        print(self.engageTimer.timeStringDisplay)
         
     } else if self.engageTimer.rest > 0 {
         self.engageTimer.rest -= 1
         self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
+        
     } else if self.engageTimer.round > 1 {
         self.engageTimer.round -= 1
         // Update the reset to use the users input numbers
@@ -141,20 +138,24 @@ func runEngageTimer() {
         self.engageTimer.rest = 5
         self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
         self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
+        
     } else {
-        self.engageTimer.buttonTitle = "ENGAGE"
-        self.engageTimer.timerIsRunning = false
-        self.timer.connect().cancel()
+        self.cancelTimer()
     }
 }
     
+
+    
     func instanstiateTimer() {
+        self.engageTimer.timerIsRunning = true
         self.timer = Timer.publish(every: 1, on: .main, in: .common)
         return
     }
     
     func cancelTimer() {
         self.timer.connect().cancel()
+        self.engageTimer.buttonTitle = "ENGAGE"
+        self.engageTimer.timerIsRunning = false
     }
 
 
