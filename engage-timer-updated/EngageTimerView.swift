@@ -74,25 +74,7 @@ struct EngageTimerView: View {
             // ======================
             VStack (alignment: .center) {
                 Button(action: {
-                    
-                    if self.engageTimer.timerIsRunning == true {
-                        self.cancelTimer()
-                        self.resetValues()
-                        self.engageTimer.buttonTitle = "Engage"
-                    } else if self.pauseButtonTitle == "Re-start" {
-                        self.cancelTimer()
-                        self.resetValues()
-                        self.engageTimer.buttonTitle = "Engage"
-                        self.pauseButtonTitle = "Pause"
-                    } else {
-                        // Capture reset values if timer is starting
-                        self.fillResetValues()
-                        self.instanstiateTimer()
-                        self.timer.connect()
-                        playSound(sound: "boxing-bell-1", type: "wav")
-                        self.engageTimer.timerIsRunning = true
-                        self.engageTimer.buttonTitle = "Stop"
-                    }
+                    self.pressedEngageTimer()
                 })
                 { Text("\(self.engageTimer.buttonTitle)") }
                     .font(.title)
@@ -103,7 +85,7 @@ struct EngageTimerView: View {
                     .overlay(RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.black, lineWidth: 2)
                 )
-            }
+            }.padding(5)
             
             VStack {
                 Button(action: {
@@ -130,7 +112,7 @@ struct EngageTimerView: View {
                       .overlay(RoundedRectangle(cornerRadius: 10)
                       .stroke(Color.black, lineWidth: 2)
                   )
-            } // VStack Close
+            }.padding(5) // VStack Close
             
         }// Form Close
          // Navigation Bar Layout and Design
@@ -146,41 +128,95 @@ struct EngageTimerView: View {
         
 } // View Closure
 
+    
+    
+    
 
 // Methods
 // =======
+ 
+   
+func pressedEngageTimer() {
+    if self.engageTimer.timerIsRunning == true {
+          self.cancelTimer()
+          self.resetTimeAndRest()
+          self.engageTimer.buttonTitle = "Engage"
+      } else if self.pauseButtonTitle == "Re-start" {
+          self.cancelTimer()
+          self.resetTimeAndRest()
+          self.engageTimer.buttonTitle = "Engage"
+          self.pauseButtonTitle = "Pause"
+      } else {
+          // Capture reset values if timer is starting
+          self.fillResetValues()
+          self.instanstiateTimer()
+          self.timer.connect()
+          playSound(sound: "boxing-bell-1", type: "wav")
+          self.engageTimer.timerIsRunning = true
+          self.engageTimer.buttonTitle = "Stop"
+    }
+}
+    
+    
 func runEngageTimer() {
     if self.engageTimer.time > 0 {
         self.engageTimer.time -= 1
         self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
         
     } else if self.engageTimer.rest > 0 {
+        // Play the boxing bell x 3 to indicate rest started
+        if self.engageTimer.rest == self.restReset {
+            playSound(sound: "boxing-bell-3", type: "wav")
+        }
+        
         self.engageTimer.rest -= 1
         self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
         
     } else if self.engageTimer.round > 1 {
         self.engageTimer.round -= 1
+        print(self.engageTimer.round)
         // Update the reset to use the users input numbers
         // FIX FIX FIX
-        self.engageTimer.time = 10
-        self.engageTimer.rest = 5
-        self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
-        self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
+        playSound(sound: "boxing-bell-1", type: "wav")
+        self.resetTimeAndRest()
         
     } else {
-        self.cancelTimer()
+        self.engageTimer.buttonTitle = "Engage"
+        resetAllValues()
+        cancelTimer()
     }
 }
     
-    func resetValues() {
+    
+    func switchBoolValue() {
+        self.engageTimer.timerIsRunning.toggle()
+    }
+    
+    func resetAllValues() {
         self.engageTimer.round = self.roundReset
-        
         self.engageTimer.time = self.timeReset
         self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
         
         self.engageTimer.rest = self.restReset
         self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
         self.engageTimer.noiseTotal = self.noiseCountReset
+        // Reset Rounds
+        self.engageTimer.round = self.roundReset
+        // Reset Noise Total
+        self.engageTimer.noiseTotal = self.noiseCountReset
+    }
+    
+    func resetTimeAndRest() {
+        // Reset the time
+        self.engageTimer.time = self.timeReset
+        // Display Time in clock format
+        self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
+        
+        // Reset the Rest
+        self.engageTimer.rest = self.restReset
+        // Display Rest in clock format
+        self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
+        
     }
 
     func fillResetValues() {
@@ -200,7 +236,6 @@ func runEngageTimer() {
         self.timer.connect().cancel()
         self.engageTimer.timerIsRunning = false
     }
-
 
 // =====================================================================
 struct ContentView_Previews: PreviewProvider {
