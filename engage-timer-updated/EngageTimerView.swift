@@ -3,11 +3,31 @@
 
 // Notes
 // find a way to get the layout to fill the whole screen?
-// Add start / stop noise into the app
 // Add random noises to app
 // Add in random noise algorithm
 
 import SwiftUI
+import GoogleMobileAds
+
+final private class BannerVC: UIViewControllerRepresentable  {
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        let view = GADBannerView(adSize: kGADAdSizeBanner)
+
+        let viewController = UIViewController()
+        view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        view.rootViewController = viewController
+        viewController.view.addSubview(view)
+        viewController.view.frame = CGRect(origin: .zero, size: kGADAdSizeBanner.size)
+        view.load(GADRequest())
+
+        return viewController
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+}
+
+
 
 struct EngageTimerView: View {
     
@@ -81,7 +101,7 @@ struct EngageTimerView: View {
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .background(Color.white)
                     .foregroundColor(.black)
-                    .padding(3)
+                    .padding(10)
                     .overlay(RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.black, lineWidth: 2)
                 )
@@ -108,11 +128,17 @@ struct EngageTimerView: View {
                       .frame(minWidth: 0, maxWidth: .infinity)
                       .background(Color.white)
                       .foregroundColor(.black)
-                      .padding(3)
+                      .padding(10)
                       .overlay(RoundedRectangle(cornerRadius: 10)
                       .stroke(Color.black, lineWidth: 2)
                   )
             }.padding(5) // VStack Close
+            
+            HStack{
+                Spacer()
+                BannerVC().frame(width: 320, height: 50, alignment: .center)
+                Spacer()
+            }
             
         }// Form Close
          // Navigation Bar Layout and Design
@@ -133,8 +159,7 @@ struct EngageTimerView: View {
     
 
 // Methods
-// =======
- 
+// =============================================
    
 func pressedEngageTimer() {
     if self.engageTimer.timerIsRunning == true {

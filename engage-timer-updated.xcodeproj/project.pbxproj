@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6629071824575E5F00EFF54D /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6629071724575E5F00EFF54D /* TestView.swift */; };
+		35AE4EA10FDF3F444D6286BE /* Pods_engage_timer_updated.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29594D09A974EED759575E5 /* Pods_engage_timer_updated.framework */; };
 		6629071A2458C80500EFF54D /* sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662907192458C80500EFF54D /* sounds.swift */; };
 		6629071D2458C92600EFF54D /* boxing-bell-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071B2458C92600EFF54D /* boxing-bell-1.wav */; };
 		6629071E2458C92600EFF54D /* boxing-bell-3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071C2458C92600EFF54D /* boxing-bell-3.wav */; };
@@ -23,7 +23,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6629071724575E5F00EFF54D /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		662907192458C80500EFF54D /* sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sounds.swift; sourceTree = "<group>"; };
 		6629071B2458C92600EFF54D /* boxing-bell-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "boxing-bell-1.wav"; sourceTree = "<group>"; };
 		6629071C2458C92600EFF54D /* boxing-bell-3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "boxing-bell-3.wav"; sourceTree = "<group>"; };
@@ -38,6 +37,9 @@
 		66CBF16F23ED19AA0022F015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66CBF17923ED1FC40022F015 /* DS-DIGI.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGI.TTF"; sourceTree = "<group>"; };
 		66E88EB32453AD590076865F /* EngageTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngageTimerModel.swift; sourceTree = "<group>"; };
+		6D705BCB0310B7DB9D151024 /* Pods-engage-timer-updated.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-engage-timer-updated.debug.xcconfig"; path = "Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated.debug.xcconfig"; sourceTree = "<group>"; };
+		9841058B02E7FB9FE2476B10 /* Pods-engage-timer-updated.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-engage-timer-updated.release.xcconfig"; path = "Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated.release.xcconfig"; sourceTree = "<group>"; };
+		B29594D09A974EED759575E5 /* Pods_engage_timer_updated.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_engage_timer_updated.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,17 +47,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35AE4EA10FDF3F444D6286BE /* Pods_engage_timer_updated.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2074108EF6390707411C3955 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6D705BCB0310B7DB9D151024 /* Pods-engage-timer-updated.debug.xcconfig */,
+				9841058B02E7FB9FE2476B10 /* Pods-engage-timer-updated.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		66CBF15523ED19A70022F015 = {
 			isa = PBXGroup;
 			children = (
 				66CBF16023ED19A70022F015 /* engage-timer-updated */,
 				66CBF15F23ED19A70022F015 /* Products */,
+				2074108EF6390707411C3955 /* Pods */,
+				AAE4A6EFAFC6803BB77A879F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,7 +95,6 @@
 				66CBF16923ED19AA0022F015 /* Preview Content */,
 				66E88EB32453AD590076865F /* EngageTimerModel.swift */,
 				66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */,
-				6629071724575E5F00EFF54D /* TestView.swift */,
 				662907192458C80500EFF54D /* sounds.swift */,
 				6629071B2458C92600EFF54D /* boxing-bell-1.wav */,
 				6629071C2458C92600EFF54D /* boxing-bell-3.wav */,
@@ -104,6 +118,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		AAE4A6EFAFC6803BB77A879F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B29594D09A974EED759575E5 /* Pods_engage_timer_updated.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -111,9 +133,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 66CBF17223ED19AA0022F015 /* Build configuration list for PBXNativeTarget "engage-timer-updated" */;
 			buildPhases = (
+				03C405A66EB9EB11E7B1560C /* [CP] Check Pods Manifest.lock */,
 				66CBF15A23ED19A70022F015 /* Sources */,
 				66CBF15B23ED19A70022F015 /* Frameworks */,
 				66CBF15C23ED19A70022F015 /* Resources */,
+				FAE92F5C3EA8CFBE7A34DFED /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -173,12 +197,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		03C405A66EB9EB11E7B1560C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-engage-timer-updated-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FAE92F5C3EA8CFBE7A34DFED /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		66CBF15A23ED19A70022F015 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6629071824575E5F00EFF54D /* TestView.swift in Sources */,
 				66B5A52E2456413D005A2D4F /* EditEngageTimerOptionsView.swift in Sources */,
 				66CBF16223ED19A70022F015 /* AppDelegate.swift in Sources */,
 				66CBF16423ED19A70022F015 /* SceneDelegate.swift in Sources */,
@@ -318,6 +383,7 @@
 		};
 		66CBF17323ED19AA0022F015 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D705BCB0310B7DB9D151024 /* Pods-engage-timer-updated.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -338,6 +404,7 @@
 		};
 		66CBF17423ED19AA0022F015 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9841058B02E7FB9FE2476B10 /* Pods-engage-timer-updated.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
