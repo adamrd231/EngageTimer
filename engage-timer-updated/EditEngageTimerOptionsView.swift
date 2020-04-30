@@ -19,10 +19,7 @@ struct EditEngageTimerOptionsView: View {
             Form {
                 HStack {
                 Text("Rounds")
-                 Spacer()
-                Text("\(self.engageTimer.round)")
-                    Stepper("", value: $engageTimer.round, in: 0...10)
-
+                    Stepper("\(self.engageTimer.round)", value: $engageTimer.round, in: 0...10)
                 }
                 
                 HStack {
