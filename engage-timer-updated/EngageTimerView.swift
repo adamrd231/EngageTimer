@@ -9,23 +9,7 @@
 import SwiftUI
 import GoogleMobileAds
 
-final private class BannerVC: UIViewControllerRepresentable  {
 
-    func makeUIViewController(context: Context) -> UIViewController {
-        let view = GADBannerView(adSize: kGADAdSizeBanner)
-
-        let viewController = UIViewController()
-        view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        view.rootViewController = viewController
-        viewController.view.addSubview(view)
-        viewController.view.frame = CGRect(origin: .zero, size: kGADAdSizeBanner.size)
-        view.load(GADRequest())
-
-        return viewController
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-}
 
 
 
@@ -213,54 +197,76 @@ func runEngageTimer() {
 }
     
     
-    func switchBoolValue() {
-        self.engageTimer.timerIsRunning.toggle()
-    }
+func switchBoolValue() {
+    self.engageTimer.timerIsRunning.toggle()
+}
     
-    func resetAllValues() {
-        self.engageTimer.round = self.roundReset
-        self.engageTimer.time = self.timeReset
-        self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
-        
-        self.engageTimer.rest = self.restReset
-        self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
-        self.engageTimer.noiseTotal = self.noiseCountReset
-        // Reset Rounds
-        self.engageTimer.round = self.roundReset
-        // Reset Noise Total
-        self.engageTimer.noiseTotal = self.noiseCountReset
-    }
+func resetAllValues() {
+    self.engageTimer.round = self.roundReset
+    self.engageTimer.time = self.timeReset
+    self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
     
-    func resetTimeAndRest() {
-        // Reset the time
-        self.engageTimer.time = self.timeReset
-        // Display Time in clock format
-        self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
-        
-        // Reset the Rest
-        self.engageTimer.rest = self.restReset
-        // Display Rest in clock format
-        self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
-        
-    }
+    self.engageTimer.rest = self.restReset
+    self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
+    self.engageTimer.noiseTotal = self.noiseCountReset
+    // Reset Rounds
+    self.engageTimer.round = self.roundReset
+    // Reset Noise Total
+    self.engageTimer.noiseTotal = self.noiseCountReset
+}
 
-    func fillResetValues() {
-        self.roundReset = self.engageTimer.round
-        self.timeReset = self.engageTimer.time
-        self.restReset = self.engageTimer.rest
-        self.noiseCountReset = self.engageTimer.noiseTotal
-    }
+func resetTimeAndRest() {
+    // Reset the time
+    self.engageTimer.time = self.timeReset
+    // Display Time in clock format
+    self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
     
-    func instanstiateTimer() {
-        self.engageTimer.timerIsRunning = true
-        self.timer = Timer.publish(every: 1, on: .main, in: .common)
-        return
-    }
+    // Reset the Rest
+    self.engageTimer.rest = self.restReset
+    // Display Rest in clock format
+    self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
     
-    func cancelTimer() {
-        self.timer.connect().cancel()
-        self.engageTimer.timerIsRunning = false
-    }
+}
+
+func fillResetValues() {
+    self.roundReset = self.engageTimer.round
+    self.timeReset = self.engageTimer.time
+    self.restReset = self.engageTimer.rest
+    self.noiseCountReset = self.engageTimer.noiseTotal
+}
+
+func instanstiateTimer() {
+    self.engageTimer.timerIsRunning = true
+    self.timer = Timer.publish(every: 1, on: .main, in: .common)
+    return
+}
+
+func cancelTimer() {
+    self.timer.connect().cancel()
+    self.engageTimer.timerIsRunning = false
+}
+    
+    
+// Google ADMOB
+// ==================================
+final private class BannerVC: UIViewControllerRepresentable  {
+
+     func makeUIViewController(context: Context) -> UIViewController {
+         let view = GADBannerView(adSize: kGADAdSizeBanner)
+
+         let viewController = UIViewController()
+         view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+         view.rootViewController = viewController
+         viewController.view.addSubview(view)
+         viewController.view.frame = CGRect(origin: .zero, size: kGADAdSizeBanner.size)
+         view.load(GADRequest())
+
+         return viewController
+     }
+
+     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+ }
+ 
 
 // =====================================================================
 struct ContentView_Previews: PreviewProvider {

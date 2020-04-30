@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -60,7 +60,6 @@
 				6D705BCB0310B7DB9D151024 /* Pods-engage-timer-updated.debug.xcconfig */,
 				9841058B02E7FB9FE2476B10 /* Pods-engage-timer-updated.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

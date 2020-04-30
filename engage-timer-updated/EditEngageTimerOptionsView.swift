@@ -21,24 +21,22 @@ struct EditEngageTimerOptionsView: View {
                 Text("Rounds")
                  Spacer()
                 Text("\(self.engageTimer.round)")
-                Stepper("", onIncrement: {
-                                   self.engageTimer.round += 1
-                                }, onDecrement: {
-                                   self.engageTimer.round -= 1
-                    }).labelsHidden().padding()
+                    Stepper("", value: $engageTimer.round, in: 0...10)
+
                 }
                 
                 HStack {
                 Text("Time")
                 Spacer()
-                    Text("\(self.engageTimer.timeStringDisplay)")
-                Stepper("", onIncrement: {
-                                   self.engageTimer.time += 5
-                    self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
-                                }, onDecrement: {
-                                   self.engageTimer.time -= 5
-                                    self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
-                    }).labelsHidden().padding()
+                    Text("\(self.engageTimer.time)")
+                    Stepper("", value: $engageTimer.time, in: 1...600)
+//                Stepper("", onIncrement: {
+//                                   self.engageTimer.time += 5
+//                    self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
+//                                }, onDecrement: {
+//                                   self.engageTimer.time -= 5
+//                                    self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
+//                    }).labelsHidden().padding()
                     }
                 
                 HStack {
