@@ -4,7 +4,18 @@
 // Notes
 // find a way to get the layout to fill the whole screen?
 // Add random noises to app
+// add choice to change random noise.
 // Add in random noise algorithm
+
+// no need for resting on the final round, can just end the timer
+// dark mode looks very weird (the buttons have a white background but not to the edge of the border.
+// could the app make a bell noise even if the phone is on silent?
+
+// need to create persistence for the data
+
+
+
+
 
 import SwiftUI
 import GoogleMobileAds
@@ -153,6 +164,11 @@ func pressedEngageTimer() {
       } else {
           // Capture reset values if timer is starting
           self.fillResetValues()
+        // create the random number range
+
+        // print(self.engageTimer.randomArray)
+          self.createRandomNumberArray()
+        print(self.engageTimer.randomArray)
           self.instanstiateTimer()
           self.timer.connect()
           playSound(sound: "boxing-bell-1", type: "wav")
@@ -161,10 +177,32 @@ func pressedEngageTimer() {
     }
 }
     
+    func createRandomNumberArray() {
+        
+        self.engageTimer.randomArray = []
+        let range = engageTimer.time - 3
+        
+        for _ in 1...engageTimer.noiseTotal {
+            engageTimer.randomNumber = Int.random(in: 2...range)
+            
+            while engageTimer.randomArray.contains(engageTimer.randomNumber) || engageTimer.randomArray.contains(engageTimer.randomNumber + 1) || engageTimer.randomArray.contains(engageTimer.randomNumber - 1) || engageTimer.randomArray.contains(engageTimer.randomNumber - 2) || engageTimer.randomArray.contains(engageTimer.randomNumber + 2) {
+                engageTimer.randomNumber = Int.random(in: 2...range)
+            }
+            engageTimer.randomArray.append(engageTimer.randomNumber)
+            
+        }
+        
+    }
+    
     
 func runEngageTimer() {
     if self.engageTimer.time > 0 {
+        
         self.engageTimer.time -= 1
+        
+        if self.engageTimer.randomArray.contains(self.engageTimer.time) {
+            playSound(sound: "boxing-bell-1", type: "wav")
+        }
         
     } else if self.engageTimer.rest > 0 {
         // Play the boxing bell x 3 to indicate rest started

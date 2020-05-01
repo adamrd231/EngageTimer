@@ -55,6 +55,10 @@ struct EditEngageTimerOptionsView: View {
         } // Main VStack Closure
     } // Nav CLosure
 } // View Closure
+
+func makeRandomNumberArray(_ number: Int) -> [Int] {
+    return (0..<number).map { _ in .random(in: 1...20) }
+}
  
 
 struct EditEngageTimerOptionsView_Previews: PreviewProvider {

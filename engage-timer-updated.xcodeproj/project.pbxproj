@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -86,14 +86,14 @@
 			children = (
 				66CBF16123ED19A70022F015 /* AppDelegate.swift */,
 				66CBF16323ED19A70022F015 /* SceneDelegate.swift */,
+				66E88EB32453AD590076865F /* EngageTimerModel.swift */,
 				66CBF16523ED19A70022F015 /* EngageTimerView.swift */,
+				66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */,
 				66CBF16723ED19AA0022F015 /* Assets.xcassets */,
 				66CBF16C23ED19AA0022F015 /* LaunchScreen.storyboard */,
 				66CBF16F23ED19AA0022F015 /* Info.plist */,
 				66CBF17523ED1DA00022F015 /* Fonts */,
 				66CBF16923ED19AA0022F015 /* Preview Content */,
-				66E88EB32453AD590076865F /* EngageTimerModel.swift */,
-				66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */,
 				662907192458C80500EFF54D /* sounds.swift */,
 				6629071B2458C92600EFF54D /* boxing-bell-1.wav */,
 				6629071C2458C92600EFF54D /* boxing-bell-3.wav */,

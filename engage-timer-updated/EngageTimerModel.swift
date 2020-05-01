@@ -12,16 +12,12 @@ class EngageTimer: ObservableObject {
     @Published var round = 3
     @Published var time = 10
     @Published var rest = 5
-    @Published var noiseTotal = 0
+    @Published var noiseTotal = 2
     @Published var noise = "Clap"
     @Published var buttonTitle = "Engage"
     @Published var timerIsRunning = false
     @Published private var showingAlert = false
     
-    func checkNoiseCount() {
-        if noiseTotal > time / 5 {
-            noiseTotal = time / 5
-        }
-    }
-
+    @Published var randomArray:[Int] = []
+    @Published var randomNumber = 1
 }
