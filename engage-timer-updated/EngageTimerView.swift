@@ -50,6 +50,8 @@ struct EngageTimerView: View {
                 Text("Round").font(.largeTitle)
                 Spacer()
                 Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: textSize))
+            }.onAppear() {
+                self.fillResetValues()
             }
                     
             // Time Remaining Stack
@@ -137,6 +139,7 @@ struct EngageTimerView: View {
         .navigationBarItems(trailing: Button("Edit") {
             self.engageTimer.buttonTitle = "Engage"
             self.cancelTimer()
+            self.resetAllValues()
             self.editEngageTimerViewIsVisible = true
         })
     } // Navigation View Close
@@ -154,7 +157,7 @@ struct EngageTimerView: View {
 func pressedEngageTimer() {
     if self.engageTimer.timerIsRunning == true {
           self.cancelTimer()
-          self.resetTimeAndRest()
+          self.resetAllValues()
           self.engageTimer.buttonTitle = "Engage"
       } else if self.pauseButtonTitle == "Re-start" {
           self.cancelTimer()
@@ -165,10 +168,8 @@ func pressedEngageTimer() {
           // Capture reset values if timer is starting
           self.fillResetValues()
         // create the random number range
-
-        // print(self.engageTimer.randomArray)
           self.createRandomNumberArray()
-        print(self.engageTimer.randomArray)
+          print(self.engageTimer.randomArray)
           self.instanstiateTimer()
           self.timer.connect()
           playSound(sound: "boxing-bell-1", type: "wav")
@@ -201,7 +202,7 @@ func runEngageTimer() {
         self.engageTimer.time -= 1
         
         if self.engageTimer.randomArray.contains(self.engageTimer.time) {
-            playSound(sound: "boxing-bell-1", type: "wav")
+            playSound(sound: "Single-clap", type: "mp3")
         }
         
     } else if self.engageTimer.rest > 0 {
@@ -213,12 +214,15 @@ func runEngageTimer() {
         self.engageTimer.rest -= 1
         
     } else if self.engageTimer.round > 1 {
+        
         self.engageTimer.round -= 1
         print(self.engageTimer.round)
         // Update the reset to use the users input numbers
         // FIX FIX FIX
         playSound(sound: "boxing-bell-1", type: "wav")
         self.resetTimeAndRest()
+        self.createRandomNumberArray()
+        print(self.engageTimer.randomArray)
         
     } else {
         self.engageTimer.buttonTitle = "Engage"
