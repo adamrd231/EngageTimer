@@ -19,45 +19,30 @@ struct EditEngageTimerOptionsView: View {
             Form {
                 HStack {
                 Text("Rounds")
-                    Stepper("\(self.engageTimer.round)", value: $engageTimer.round, in: 0...10)
+                    Spacer()
+                    Text("\(self.engageTimer.round)")
+                    Stepper("\(self.engageTimer.round)", value: $engageTimer.round, in: 0...25).labelsHidden()
                 }
                 
                 HStack {
                 Text("Time")
                 Spacer()
-                    Text("\(self.engageTimer.time)")
-                    Stepper("", value: $engageTimer.time, in: 1...600)
-//                Stepper("", onIncrement: {
-//                                   self.engageTimer.time += 5
-//                    self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
-//                                }, onDecrement: {
-//                                   self.engageTimer.time -= 5
-//                                    self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
-//                    }).labelsHidden().padding()
+                    Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60))
+                    Stepper("", value: $engageTimer.time, in: 10...639, step: 10).labelsHidden()
                     }
                 
                 HStack {
                 Text("Rest")
                 Spacer()
-                    Text("\(self.engageTimer.restStringDisplay)")
-                Stepper("", onIncrement: {
-                                   self.engageTimer.rest += 5
-                    self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
-                                }, onDecrement: {
-                                   self.engageTimer.rest -= 5
-                                    self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
-                    }).labelsHidden().padding()
+                    Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60))
+                    Stepper("", value: $engageTimer.rest, in: 0...639, step: 5).labelsHidden()
                     }
                     
                 HStack {
                 Text("Noise Count")
                 Spacer()
                     Text("\(self.engageTimer.noiseTotal)")
-                Stepper("", onIncrement: {
-                                   self.engageTimer.noiseTotal += 1
-                                }, onDecrement: {
-                                   self.engageTimer.noiseTotal -= 1
-                    }).labelsHidden().padding()
+                    Stepper("", value: $engageTimer.noiseTotal, in: 0...engageTimer.time / 5).labelsHidden()
                     }
                 
 
@@ -65,10 +50,12 @@ struct EditEngageTimerOptionsView: View {
 
         }
         Text("Swipe Down To Save").padding()
+            
         } // Form Closure
         } // Main VStack Closure
     } // Nav CLosure
 } // View Closure
+ 
 
 struct EditEngageTimerOptionsView_Previews: PreviewProvider {
     static var previews: some View {

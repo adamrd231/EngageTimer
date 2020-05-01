@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		35AE4EA10FDF3F444D6286BE /* Pods_engage_timer_updated.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29594D09A974EED759575E5 /* Pods_engage_timer_updated.framework */; };
 		6629071A2458C80500EFF54D /* sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662907192458C80500EFF54D /* sounds.swift */; };
 		6629071D2458C92600EFF54D /* boxing-bell-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071B2458C92600EFF54D /* boxing-bell-1.wav */; };
 		6629071E2458C92600EFF54D /* boxing-bell-3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071C2458C92600EFF54D /* boxing-bell-3.wav */; };
@@ -20,9 +19,11 @@
 		66CBF16E23ED19AA0022F015 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CBF16C23ED19AA0022F015 /* LaunchScreen.storyboard */; };
 		66CBF17A23ED1FC50022F015 /* DS-DIGI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 66CBF17923ED1FC40022F015 /* DS-DIGI.TTF */; };
 		66E88EB42453AD590076865F /* EngageTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E88EB32453AD590076865F /* EngageTimerModel.swift */; };
+		ABAA43D40C6E4C268879F2F9 /* libPods-engage-timer-updated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9A014FEFDDB8FE164C8180 /* libPods-engage-timer-updated.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F9A014FEFDDB8FE164C8180 /* libPods-engage-timer-updated.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-engage-timer-updated.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		662907192458C80500EFF54D /* sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sounds.swift; sourceTree = "<group>"; };
 		6629071B2458C92600EFF54D /* boxing-bell-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "boxing-bell-1.wav"; sourceTree = "<group>"; };
 		6629071C2458C92600EFF54D /* boxing-bell-3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "boxing-bell-3.wav"; sourceTree = "<group>"; };
@@ -39,7 +40,6 @@
 		66E88EB32453AD590076865F /* EngageTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngageTimerModel.swift; sourceTree = "<group>"; };
 		6D705BCB0310B7DB9D151024 /* Pods-engage-timer-updated.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-engage-timer-updated.debug.xcconfig"; path = "Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated.debug.xcconfig"; sourceTree = "<group>"; };
 		9841058B02E7FB9FE2476B10 /* Pods-engage-timer-updated.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-engage-timer-updated.release.xcconfig"; path = "Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated.release.xcconfig"; sourceTree = "<group>"; };
-		B29594D09A974EED759575E5 /* Pods_engage_timer_updated.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_engage_timer_updated.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35AE4EA10FDF3F444D6286BE /* Pods_engage_timer_updated.framework in Frameworks */,
+				ABAA43D40C6E4C268879F2F9 /* libPods-engage-timer-updated.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +120,7 @@
 		AAE4A6EFAFC6803BB77A879F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B29594D09A974EED759575E5 /* Pods_engage_timer_updated.framework */,
+				0F9A014FEFDDB8FE164C8180 /* libPods-engage-timer-updated.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -136,7 +136,6 @@
 				66CBF15A23ED19A70022F015 /* Sources */,
 				66CBF15B23ED19A70022F015 /* Frameworks */,
 				66CBF15C23ED19A70022F015 /* Resources */,
-				FAE92F5C3EA8CFBE7A34DFED /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -217,23 +216,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FAE92F5C3EA8CFBE7A34DFED /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

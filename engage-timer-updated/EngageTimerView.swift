@@ -9,10 +9,6 @@
 import SwiftUI
 import GoogleMobileAds
 
-
-
-
-
 struct EngageTimerView: View {
     
     //Properties
@@ -50,7 +46,7 @@ struct EngageTimerView: View {
             HStack {
                 Text("Time").font(.largeTitle)
                 Spacer()
-                Text("\(self.engageTimer.timeStringDisplay)").font(.custom("DS-Digital", size: textSize))
+                Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60)).font(.custom("DS-Digital", size: textSize))
                 // When timer is running, every second runs this code
                     .onReceive(timer) { _ in
                         self.runEngageTimer()
@@ -62,7 +58,7 @@ struct EngageTimerView: View {
            HStack {
                Text("Rest").font(.largeTitle)
                 Spacer()
-               Text("\(self.engageTimer.restStringDisplay)").font(.custom("DS-Digital", size: textSize))
+               Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60)).font(.custom("DS-Digital", size: textSize))
            }
        
    
@@ -141,7 +137,6 @@ struct EngageTimerView: View {
     
     
     
-
 // Methods
 // =============================================
    
@@ -170,7 +165,6 @@ func pressedEngageTimer() {
 func runEngageTimer() {
     if self.engageTimer.time > 0 {
         self.engageTimer.time -= 1
-        self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
         
     } else if self.engageTimer.rest > 0 {
         // Play the boxing bell x 3 to indicate rest started
@@ -179,7 +173,6 @@ func runEngageTimer() {
         }
         
         self.engageTimer.rest -= 1
-        self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
         
     } else if self.engageTimer.round > 1 {
         self.engageTimer.round -= 1
@@ -204,10 +197,8 @@ func switchBoolValue() {
 func resetAllValues() {
     self.engageTimer.round = self.roundReset
     self.engageTimer.time = self.timeReset
-    self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
     
     self.engageTimer.rest = self.restReset
-    self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
     self.engageTimer.noiseTotal = self.noiseCountReset
     // Reset Rounds
     self.engageTimer.round = self.roundReset
@@ -219,12 +210,10 @@ func resetTimeAndRest() {
     // Reset the time
     self.engageTimer.time = self.timeReset
     // Display Time in clock format
-    self.engageTimer.timeStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.time)
     
     // Reset the Rest
     self.engageTimer.rest = self.restReset
     // Display Rest in clock format
-    self.engageTimer.restStringDisplay = self.engageTimer.integerToString(number: self.engageTimer.rest)
     
 }
 
