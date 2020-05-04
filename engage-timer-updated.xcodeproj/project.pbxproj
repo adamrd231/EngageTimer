@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		40CA507BF966D4A84F7E3217 /* Pods_engage_timer_updated.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF25E81A477380A5FE13BD35 /* Pods_engage_timer_updated.framework */; };
+		4D746393F7038F44A9FA1384 /* libPods-engage-timer-updated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1456B105882C4053CC06E7B /* libPods-engage-timer-updated.a */; };
 		6629071A2458C80500EFF54D /* sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662907192458C80500EFF54D /* sounds.swift */; };
 		6629071D2458C92600EFF54D /* boxing-bell-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071B2458C92600EFF54D /* boxing-bell-1.wav */; };
 		6629071E2458C92600EFF54D /* boxing-bell-3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071C2458C92600EFF54D /* boxing-bell-3.wav */; };
@@ -41,7 +41,7 @@
 		66E88EB32453AD590076865F /* EngageTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngageTimerModel.swift; sourceTree = "<group>"; };
 		6D705BCB0310B7DB9D151024 /* Pods-engage-timer-updated.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-engage-timer-updated.debug.xcconfig"; path = "Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated.debug.xcconfig"; sourceTree = "<group>"; };
 		9841058B02E7FB9FE2476B10 /* Pods-engage-timer-updated.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-engage-timer-updated.release.xcconfig"; path = "Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated.release.xcconfig"; sourceTree = "<group>"; };
-		FF25E81A477380A5FE13BD35 /* Pods_engage_timer_updated.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_engage_timer_updated.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1456B105882C4053CC06E7B /* libPods-engage-timer-updated.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-engage-timer-updated.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40CA507BF966D4A84F7E3217 /* Pods_engage_timer_updated.framework in Frameworks */,
+				4D746393F7038F44A9FA1384 /* libPods-engage-timer-updated.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,7 +123,7 @@
 		AAE4A6EFAFC6803BB77A879F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FF25E81A477380A5FE13BD35 /* Pods_engage_timer_updated.framework */,
+				F1456B105882C4053CC06E7B /* libPods-engage-timer-updated.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -139,7 +139,6 @@
 				66CBF15A23ED19A70022F015 /* Sources */,
 				66CBF15B23ED19A70022F015 /* Frameworks */,
 				66CBF15C23ED19A70022F015 /* Resources */,
-				E9DCF547A777D3269E12C59F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -221,23 +220,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E9DCF547A777D3269E12C59F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

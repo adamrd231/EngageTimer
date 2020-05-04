@@ -14,6 +14,8 @@ class EngageTimer: ObservableObject {
     @Published var rest = 5
     @Published var noiseTotal = 2
     @Published var noise = "Clap"
+    @Published var usingRandomNoise = true
+    @Published var noiseArray = ["Clap", "Bell", "Whack"]
     @Published var buttonTitle = "Engage"
     @Published var timerIsRunning = false
     

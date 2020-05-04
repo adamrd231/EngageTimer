@@ -6,15 +6,8 @@
 // Add random noises to app
 // add choice to change random noise.
 
-// no need for resting on the final round, can just end the timer
-// dark mode looks very weird (the buttons have a white background but not to the edge of the border.
-// could the app make a bell noise even if the phone is on silent?
-
+// buttons still dark on dark mode
 // need to create persistence for the data
-
-
-
-
 
 import SwiftUI
 import GoogleMobileAds
@@ -37,6 +30,10 @@ struct EngageTimerView: View {
 // State variable to bring up editing view
 @State var editEngageTimerViewIsVisible = false
 @State var textSize = CGFloat(70)
+    
+// Admob
+var interstitial:Interstitial
+init() { self.interstitial = Interstitial() }
 // ================================================================
     
 // User Interface Views
@@ -49,7 +46,7 @@ NavigationView {
             Text("Round").font(.largeTitle)
             Spacer()
             Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: textSize))
-            }
+            }.padding(5)
                 
         // Time Remaining Stack
         HStack {
@@ -60,7 +57,7 @@ NavigationView {
                 .onReceive(timer) { _ in
                     self.runEngageTimer()
                 }
-        }
+        }.padding(5)
                 
        // Rest Stack
        // ==========
@@ -68,15 +65,20 @@ NavigationView {
            Text("Rest").font(.largeTitle)
             Spacer()
            Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60)).font(.custom("DS-Digital", size: textSize))
-       }
+       }.padding(5)
    
 
        // Random Noise Choice & Count
        HStack {
-           Text("\(self.engageTimer.noise)").font(.largeTitle).bold()
-            Spacer()
-            Text("\(self.engageTimer.noiseTotal)").font(.custom("DS-Digital", size: textSize))
-       }
+        if self.engageTimer.usingRandomNoise {
+            Text("\(self.engageTimer.noise)").font(.largeTitle).bold()
+                 Spacer()
+                 Text("\(self.engageTimer.noiseTotal)").font(.custom("DS-Digital", size: textSize))
+            } else {
+            EmptyView()
+        }
+        }.padding(5)
+           
                 
         // Engage Button Action & Design
         VStack (alignment: .center) {
@@ -219,6 +221,7 @@ func runEngageTimer() {
         self.engageTimer.buttonTitle = "Engage"
         resetAllValues()
         cancelTimer()
+        self.interstitial.showAd()
     }
 }
     
@@ -287,6 +290,36 @@ final private class BannerVC: UIViewControllerRepresentable  {
 
      func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
  }
+    
+final class Interstitial:NSObject, GADInterstitialDelegate{
+    var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+    
+    override init() {
+        super.init()
+        LoadInterstitial()
+    }
+    
+    func LoadInterstitial(){
+        let req = GADRequest()
+        self.interstitial.load(req)
+        self.interstitial.delegate = self
+    }
+    
+    func showAd(){
+        if self.interstitial.isReady{
+           let root = UIApplication.shared.windows.first?.rootViewController
+           self.interstitial.present(fromRootViewController: root!)
+        }
+       else{
+           print("Not Ready")
+       }
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        LoadInterstitial()
+    }
+}
  
 
 // =====================================================================
