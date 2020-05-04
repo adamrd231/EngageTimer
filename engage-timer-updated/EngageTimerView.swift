@@ -22,130 +22,126 @@ import GoogleMobileAds
 
 struct EngageTimerView: View {
     
-    //Properties
-    // =========
-    @EnvironmentObject var engageTimer: EngageTimer
+//Properties
+// =========
+@EnvironmentObject var engageTimer: EngageTimer
+
+@State var timer = Timer.publish(every: 1, on: .main, in: .common)
+
+// Reset values used only for this View
+@State var pauseButtonTitle = "Pause"
+@State var timeReset = 0
+@State var restReset = 0
+@State var roundReset = 0
+@State var noiseCountReset = 0
+
+// State variable to bring up editing view
+@State var editEngageTimerViewIsVisible = false
+@State var textSize = CGFloat(70)
+// ================================================================
     
-    @State var timer = Timer.publish(every: 1, on: .main, in: .common)
+// User Interface Views
+var body: some View {
     
-    // Reset values used only for this View
-    @State var pauseButtonTitle = "Pause"
-    @State var timeReset = 0
-    @State var restReset = 0
-    @State var roundReset = 0
-    @State var noiseCountReset = 0
-    
-    // State variable to bring up editing view
-    @State var editEngageTimerViewIsVisible = false
-    @State var textSize = CGFloat(70)
-    // ================================================================
-    
-    // User Interface Views
-    var body: some View {
-        NavigationView {
-        Form {
-            // Rounds Stack
-            // =============================
-            HStack {
-                Text("Round").font(.largeTitle)
-                Spacer()
-                Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: textSize))
-            }.onAppear() {
-                self.fillResetValues()
+NavigationView {
+    Form {
+        // Rounds Stack
+        // =============================
+        HStack {
+            Text("Round").font(.largeTitle)
+            Spacer()
+            Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: textSize))
             }
-                    
-            // Time Remaining Stack
-            // ====================
-            HStack {
-                Text("Time").font(.largeTitle)
-                Spacer()
-                Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60)).font(.custom("DS-Digital", size: textSize))
-                // When timer is running, every second runs this code
-                    .onReceive(timer) { _ in
-                        self.runEngageTimer()
-                    }
-            }
-                    
-           // Rest Stack
-           // ==========
-           HStack {
-               Text("Rest").font(.largeTitle)
-                Spacer()
-               Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60)).font(.custom("DS-Digital", size: textSize))
-           }
-       
+                
+        // Time Remaining Stack
+        // ====================
+        HStack {
+            Text("Time").font(.largeTitle)
+            Spacer()
+            Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60)).font(.custom("DS-Digital", size: textSize))
+            // When timer is running, every second runs this code
+                .onReceive(timer) { _ in
+                    self.runEngageTimer()
+                }
+        }
+                
+       // Rest Stack
+       // ==========
+       HStack {
+           Text("Rest").font(.largeTitle)
+            Spacer()
+           Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60)).font(.custom("DS-Digital", size: textSize))
+       }
    
-           // Random Noise Choice & Count
-           // ===========================
-           HStack {
-               Text("\(self.engageTimer.noise)").font(.largeTitle).bold()
-                Spacer()
-                Text("\(self.engageTimer.noiseTotal)").font(.custom("DS-Digital", size: textSize))
-           }
-                    
-            // Button Action & Design
-            // ======================
-            VStack (alignment: .center) {
-                Button(action: {
-                    self.pressedEngageTimer()
-                })
-                { Text("\(self.engageTimer.buttonTitle)") }
-                    .font(.title)
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .background(Color.white)
-                    .foregroundColor(.black)
-                    .padding(10)
-                    .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.black, lineWidth: 2)
-                )
-            }.padding(5)
+
+       // Random Noise Choice & Count
+       // ===========================
+       HStack {
+           Text("\(self.engageTimer.noise)").font(.largeTitle).bold()
+            Spacer()
+            Text("\(self.engageTimer.noiseTotal)").font(.custom("DS-Digital", size: textSize))
+       }
+                
+        // Button Action & Design
+        // ======================
+        VStack (alignment: .center) {
+            Button(action: {
+                self.pressedEngageTimer()
+            })
+            { Text("\(self.engageTimer.buttonTitle)") }
+                .font(.title)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .padding(10)
+                .background(Capsule().stroke(lineWidth: 2))
+                .foregroundColor(.black)
             
-            VStack {
-                Button(action: {
-                              
-                  if self.engageTimer.timerIsRunning == true {
-                      //Pause the Timer
-                    self.cancelTimer()
-                    self.pauseButtonTitle = "Re-start"
-                    
-                  } else if self.engageTimer.buttonTitle == "Engage" {
-                    return
-                } else {
-                      // Restart the Timer
-                    self.instanstiateTimer()
-                    self.timer.connect()
-                    self.pauseButtonTitle = "Pause"
-                  }
-                }) { Text("\(self.pauseButtonTitle)") }
-                      .font(.title)
-                      .frame(minWidth: 0, maxWidth: .infinity)
-                      .background(Color.white)
-                      .foregroundColor(.black)
-                      .padding(10)
-                      .overlay(RoundedRectangle(cornerRadius: 10)
-                      .stroke(Color.black, lineWidth: 2)
-                  )
-            }.padding(5) // VStack Close
-            
-            HStack{
-                Spacer()
-                BannerVC().frame(width: 320, height: 50, alignment: .center)
-                Spacer()
-            }
-            
-        }// Form Close
-         // Navigation Bar Layout and Design
-        .navigationBarTitle("Engage Timer", displayMode: .large)
-        .navigationBarItems(trailing: Button("Edit") {
-            self.engageTimer.buttonTitle = "Engage"
-            self.cancelTimer()
-            self.resetAllValues()
-            self.editEngageTimerViewIsVisible = true
-        })
-    } // Navigation View Close
-      // Present options sheet using binded variable and pass environment object
-    .sheet(isPresented: $editEngageTimerViewIsVisible){ EditEngageTimerOptionsView().environmentObject(self.engageTimer) }
+                
+        }.padding(5)
         
+        VStack {
+            Button(action: {
+                          
+              if self.engageTimer.timerIsRunning == true {
+                  //Pause the Timer
+                self.cancelTimer()
+                self.pauseButtonTitle = "Re-start"
+                
+              } else if self.engageTimer.buttonTitle == "Engage" {
+                return
+            } else {
+                // Restart the Timer
+                self.instanstiateTimer()
+                self.timer.connect()
+                self.pauseButtonTitle = "Pause"
+              }
+                }
+            ) { Text("\(self.pauseButtonTitle)") }
+                  .font(.title)
+                  .frame(minWidth: 0, maxWidth: .infinity)
+                  .padding(10)
+                  .background(Capsule().stroke(lineWidth: 2))
+                .foregroundColor(buttonColor)
+            
+        }.padding(5).disabled(self.engageTimer.buttonTitle == "Engage") // VStack Close
+        
+        HStack{
+            Spacer()
+            BannerVC().frame(width: 320, height: 50, alignment: .center)
+            Spacer()
+        }
+        
+    }// Form Close
+     // Navigation Bar Layout and Design
+    .navigationBarTitle("Engage Timer", displayMode: .large)
+    .navigationBarItems(trailing: Button("Edit") {
+        self.engageTimer.buttonTitle = "Engage"
+        self.cancelTimer()
+        self.editEngageTimerViewIsVisible = true
+    }.disabled(self.engageTimer.buttonTitle != "Engage"))
+    
+} // Navigation View Close
+  // Present options sheet using binded variable and pass environment object
+.sheet(isPresented: $editEngageTimerViewIsVisible){ EditEngageTimerOptionsView().environmentObject(self.engageTimer) }
 } // View Closure
 
     
@@ -153,7 +149,11 @@ struct EngageTimerView: View {
     
 // Methods
 // =============================================
-   
+
+    var buttonColor: Color {
+        return self.engageTimer.buttonTitle == "Engage" ? .gray : .black
+    }
+    
 func pressedEngageTimer() {
     if self.engageTimer.timerIsRunning == true {
           self.cancelTimer()
