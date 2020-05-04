@@ -5,7 +5,6 @@
 // find a way to get the layout to fill the whole screen?
 // Add random noises to app
 // add choice to change random noise.
-// Add in random noise algorithm
 
 // no need for resting on the final round, can just end the timer
 // dark mode looks very weird (the buttons have a white background but not to the edge of the border.
@@ -46,7 +45,6 @@ var body: some View {
 NavigationView {
     Form {
         // Rounds Stack
-        // =============================
         HStack {
             Text("Round").font(.largeTitle)
             Spacer()
@@ -54,7 +52,6 @@ NavigationView {
             }
                 
         // Time Remaining Stack
-        // ====================
         HStack {
             Text("Time").font(.largeTitle)
             Spacer()
@@ -75,15 +72,13 @@ NavigationView {
    
 
        // Random Noise Choice & Count
-       // ===========================
        HStack {
            Text("\(self.engageTimer.noise)").font(.largeTitle).bold()
             Spacer()
             Text("\(self.engageTimer.noiseTotal)").font(.custom("DS-Digital", size: textSize))
        }
                 
-        // Button Action & Design
-        // ======================
+        // Engage Button Action & Design
         VStack (alignment: .center) {
             Button(action: {
                 self.pressedEngageTimer()
@@ -94,26 +89,12 @@ NavigationView {
                 .padding(10)
                 .background(Capsule().stroke(lineWidth: 2))
                 .foregroundColor(.black)
-            
-                
         }.padding(5)
         
+        // Pause Button Action & Design
         VStack {
             Button(action: {
-                          
-              if self.engageTimer.timerIsRunning == true {
-                  //Pause the Timer
-                self.cancelTimer()
-                self.pauseButtonTitle = "Re-start"
-                
-              } else if self.engageTimer.buttonTitle == "Engage" {
-                return
-            } else {
-                // Restart the Timer
-                self.instanstiateTimer()
-                self.timer.connect()
-                self.pauseButtonTitle = "Pause"
-              }
+                self.pressedPauseButton()
                 }
             ) { Text("\(self.pauseButtonTitle)") }
                   .font(.title)
@@ -121,8 +102,9 @@ NavigationView {
                   .padding(10)
                   .background(Capsule().stroke(lineWidth: 2))
                 .foregroundColor(buttonColor)
-            
-        }.padding(5).disabled(self.engageTimer.buttonTitle == "Engage") // VStack Close
+        }
+            .padding(5)
+            .disabled(self.engageTimer.buttonTitle == "Engage")
         
         HStack{
             Spacer()
@@ -134,8 +116,6 @@ NavigationView {
      // Navigation Bar Layout and Design
     .navigationBarTitle("Engage Timer", displayMode: .large)
     .navigationBarItems(trailing: Button("Edit") {
-        self.engageTimer.buttonTitle = "Engage"
-        self.cancelTimer()
         self.editEngageTimerViewIsVisible = true
     }.disabled(self.engageTimer.buttonTitle != "Engage"))
     
@@ -172,35 +152,53 @@ func pressedEngageTimer() {
           print(self.engageTimer.randomArray)
           self.instanstiateTimer()
           self.timer.connect()
-          playSound(sound: "boxing-bell-1", type: "wav")
+          
           self.engageTimer.timerIsRunning = true
           self.engageTimer.buttonTitle = "Stop"
     }
 }
     
-    func createRandomNumberArray() {
+func pressedPauseButton() {
+    if self.engageTimer.timerIsRunning == true {
+       //Pause the Timer
+       self.cancelTimer()
+       self.pauseButtonTitle = "Re-start"
+       
+     } else if self.engageTimer.buttonTitle == "Engage" {
+       return
+   } else {
+       // Restart the Timer
+       self.instanstiateTimer()
+       self.timer.connect()
+       self.pauseButtonTitle = "Pause"
+     }
+}
+    
+func createRandomNumberArray() {
+    
+    self.engageTimer.randomArray = []
+    let range = engageTimer.time - 3
+    
+    for _ in 1...engageTimer.noiseTotal {
+        engageTimer.randomNumber = Int.random(in: 2...range)
         
-        self.engageTimer.randomArray = []
-        let range = engageTimer.time - 3
-        
-        for _ in 1...engageTimer.noiseTotal {
+        while engageTimer.randomArray.contains(engageTimer.randomNumber) || engageTimer.randomArray.contains(engageTimer.randomNumber + 1) || engageTimer.randomArray.contains(engageTimer.randomNumber - 1) || engageTimer.randomArray.contains(engageTimer.randomNumber - 2) || engageTimer.randomArray.contains(engageTimer.randomNumber + 2) {
             engageTimer.randomNumber = Int.random(in: 2...range)
-            
-            while engageTimer.randomArray.contains(engageTimer.randomNumber) || engageTimer.randomArray.contains(engageTimer.randomNumber + 1) || engageTimer.randomArray.contains(engageTimer.randomNumber - 1) || engageTimer.randomArray.contains(engageTimer.randomNumber - 2) || engageTimer.randomArray.contains(engageTimer.randomNumber + 2) {
-                engageTimer.randomNumber = Int.random(in: 2...range)
-            }
-            engageTimer.randomArray.append(engageTimer.randomNumber)
-            
         }
+        engageTimer.randomArray.append(engageTimer.randomNumber)
         
     }
     
+}
+
     
 func runEngageTimer() {
     if self.engageTimer.time > 0 {
-        
+        if self.engageTimer.time == self.timeReset {
+            playSound(sound: "boxing-bell-1", type: "wav")
+        }
         self.engageTimer.time -= 1
-        
+    
         if self.engageTimer.randomArray.contains(self.engageTimer.time) {
             playSound(sound: "Single-clap", type: "mp3")
         }
@@ -210,19 +208,12 @@ func runEngageTimer() {
         if self.engageTimer.rest == self.restReset {
             playSound(sound: "boxing-bell-3", type: "wav")
         }
-        
         self.engageTimer.rest -= 1
         
     } else if self.engageTimer.round > 1 {
-        
         self.engageTimer.round -= 1
-        print(self.engageTimer.round)
-        // Update the reset to use the users input numbers
-        // FIX FIX FIX
-        playSound(sound: "boxing-bell-1", type: "wav")
         self.resetTimeAndRest()
         self.createRandomNumberArray()
-        print(self.engageTimer.randomArray)
         
     } else {
         self.engageTimer.buttonTitle = "Engage"
@@ -239,7 +230,6 @@ func switchBoolValue() {
 func resetAllValues() {
     self.engageTimer.round = self.roundReset
     self.engageTimer.time = self.timeReset
-    
     self.engageTimer.rest = self.restReset
     self.engageTimer.noiseTotal = self.noiseCountReset
     // Reset Rounds
