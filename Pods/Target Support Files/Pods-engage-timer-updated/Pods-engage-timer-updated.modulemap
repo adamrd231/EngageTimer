@@ -1,0 +1,6 @@
+framework module Pods_engage_timer_updated {
+  umbrella header "Pods-engage-timer-updated-umbrella.h"
+
+  export *
+  module * { export * }
+}

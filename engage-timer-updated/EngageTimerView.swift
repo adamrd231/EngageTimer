@@ -13,19 +13,10 @@ import SwiftUI
 import GoogleMobileAds
 
 struct EngageTimerView: View {
-    
 //Properties
 // =========
 @EnvironmentObject var engageTimer: EngageTimer
-
 @State var timer = Timer.publish(every: 1, on: .main, in: .common)
-
-// Reset values used only for this View
-@State var pauseButtonTitle = "Pause"
-@State var timeReset = 0
-@State var restReset = 0
-@State var roundReset = 0
-@State var noiseCountReset = 0
 
 // State variable to bring up editing view
 @State var editEngageTimerViewIsVisible = false
@@ -34,95 +25,101 @@ struct EngageTimerView: View {
 // Admob
 var interstitial:Interstitial
 init() { self.interstitial = Interstitial() }
+@State var interstitialCount = 0
 // ================================================================
     
 // User Interface Views
 var body: some View {
     
-NavigationView {
-    Form {
-        // Rounds Stack
-        HStack {
-            Text("Round").font(.largeTitle)
-            Spacer()
-            Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: textSize))
+    NavigationView {
+        Form {
+            // Rounds Stack
+            HStack {
+                Text("Round").font(.largeTitle)
+                Spacer()
+                Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: textSize))
+                Text("OF")
+                Text("\(self.engageTimer.totalRounds)").font(.custom("DS-Digital", size: textSize))
+                
+                }.padding(5)
+                    
+            // Time Remaining Stack
+            HStack {
+                Text("Time").font(.largeTitle)
+                Spacer()
+                Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60))
+                    .font(.custom("DS-Digital", size: textSize))
+                    // Timer runs function every second
+                    .onReceive(timer) { _ in
+                        self.runEngageTimer()
+                    }
             }.padding(5)
-                
-        // Time Remaining Stack
-        HStack {
-            Text("Time").font(.largeTitle)
-            Spacer()
-            Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60)).font(.custom("DS-Digital", size: textSize))
-            // When timer is running, every second runs this code
-                .onReceive(timer) { _ in
-                    self.engageTimer.runEngageTimer()
-                }
-        }.padding(5)
-                
-       // Rest Stack
-       // ==========
-       HStack {
-           Text("Rest").font(.largeTitle)
-            Spacer()
-           Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60)).font(.custom("DS-Digital", size: textSize))
-       }.padding(5)
-   
+                    
+           // Rest Stack
+           // ==========
+           HStack {
+               Text("Rest").font(.largeTitle)
+               Spacer()
+               Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60))
+                   .font(.custom("DS-Digital", size: textSize))
+           }.padding(5)
+       
 
-       // Random Noise Choice & Count
-       HStack {
-        if self.engageTimer.usingRandomNoise {
-            Text("\(self.engageTimer.noise)").font(.largeTitle).bold()
-                 Spacer()
-                 Text("\(self.engageTimer.noiseTotal)").font(.custom("DS-Digital", size: textSize))
+           // Random Noise Choice & Count
+           HStack {
+            if self.engageTimer.usingRandomNoise {
+                Text("\(self.engageTimer.noise)")
+                    .font(.largeTitle).bold()
+                Spacer()
+                Text("\(self.engageTimer.noiseTotal)")
+                    .font(.custom("DS-Digital", size: textSize))
             } else {
-            EmptyView()
-        }
-        }.padding(5)
-           
-                
-        // Engage Button Action & Design
-        VStack (alignment: .center) {
-            Button(action: {
-                self.engageTimer.pressedEngageTimer()
-            })
-            { Text("\(self.engageTimer.buttonTitle)") }
-                .font(.title)
-                .frame(minWidth: 0, maxWidth: .infinity)
-                .padding(10)
-                .background(Capsule().stroke(lineWidth: 2))
-                .foregroundColor(.black)
-            
-        }.padding(5)
-        
-        // Pause Button Action & Design
-        VStack {
-            Button(action: {
-                self.engageTimer.pressedPauseButton()
+                EmptyView()
                 }
-            ) { Text("\(self.pauseButtonTitle)") }
-                  .font(.title)
-                  .frame(minWidth: 0, maxWidth: .infinity)
-                  .padding(10)
-                  .background(Capsule().stroke(lineWidth: 2))
-                .foregroundColor(buttonColor)
-        }
-            .padding(5)
-            .disabled(self.engageTimer.buttonTitle == "Engage")
+            }.padding(5)
+               
+            // Engage Button Action & Design
+            VStack (alignment: .center) {
+                Button(action: {
+                    self.pressedEngageTimerButton()
+                })
+                { Text("\(self.engageTimer.buttonTitle)") }
+                    .font(.title)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .padding(10)
+                    .background(Capsule().stroke(lineWidth: 2))
+                    .foregroundColor(.black)
+            }.padding(5)
+            
+            // Pause Button Action & Design
+            VStack {
+                Button(action: {
+                    self.pressedPauseButton()
+                    }
+                ) { Text("\(self.engageTimer.pauseButtonTitle)") }
+                      .font(.title)
+                      .frame(minWidth: 0, maxWidth: .infinity)
+                      .padding(10)
+                      .background(Capsule().stroke(lineWidth: 2))
+                    .foregroundColor(buttonColor)
+            }
+                .padding(5)
+                .disabled(self.engageTimer.buttonTitle == "Engage")
+            
+            HStack{
+                Spacer()
+                BannerVC().frame(width: 320, height: 50, alignment: .center)
+                Spacer()
+            }
+            
+        }// Form Close
+         // Navigation Bar Layout and Design
+        .navigationBarTitle("Engage Timer", displayMode: .large)
+        .navigationBarItems(trailing: Button("Edit") {
+            self.editEngageTimerViewIsVisible = true
+        }.disabled(self.engageTimer.buttonTitle != "Engage"))
         
-        HStack{
-            Spacer()
-            BannerVC().frame(width: 320, height: 50, alignment: .center)
-            Spacer()
-        }
-        
-    }// Form Close
-     // Navigation Bar Layout and Design
-    .navigationBarTitle("Engage Timer", displayMode: .large)
-    .navigationBarItems(trailing: Button("Edit") {
-        self.editEngageTimerViewIsVisible = true
-    }.disabled(self.engageTimer.buttonTitle != "Engage"))
-    
-} // Navigation View Close
+    } // Navigation View Close
   // Present options sheet using binded variable and pass environment object
 .sheet(isPresented: $editEngageTimerViewIsVisible){ EditEngageTimerOptionsView().environmentObject(self.engageTimer) }
 } // View Closure
@@ -132,63 +129,67 @@ NavigationView {
     
 // Methods
 // =============================================
-
 var buttonColor: Color {
     return self.engageTimer.buttonTitle == "Engage" ? .gray : .black
 }
 
 
 func runEngageTimer() {
+    
     if self.engageTimer.time > 0 {
-        if self.engageTimer.time == self.timeReset {
+        if self.engageTimer.time == self.engageTimer.timeReset {
             playSound(sound: "boxing-bell-1", type: "wav")
         }
         self.engageTimer.time -= 1
 
         if self.engageTimer.randomArray.contains(self.engageTimer.time) {
-            playSound(sound: "Single-clap", type: "mp3")
+            playSound(sound: "\(self.engageTimer.noise)", type: "mp3")
         }
 
     } else if self.engageTimer.rest > 0 {
         // Play the boxing bell x 3 to indicate rest started
-        if self.engageTimer.rest == self.restReset {
+        if self.engageTimer.rest == self.engageTimer.restReset {
             playSound(sound: "boxing-bell-3", type: "wav")
         }
         self.engageTimer.rest -= 1
 
-    } else if self.engageTimer.round > 1 {
-        self.engageTimer.round -= 1
-        self.resetTimeAndRest()
-        self.createRandomNumberArray()
+    } else if self.engageTimer.round < self.engageTimer.totalRounds {
+        self.engageTimer.round += 1
+        self.engageTimer.resetTimeAndRest()
+        self.engageTimer.createRandomNumberArray()
 
     } else {
         self.engageTimer.buttonTitle = "Engage"
-        resetAllValues()
-        cancelTimer()
+        engageTimer.resetAllValues()
+        self.cancelTimer()
         self.interstitial.showAd()
     }
 }
     
-func pressedEngageTimer() {
+func pressedEngageTimerButton() {
+    // If Timer is running, stop Timer
     if self.engageTimer.timerIsRunning == true {
           self.cancelTimer()
-          self.resetAllValues()
+          self.engageTimer.resetAllValues()
           self.engageTimer.buttonTitle = "Engage"
-      } else if self.pauseButtonTitle == "Re-start" {
+        
+    // Timer has run some, but the user wants to reset to original settings
+      } else if self.engageTimer.pauseButtonTitle == "Re-start" {
           self.cancelTimer()
-          self.resetTimeAndRest()
+          self.engageTimer.resetTimeAndRest()
           self.engageTimer.buttonTitle = "Engage"
-          self.pauseButtonTitle = "Pause"
+          self.engageTimer.pauseButtonTitle = "Pause"
+        
+    // Starts the timer if it has not been started before.
       } else {
           // Capture reset values if timer is starting
-          self.fillResetValues()
-        // create the random number range
-          self.createRandomNumberArray()
-          print(self.engageTimer.randomArray)
+          self.engageTimer.fillResetValues()
+        // Create random number array
+        self.engageTimer.createRandomNumberArray()
+        // Create new timer
           self.instanstiateTimer()
+        // Start running the new timer (Uses func runEngageTimer)
           self.timer.connect()
-
-          self.engageTimer.timerIsRunning = true
           self.engageTimer.buttonTitle = "Stop"
     }
 }
@@ -197,7 +198,7 @@ func pressedPauseButton() {
     if self.engageTimer.timerIsRunning == true {
        //Pause the Timer
        self.cancelTimer()
-       self.pauseButtonTitle = "Re-start"
+       self.engageTimer.pauseButtonTitle = "Re-start"
 
      } else if self.engageTimer.buttonTitle == "Engage" {
        return
@@ -205,71 +206,22 @@ func pressedPauseButton() {
        // Restart the Timer
        self.instanstiateTimer()
        self.timer.connect()
-       self.pauseButtonTitle = "Pause"
+       self.engageTimer.pauseButtonTitle = "Pause"
      }
 }
-//
-//func createRandomNumberArray() {
-//
-//    self.engageTimer.randomArray = []
-//    let range = engageTimer.time - 3
-//
-//    for _ in 1...engageTimer.noiseTotal {
-//        engageTimer.randomNumber = Int.random(in: 2...range)
-//
-//        while engageTimer.randomArray.contains(engageTimer.randomNumber) || engageTimer.randomArray.contains(engageTimer.randomNumber + 1) || engageTimer.randomArray.contains(engageTimer.randomNumber - 1) || engageTimer.randomArray.contains(engageTimer.randomNumber - 2) || engageTimer.randomArray.contains(engageTimer.randomNumber + 2) {
-//            engageTimer.randomNumber = Int.random(in: 2...range)
-//        }
-//        engageTimer.randomArray.append(engageTimer.randomNumber)
-//
-//    }
-//
-//}
+    
+func instanstiateTimer() {
+    self.engageTimer.timerIsRunning = true
+    timer = Timer.publish(every: 1, on: .main, in: .common)
+    return
+}
 
-//
+func cancelTimer() {
+    timer.connect().cancel()
+    self.engageTimer.timerIsRunning = false
+}
 
-    
-    
-//func resetAllValues() {
-//    self.engageTimer.round = self.roundReset
-//    self.engageTimer.time = self.timeReset
-//    self.engageTimer.rest = self.restReset
-//    self.engageTimer.noiseTotal = self.noiseCountReset
-//    // Reset Rounds
-//    self.engageTimer.round = self.roundReset
-//    // Reset Noise Total
-//    self.engageTimer.noiseTotal = self.noiseCountReset
-//}
-//
-//func resetTimeAndRest() {
-//    // Reset the time
-//    self.engageTimer.time = self.timeReset
-//    // Display Time in clock format
-//    
-//    // Reset the Rest
-//    self.engageTimer.rest = self.restReset
-//    // Display Rest in clock format
-//    
-//}
-//
-//func fillResetValues() {
-//    self.roundReset = self.engageTimer.round
-//    self.timeReset = self.engageTimer.time
-//    self.restReset = self.engageTimer.rest
-//    self.noiseCountReset = self.engageTimer.noiseTotal
-//}
-//
-//func instanstiateTimer() {
-//    self.engageTimer.timerIsRunning = true
-//    self.timer = Timer.publish(every: 1, on: .main, in: .common)
-//    return
-//}
-//
-//func cancelTimer() {
-//    self.timer.connect().cancel()
-//    self.engageTimer.timerIsRunning = false
-//}
-    
+
     
 // Google ADMOB
 // ==================================

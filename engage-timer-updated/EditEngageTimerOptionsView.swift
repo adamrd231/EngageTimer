@@ -22,8 +22,8 @@ struct EditEngageTimerOptionsView: View {
                 HStack {
                 Text("Rounds")
                     Spacer()
-                    Text("\(self.engageTimer.round)")
-                    Stepper("\(self.engageTimer.round)", value: $engageTimer.round, in: 0...25).labelsHidden()
+                    Text("\(self.engageTimer.totalRounds)")
+                    Stepper("\(self.engageTimer.totalRounds)", value: $engageTimer.totalRounds, in: 0...25).labelsHidden()
                 }.padding()
                 
                 HStack {
