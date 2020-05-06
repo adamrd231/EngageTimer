@@ -1,12 +1,10 @@
 //  Created by Adam Reed on 2/6/20.
 //  Copyright © 2020 rdConcepts. All rights reserved.
 
-// Notes
 // find a way to get the layout to fill the whole screen?
-// Add random noises to app
-// add choice to change random noise.
-
+// Add random noises to app - make sure the noisefile matches the name. .mp3 or wav is fine.
 // need to create persistence for the data
+// Keep the app open while running the timer?
 
 import SwiftUI
 import GoogleMobileAds
@@ -178,6 +176,7 @@ func pressedEngageTimerButton() {
           self.cancelTimer()
           self.engageTimer.resetAllValues()
           self.engageTimer.buttonTitle = "Engage"
+        self.checkInterstitialCount()
         
     // Timer has run some, but the user wants to reset to original settings
       } else if self.engageTimer.pauseButtonTitle == "Re-start" {
@@ -185,6 +184,7 @@ func pressedEngageTimerButton() {
           self.engageTimer.resetTimeAndRest()
           self.engageTimer.buttonTitle = "Engage"
           self.engageTimer.pauseButtonTitle = "Pause"
+        self.checkInterstitialCount()
         
     // Starts the timer if it has not been started before.
       } else {
@@ -197,6 +197,15 @@ func pressedEngageTimerButton() {
         // Start running the new timer (Uses func runEngageTimer)
           self.timer.connect()
           self.engageTimer.buttonTitle = "Stop"
+    }
+}
+    
+func checkInterstitialCount() {
+    self.interstitialCount += 1
+    if self.interstitialCount == 5 {
+        self.interstitial.showAd()
+        print("Interstital is Playing Meow")
+        self.interstitialCount = 0
     }
 }
     
