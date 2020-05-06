@@ -6,7 +6,6 @@
 // Add random noises to app
 // add choice to change random noise.
 
-// buttons still dark on dark mode
 // need to create persistence for the data
 
 import SwiftUI
@@ -26,6 +25,7 @@ struct EngageTimerView: View {
 var interstitial:Interstitial
 init() { self.interstitial = Interstitial() }
 @State var interstitialCount = 0
+    
 // ================================================================
     
 // User Interface Views
@@ -88,7 +88,8 @@ var body: some View {
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .padding(10)
                     .background(Capsule().stroke(lineWidth: 2))
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
+                
             }.padding(5)
             
             // Pause Button Action & Design
@@ -114,7 +115,7 @@ var body: some View {
             
         }// Form Close
          // Navigation Bar Layout and Design
-        .navigationBarTitle("Engage Timer", displayMode: .large)
+            .navigationBarTitle("Engage Timer", displayMode: .large)
         .navigationBarItems(trailing: Button("Edit") {
             self.editEngageTimerViewIsVisible = true
         }.disabled(self.engageTimer.buttonTitle != "Engage"))
@@ -130,7 +131,7 @@ var body: some View {
 // Methods
 // =============================================
 var buttonColor: Color {
-    return self.engageTimer.buttonTitle == "Engage" ? .gray : .black
+    return self.engageTimer.buttonTitle == "Engage" ? .secondary : .primary
 }
 
 
@@ -144,6 +145,7 @@ func runEngageTimer() {
 
         if self.engageTimer.randomArray.contains(self.engageTimer.time) {
             playSound(sound: "\(self.engageTimer.noise)", type: "mp3")
+            self.engageTimer.noiseTotal -= 1
         }
 
     } else if self.engageTimer.rest > 0 {
@@ -154,11 +156,15 @@ func runEngageTimer() {
         self.engageTimer.rest -= 1
 
     } else if self.engageTimer.round < self.engageTimer.totalRounds {
+        print("reset and start over")
         self.engageTimer.round += 1
         self.engageTimer.resetTimeAndRest()
+        // need to also reset the random noise count
+        self.engageTimer.resetRandomNoiseCount()
         self.engageTimer.createRandomNumberArray()
 
     } else {
+        print("ending timer")
         self.engageTimer.buttonTitle = "Engage"
         engageTimer.resetAllValues()
         self.cancelTimer()
@@ -277,7 +283,7 @@ final class Interstitial:NSObject, GADInterstitialDelegate{
 // =====================================================================
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        EngageTimerView().environmentObject(EngageTimer())
+        EngageTimerView().environmentObject(EngageTimer()).colorScheme(.dark)
     }
 }
 }

@@ -62,6 +62,9 @@ class EngageTimer: ObservableObject {
         noiseCountReset = noiseTotal
     }
 
+    func resetRandomNoiseCount() {
+        noiseTotal = noiseCountReset
+    }
 
         
     func createRandomNumberArray() {
