@@ -9,7 +9,6 @@
 import Foundation
 import GoogleMobileAds
 
-
 class EngageTimer: ObservableObject {
     @Published var round = 1
     // State variable to countdown rounds instead of counting up
@@ -31,7 +30,7 @@ class EngageTimer: ObservableObject {
     
     @Published var randomArray:[Int] = []
     @Published var randomNumber = 1
-
+    
     
     func resetAllValues() {
         round = roundReset
@@ -46,7 +45,7 @@ class EngageTimer: ObservableObject {
 
     func resetTimeAndRest() {
         // Reset the time
-        time = self.timeReset
+        time = timeReset
         // Display Time in clock format
         
         // Reset the Rest
@@ -68,7 +67,6 @@ class EngageTimer: ObservableObject {
 
         
     func createRandomNumberArray() {
-
         randomArray = []
         let range = time - 3
         
@@ -82,4 +80,5 @@ class EngageTimer: ObservableObject {
             
         }
     }
+    
 }

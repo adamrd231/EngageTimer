@@ -1,10 +1,8 @@
 //  Created by Adam Reed on 2/6/20.
 //  Copyright © 2020 rdConcepts. All rights reserved.
 
-// find a way to get the layout to fill the whole screen?
 // Add random noises to app - make sure the noisefile matches the name. .mp3 or wav is fine.
 // need to create persistence for the data
-// Keep the app open while running the timer?
 
 import SwiftUI
 import GoogleMobileAds
@@ -17,6 +15,7 @@ struct EngageTimerView: View {
 
 // State variable to bring up editing view
 @State var editEngageTimerViewIsVisible = false
+@State var explanationViewIsVisible = false
 @State var textSize = CGFloat(70)
     
 // Admob
@@ -28,7 +27,6 @@ init() { self.interstitial = Interstitial() }
     
 // User Interface Views
 var body: some View {
-    
     NavigationView {
         Form {
             // Rounds Stack
@@ -114,13 +112,18 @@ var body: some View {
         }// Form Close
          // Navigation Bar Layout and Design
             .navigationBarTitle("Engage Timer", displayMode: .large)
-        .navigationBarItems(trailing: Button("Edit") {
-            self.editEngageTimerViewIsVisible = true
+            .navigationBarItems( leading:
+                Button("About") {
+                    self.explanationViewIsVisible = true
+                    }, trailing:
+                Button("Edit") {
+                    self.editEngageTimerViewIsVisible = true
         }.disabled(self.engageTimer.buttonTitle != "Engage"))
         
     } // Navigation View Close
   // Present options sheet using binded variable and pass environment object
-.sheet(isPresented: $editEngageTimerViewIsVisible){ EditEngageTimerOptionsView().environmentObject(self.engageTimer) }
+.sheet(isPresented: $editEngageTimerViewIsVisible) { EditEngageTimerOptionsView().environmentObject(self.engageTimer) }
+.sheet(isPresented: $explanationViewIsVisible) { ExplanationView() }
 } // View Closure
 
     
@@ -134,6 +137,10 @@ var buttonColor: Color {
 
 
 func runEngageTimer() {
+    
+    if self.engageTimer.round == self.engageTimer.totalRounds {
+        self.engageTimer.rest = 0
+    }
     
     if self.engageTimer.time > 0 {
         if self.engageTimer.time == self.engageTimer.timeReset {
@@ -157,6 +164,7 @@ func runEngageTimer() {
         print("reset and start over")
         self.engageTimer.round += 1
         self.engageTimer.resetTimeAndRest()
+        
         // need to also reset the random noise count
         self.engageTimer.resetRandomNoiseCount()
         self.engageTimer.createRandomNumberArray()
@@ -199,15 +207,7 @@ func pressedEngageTimerButton() {
           self.engageTimer.buttonTitle = "Stop"
     }
 }
-    
-func checkInterstitialCount() {
-    self.interstitialCount += 1
-    if self.interstitialCount == 5 {
-        self.interstitial.showAd()
-        print("Interstital is Playing Meow")
-        self.interstitialCount = 0
-    }
-}
+
     
 func pressedPauseButton() {
     if self.engageTimer.timerIsRunning == true {
@@ -236,6 +236,32 @@ func cancelTimer() {
     self.engageTimer.timerIsRunning = false
 }
 
+    
+    
+// Saving
+// ==============================
+
+//func saveEngageTimer() {
+//    let encoder = PropertyListEncoder()
+//    
+//    do {
+//        let data = try encoder.encode(engageTimer)
+//        try data.write(to: dataFilePath(), options: Data.WritingOptions.atomic)
+//    } catch {
+//        print("Error encoding item array:")
+//    }
+//}
+//
+//func documentsDirectory() -> URL {
+//    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+//    return paths[0]
+//}
+//
+//func dataFilePath() -> URL {
+//    return documentsDirectory().appendingPathComponent("Info.plist")
+//}
+    
+    
 
     
 // Google ADMOB
@@ -285,6 +311,16 @@ final class Interstitial:NSObject, GADInterstitialDelegate{
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         LoadInterstitial()
+    }
+}
+    
+        
+func checkInterstitialCount() {
+    self.interstitialCount += 1
+    if self.interstitialCount == 3 {
+        self.interstitial.showAd()
+        print("Interstital is Playing Meow")
+        self.interstitialCount = 0
     }
 }
  
