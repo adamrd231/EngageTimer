@@ -1,7 +1,6 @@
 //  Created by Adam Reed on 2/6/20.
 //  Copyright © 2020 rdConcepts. All rights reserved.
 
-// Add random noises to app - make sure the noisefile matches the name. .mp3 or wav is fine.
 // need to create persistence for the data
 
 import SwiftUI
@@ -171,6 +170,7 @@ func runEngageTimer() {
 
     } else {
         print("ending timer")
+        playSound(sound: "boxing-bell-3", type: "wav")
         self.engageTimer.buttonTitle = "Engage"
         engageTimer.resetAllValues()
         self.cancelTimer()

@@ -12,7 +12,6 @@
 		6629071D2458C92600EFF54D /* boxing-bell-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071B2458C92600EFF54D /* boxing-bell-1.wav */; };
 		6629071E2458C92600EFF54D /* boxing-bell-3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071C2458C92600EFF54D /* boxing-bell-3.wav */; };
 		662D955C245CAEE40067A952 /* Clap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 662D955B245CAEE30067A952 /* Clap.mp3 */; };
-		664ECD8724625218001EBB05 /* engage-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 664ECD8624625218001EBB05 /* engage-icon.png */; };
 		6650BC6D2464BBD000030695 /* Whistle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6650BC6C2464BBD000030695 /* Whistle.mp3 */; };
 		6650BC6F2464BCAF00030695 /* Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6650BC6E2464BCAF00030695 /* Bell.mp3 */; };
 		66B5A52E2456413D005A2D4F /* EditEngageTimerOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */; };
@@ -33,7 +32,6 @@
 		6629071B2458C92600EFF54D /* boxing-bell-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "boxing-bell-1.wav"; sourceTree = "<group>"; };
 		6629071C2458C92600EFF54D /* boxing-bell-3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "boxing-bell-3.wav"; sourceTree = "<group>"; };
 		662D955B245CAEE30067A952 /* Clap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Clap.mp3; sourceTree = "<group>"; };
-		664ECD8624625218001EBB05 /* engage-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "engage-icon.png"; sourceTree = "<group>"; };
 		6650BC6C2464BBD000030695 /* Whistle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Whistle.mp3; sourceTree = "<group>"; };
 		6650BC6E2464BCAF00030695 /* Bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bell.mp3; sourceTree = "<group>"; };
 		66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEngageTimerOptionsView.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 				6629071B2458C92600EFF54D /* boxing-bell-1.wav */,
 				6629071C2458C92600EFF54D /* boxing-bell-3.wav */,
 				66E21A642461005700A7F9F1 /* EngageButton.swift */,
-				664ECD8624625218001EBB05 /* engage-icon.png */,
 				66E983FC2464B30D005B9FE8 /* ExplanationView.swift */,
 			);
 			path = "engage-timer-updated";
@@ -211,7 +208,6 @@
 				66CBF16823ED19AA0022F015 /* Assets.xcassets in Resources */,
 				6650BC6F2464BCAF00030695 /* Bell.mp3 in Resources */,
 				66CBF17A23ED1FC50022F015 /* DS-DIGI.TTF in Resources */,
-				664ECD8724625218001EBB05 /* engage-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
