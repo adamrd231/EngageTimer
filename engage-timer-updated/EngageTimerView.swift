@@ -123,7 +123,7 @@ var body: some View {
     } // Navigation View Close
   // Present options sheet using binded variable and pass environment object
 .sheet(isPresented: $editEngageTimerViewIsVisible) { EditEngageTimerOptionsView().environmentObject(self.engageTimer) }
-.sheet(isPresented: $explanationViewIsVisible) { ExplanationView() }
+//.sheet(isPresented: $explanationViewIsVisible) { ExplanationView() }
 } // View Closure
 
     
