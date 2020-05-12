@@ -13,8 +13,8 @@ struct EngageTimerView: View {
 @State var timer = Timer.publish(every: 1, on: .main, in: .common)
 
 // State variable to bring up editing view
-@State var editEngageTimerViewIsVisible = false
-@State var explanationViewIsVisible = false
+@State var showSheet = false
+@State var sheetSelection = 1
 @State var textSize = CGFloat(70)
     
 // Admob
@@ -111,17 +111,28 @@ var body: some View {
         }// Form Close
          // Navigation Bar Layout and Design
             .navigationBarTitle("Engage Timer", displayMode: .large)
-            .navigationBarItems( leading:
-                Button("About") {
-                    self.explanationViewIsVisible = true
-                    }, trailing:
-                Button("Edit") {
-                    self.editEngageTimerViewIsVisible = true
-        }.disabled(self.engageTimer.buttonTitle != "Engage"))
+            .navigationBarItems(
+                leading: Button("About") {
+                    self.sheetSelection = 1
+                    self.showSheet = true
+                }
+                ,trailing: Button("Edit") {
+                    self.sheetSelection = 2
+                    self.showSheet = true
+                }
+                    .disabled(self.engageTimer.buttonTitle != "Engage"))
         
     } // Navigation View Close
   // Present options sheet using binded variable and pass environment object
-.sheet(isPresented: $editEngageTimerViewIsVisible) { EditEngageTimerOptionsView().environmentObject(self.engageTimer) }
+.sheet(isPresented: $showSheet) {
+    if self.sheetSelection == 1 {
+        ExplanationView()
+    }
+    if self.sheetSelection == 2 {
+        EditEngageTimerOptionsView().environmentObject(self.engageTimer)
+    }
+    }
+
 //.sheet(isPresented: $explanationViewIsVisible) { ExplanationView() }
 } // View Closure
 
