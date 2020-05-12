@@ -63,7 +63,7 @@ var body: some View {
            // Random Noise Choice & Count
            HStack {
             if self.engageTimer.usingRandomNoise {
-                Text("\(self.engageTimer.noise)")
+                Text("\(self.engageTimer.noise ?? "Clap")")
                     .font(.largeTitle).bold()
                 Spacer()
                 Text("\(self.engageTimer.noiseTotal)")

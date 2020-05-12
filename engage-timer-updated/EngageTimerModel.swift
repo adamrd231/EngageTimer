@@ -11,13 +11,35 @@ import GoogleMobileAds
 
 class EngageTimer: ObservableObject {
     @Published var round = 1
+    
     // State variable to countdown rounds instead of counting up
-    @Published var totalRounds = 3
-    @Published var time = 10
-    @Published var rest = 5
-    @Published var noiseTotal = 2
+    @Published var totalRounds = UserDefaults.standard.integer(forKey: "totalRounds") {
+        didSet {
+            UserDefaults.standard.set(self.totalRounds, forKey: "totalRounds")
+        }
+    }
+    
+    @Published var time = UserDefaults.standard.integer(forKey: "time") {
+        didSet {
+            UserDefaults.standard.set(self.time, forKey: "time")
+        }
+    }
+    
+    @Published var rest = UserDefaults.standard.integer(forKey: "rest") {
+        didSet {
+            UserDefaults.standard.set(self.rest, forKey: "rest")
+        }
+    }
+    
+    @Published var noiseTotal = UserDefaults.standard.integer(forKey: "noiseTotal") {
+        didSet {
+            UserDefaults.standard.set(self.noiseTotal, forKey: "noiseTotal")
+        }
+    }
+    
     @Published var noise = "Clap"
     @Published var usingRandomNoise = true
+    
     @Published var noiseArray = ["Clap", "Bell", "Whistle"]
     @Published var buttonTitle = "Engage"
     @Published var timerIsRunning = false
@@ -30,6 +52,7 @@ class EngageTimer: ObservableObject {
     
     @Published var randomArray:[Int] = []
     @Published var randomNumber = 1
+    
     
     
     func resetAllValues() {

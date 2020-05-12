@@ -55,7 +55,7 @@ struct EditEngageTimerOptionsView: View {
                 
                 HStack {
                     if engageTimer.usingRandomNoise {
-                        Picker(selection: $engageTimer.noise, label: Text("Currently Using...")) {
+                        Picker(selection: $engageTimer.noise, label: Text("Currently Using - \(engageTimer.noise ?? "Default")")) {
                        ForEach(engageTimer.noiseArray, id: \.self) { noise in
                            Text("\(noise)")
                        }

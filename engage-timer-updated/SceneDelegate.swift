@@ -12,7 +12,7 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var engageTimer = EngageTimer()
-    
+    var firstTimerUser = false
     var window: UIWindow?
 
 
@@ -29,6 +29,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             
             window.rootViewController = UIHostingController(rootView: EngageTimerView().environmentObject(engageTimer))
+            
+            
+            // Set initial Values for the first login
+            if firstTimerUser == false {
+                firstTimerUser = true
+                engageTimer.round = 1
+                engageTimer.totalRounds = 5
+                engageTimer.time = 300
+                engageTimer.rest = 60
+                engageTimer.noise = "Clap"
+                engageTimer.noiseTotal = 10
+            }
+        
+            
+            
             self.window = window
             window.makeKeyAndVisible()
         }
