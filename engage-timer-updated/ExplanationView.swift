@@ -11,9 +11,9 @@ import SwiftUI
 struct ExplanationView: View {
     var body: some View {
         VStack {
-            Image("engage-icon").resizable().scaledToFit()
+            Image("engage-icon-transparent").resizable().scaledToFit()
             Text("The Engage Timer.").font(.title)
-            Text("Designed to simulate having a trainer with you at home, use our timer to incororate extra focus and engagement into your workout. Use the timer on a run and sprint on the random noise, while shadow boxing anytime the random noise goes off you can simulate the opponent striking. \n\nQuestions: contact@rdConcepts.design").padding()
+            Text("The Engage Timer was developed to help bring a true random element into our fitness routines. Developing reflexes and fast twitch muscles comes from reacting to something that you can plan on. I hope you enjoy this timer whether you are a coach, athlete or just looking to improve your reaction time. \n\nQuestions: contact@rdConcepts.design").padding()
             Text("Swipe Down To Return").padding().font(.subheadline)
         }.padding()
     }
@@ -21,6 +21,6 @@ struct ExplanationView: View {
 
 struct ExplanationView_Previews: PreviewProvider {
     static var previews: some View {
-        ExplanationView()
+        ExplanationView().colorScheme(.dark)
     }
 }

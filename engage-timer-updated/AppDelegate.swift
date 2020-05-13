@@ -8,21 +8,24 @@
 
 import UIKit
 import GoogleMobileAds
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+var firstTimeUser = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Setup google admob instance
         GADMobileAds.sharedInstance().start(completionHandler: nil)
-        UserDefaults.standard.register(defaults: [
-            "noise": "Clap",
-            "usingRandomNoise" : true
-        ])
         
+        // Change options for audio session to keep users background music playing.
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
+        
+        // If user is using the app, stop the idle timer from closing the app
         UIApplication.shared.isIdleTimerDisabled = true
+        
         return true
     }
 

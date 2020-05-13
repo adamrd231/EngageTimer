@@ -11,7 +11,7 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var engageTimer = EngageTimer()
-    var firstTimerUser: Bool?
+    var firstTimeUser:Bool?
     var window: UIWindow?
 
 
@@ -22,27 +22,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         let contentView = EngageTimerView()
-
+        
+        // Set initial Values for the first login
+        if firstTimeUser == false {
+           firstTimeUser = true
+           print(firstTimeUser)
+           engageTimer.round = 1
+           engageTimer.totalRounds = 5
+           engageTimer.time = 300
+           engageTimer.rest = 60
+           engageTimer.noiseChoice = 0
+           engageTimer.noiseTotal = 10
+        }
+        
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             
             window.rootViewController = UIHostingController(rootView: EngageTimerView().environmentObject(engageTimer))
-            
-            
-            // Set initial Values for the first login
-            if firstTimerUser == false {
-                firstTimerUser = true
-                engageTimer.round = 1
-                engageTimer.totalRounds = 5
-                engageTimer.time = 300
-                engageTimer.rest = 60
-                engageTimer.noiseChoice = 0
-                engageTimer.noiseTotal = 10
-            }
         
-            
-            
             self.window = window
             window.makeKeyAndVisible()
         }
@@ -79,3 +77,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+
+struct SceneDelegate_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
+}

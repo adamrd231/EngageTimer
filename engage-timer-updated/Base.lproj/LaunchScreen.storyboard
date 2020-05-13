@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="engage-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="CC5-YX-tc5">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="engage-icon-transparent" translatesAutoresizingMaskIntoConstraints="NO" id="CC5-YX-tc5">
                                 <rect key="frame" x="84" y="323" width="247" height="251"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -30,6 +30,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="engage-icon.png" width="1024" height="1024"/>
+        <image name="engage-icon-transparent" width="1024" height="1024"/>
     </resources>
 </document>

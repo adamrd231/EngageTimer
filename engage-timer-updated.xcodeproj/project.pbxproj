@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D746393F7038F44A9FA1384 /* libPods-engage-timer-updated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1456B105882C4053CC06E7B /* libPods-engage-timer-updated.a */; };
+		660931E5246C9D1C00D1AAEA /* engage-icon-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 660931E4246C9D1C00D1AAEA /* engage-icon-transparent.png */; };
 		6629071A2458C80500EFF54D /* sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662907192458C80500EFF54D /* sounds.swift */; };
 		6629071D2458C92600EFF54D /* boxing-bell-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071B2458C92600EFF54D /* boxing-bell-1.wav */; };
 		6629071E2458C92600EFF54D /* boxing-bell-3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071C2458C92600EFF54D /* boxing-bell-3.wav */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		660931E4246C9D1C00D1AAEA /* engage-icon-transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "engage-icon-transparent.png"; sourceTree = "<group>"; };
 		662907192458C80500EFF54D /* sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sounds.swift; sourceTree = "<group>"; };
 		6629071B2458C92600EFF54D /* boxing-bell-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "boxing-bell-1.wav"; sourceTree = "<group>"; };
 		6629071C2458C92600EFF54D /* boxing-bell-3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "boxing-bell-3.wav"; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				66CBF17523ED1DA00022F015 /* Fonts */,
 				66CBF16923ED19AA0022F015 /* Preview Content */,
 				662907192458C80500EFF54D /* sounds.swift */,
+				660931E4246C9D1C00D1AAEA /* engage-icon-transparent.png */,
 				6650BC6E2464BCAF00030695 /* Bell.mp3 */,
 				662D955B245CAEE30067A952 /* Clap.mp3 */,
 				6650BC6C2464BBD000030695 /* Whistle.mp3 */,
@@ -201,6 +204,7 @@
 			files = (
 				66CBF16E23ED19AA0022F015 /* LaunchScreen.storyboard in Resources */,
 				662D955C245CAEE40067A952 /* Clap.mp3 in Resources */,
+				660931E5246C9D1C00D1AAEA /* engage-icon-transparent.png in Resources */,
 				6629071D2458C92600EFF54D /* boxing-bell-1.wav in Resources */,
 				6629071E2458C92600EFF54D /* boxing-bell-3.wav in Resources */,
 				66CBF16B23ED19AA0022F015 /* Preview Assets.xcassets in Resources */,
