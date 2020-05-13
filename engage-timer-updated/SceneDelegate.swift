@@ -24,15 +24,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let contentView = EngageTimerView()
         
         // Set initial Values for the first login
-        if firstTimeUser == false {
-           firstTimeUser = true
-           print(firstTimeUser)
-           engageTimer.round = 1
-           engageTimer.totalRounds = 5
-           engageTimer.time = 300
-           engageTimer.rest = 60
-           engageTimer.noiseChoice = 0
-           engageTimer.noiseTotal = 10
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore {
+           print("launched before")
+        } else {
+            print("First Launch, do setup.")
+            firstTimeUser = true
+            engageTimer.round = 1
+            engageTimer.totalRounds = 5
+            engageTimer.time = 300
+            engageTimer.rest = 60
+            engageTimer.noiseChoice = 0
+            engageTimer.noiseTotal = 10
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
         
         // Use a UIHostingController as window root view controller.

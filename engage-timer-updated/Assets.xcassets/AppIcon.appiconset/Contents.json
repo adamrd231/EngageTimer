@@ -31,12 +31,12 @@
       "size" : "40x40"
     },
     {
+      "filename" : "engager-icon-120.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
-      "filename" : "engager-icon-180.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
@@ -87,7 +87,7 @@
       "size" : "83.5x83.5"
     },
     {
-      "filename" : "engage-icon.png",
+      "filename" : "engager-icon-1024.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
