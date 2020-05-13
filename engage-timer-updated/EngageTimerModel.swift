@@ -37,9 +37,13 @@ class EngageTimer: ObservableObject {
         }
     }
     
-    @Published var noise = "Clap"
     @Published var usingRandomNoise = true
     
+    @Published var noiseChoice = UserDefaults.standard.integer(forKey: "noiseChoice") {
+        didSet {
+            UserDefaults.standard.set(self.noiseChoice, forKey: "noiseChoice")
+        }
+    }
     @Published var noiseArray = ["Clap", "Bell", "Whistle"]
     @Published var buttonTitle = "Engage"
     @Published var timerIsRunning = false

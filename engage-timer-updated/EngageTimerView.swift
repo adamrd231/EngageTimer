@@ -63,7 +63,7 @@ var body: some View {
            // Random Noise Choice & Count
            HStack {
             if self.engageTimer.usingRandomNoise {
-                Text("\(self.engageTimer.noise ?? "Clap")")
+                Text("\(self.engageTimer.noiseArray[engageTimer.noiseChoice])")
                     .font(.largeTitle).bold()
                 Spacer()
                 Text("\(self.engageTimer.noiseTotal)")
@@ -159,7 +159,7 @@ func runEngageTimer() {
         self.engageTimer.time -= 1
 
         if self.engageTimer.randomArray.contains(self.engageTimer.time) {
-            playSound(sound: "\(self.engageTimer.noise)", type: "mp3")
+            playSound(sound: "\(self.engageTimer.noiseArray[engageTimer.noiseChoice])", type: "mp3")
             self.engageTimer.noiseTotal -= 1
         }
 

@@ -49,17 +49,19 @@ struct EditEngageTimerOptionsView: View {
                 
                 HStack {
                     Toggle(isOn: $engageTimer.usingRandomNoise) {
-                                      Text("Random Sound Effect")
+                                      Text("Random Effect")
                                   }
                 }.padding()
                 
                 HStack {
                     if engageTimer.usingRandomNoise {
-                        Picker(selection: $engageTimer.noise, label: Text("Currently Using - \(engageTimer.noise ?? "Default")")) {
-                       ForEach(engageTimer.noiseArray, id: \.self) { noise in
-                           Text("\(noise)")
-                       }
-                       }
+                      
+                        Picker(selection: $engageTimer.noiseChoice, label: Text("Sound Effect")) {
+                            ForEach (0 ..< engageTimer.noiseArray.count) {
+                                Text(self.engageTimer.noiseArray[$0])
+                            }
+                        }
+                        
                     }
                     }.padding()
                                   

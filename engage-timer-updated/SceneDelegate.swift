@@ -4,7 +4,6 @@
 //
 //  Created by Adam Reed on 2/6/20.
 //  Copyright © 2020 rdConcepts. All rights reserved.
-//
 
 import UIKit
 import SwiftUI
@@ -12,7 +11,7 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var engageTimer = EngageTimer()
-    var firstTimerUser = false
+    var firstTimerUser: Bool?
     var window: UIWindow?
 
 
@@ -38,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 engageTimer.totalRounds = 5
                 engageTimer.time = 300
                 engageTimer.rest = 60
-                engageTimer.noise = "Clap"
+                engageTimer.noiseChoice = 0
                 engageTimer.noiseTotal = 10
             }
         
