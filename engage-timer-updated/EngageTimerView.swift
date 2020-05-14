@@ -108,7 +108,7 @@ var body: some View {
                  Spacer()
                  BannerVC().frame(width: 320, height: 50, alignment: .center)
                  Spacer()
-             }.frame(height: geometry.size.height / 7)
+             }.frame(height: 50)
         }
         
             

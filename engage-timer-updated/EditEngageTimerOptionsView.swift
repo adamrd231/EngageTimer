@@ -30,7 +30,19 @@ struct EditEngageTimerOptionsView: View {
                 Text("Time")
                 Spacer()
                     Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60))
-                    Stepper("", value: $engageTimer.time, in: 10...639, step: 10).labelsHidden()
+                    
+                    Stepper("\(engageTimer.time)", onIncrement: {
+                        self.engageTimer.time += 10
+                    }, onDecrement: {
+                        if self.engageTimer.time > 0 {
+                            self.engageTimer.time -= 10
+                        }
+                    
+                        if self.engageTimer.time / 5 < self.engageTimer.noiseTotal {
+                            self.engageTimer.noiseTotal = self.engageTimer.time / 5
+                        }
+                        }).labelsHidden()
+//                    Stepper("", value: $engageTimer.time, in: 10...639, step: 10).labelsHidden()
                     }.padding()
                 
                 HStack {
@@ -40,18 +52,22 @@ struct EditEngageTimerOptionsView: View {
                     Stepper("", value: $engageTimer.rest, in: 0...639, step: 5).labelsHidden()
                     }.padding()
                     
-                HStack {
-                Text("Noise Count")
-                Spacer()
-                    Text("\(self.engageTimer.noiseTotal)")
-                    Stepper("", value: $engageTimer.noiseTotal, in: 0...engageTimer.time / 5).labelsHidden()
-                    }.padding()
                 
                 HStack {
                     Toggle(isOn: $engageTimer.usingRandomNoise) {
                                       Text("Random Effect")
                                   }
                 }.padding()
+                
+                HStack {
+                if engageTimer.usingRandomNoise {
+                    Text("Noise Count")
+                    Spacer()
+                        Text("\(self.engageTimer.noiseTotal)")
+                        Stepper("", value: $engageTimer.noiseTotal, in: 0...engageTimer.time / 5).labelsHidden()
+                    }
+                        }.padding()
+                
                 
                 HStack {
                     if engageTimer.usingRandomNoise {

@@ -10,12 +10,20 @@ import SwiftUI
 
 struct ExplanationView: View {
     var body: some View {
-        VStack {
-            Image("engage-icon-transparent").resizable().scaledToFit()
-            Text("The Engage Timer.").font(.title)
-            Text("The Engage Timer was developed to help bring a true random element into our fitness routines. Developing reflexes and fast twitch muscles comes from reacting to something that you can plan on. I hope you enjoy this timer whether you are a coach, athlete or just looking to improve your reaction time. \n\nQuestions: contact@rdConcepts.design").padding()
-            Text("Swipe Down To Return").padding().font(.subheadline)
-        }.padding()
+        GeometryReader { geo in
+            VStack {
+                Image("engage-icon-transparent")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: geo.size.height / 4)
+                Text("The Engage Timer.")
+                    .font(.title)
+                Text("The Engage Timer was developed to help bring a true random element into our fitness routines. Developing reflexes and fast twitch muscles comes from reacting to something that you can plan on. I hope you enjoy this timer. \n\nQuestions: contact@rdConcepts.design")
+                    .font(.body).padding()
+                    .frame(width: geo.size.width * 0.9)
+                Text("Swipe Down To Return").padding().font(.subheadline)
+            }
+        }
     }
 }
 
