@@ -9,7 +9,8 @@
 import Foundation
 import GoogleMobileAds
 
-class EngageTimer: ObservableObject {
+class EngageTimer: ObservableObject, Identifiable {
+    
     @Published var round = 1
     
     // State variable to countdown rounds instead of counting up
@@ -33,6 +34,10 @@ class EngageTimer: ObservableObject {
     
     @Published var noiseTotal = UserDefaults.standard.integer(forKey: "noiseTotal") {
         didSet {
+                if time / 5 < noiseTotal {
+                    noiseTotal = time / 5
+                }
+                print(noiseTotal)
             UserDefaults.standard.set(self.noiseTotal, forKey: "noiseTotal")
         }
     }

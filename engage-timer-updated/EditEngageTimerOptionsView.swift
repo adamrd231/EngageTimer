@@ -34,16 +34,18 @@ struct EditEngageTimerOptionsView: View {
                     Stepper("\(engageTimer.time)", onIncrement: {
                         self.engageTimer.time += 10
                     }, onDecrement: {
-                        if self.engageTimer.time > 0 {
+                        if self.engageTimer.time == 0 {
+                            self.engageTimer.time += 10
+                        } else {
                             self.engageTimer.time -= 10
                         }
-                    
+
                         if self.engageTimer.time / 5 < self.engageTimer.noiseTotal {
                             self.engageTimer.noiseTotal = self.engageTimer.time / 5
                         }
                         }).labelsHidden()
 //                    Stepper("", value: $engageTimer.time, in: 10...639, step: 10).labelsHidden()
-                    }.padding()
+                }.padding()
                 
                 HStack {
                 Text("Rest")
@@ -73,6 +75,7 @@ struct EditEngageTimerOptionsView: View {
                     if engageTimer.usingRandomNoise {
                       
                         Picker(selection: $engageTimer.noiseChoice, label: Text("Sound Effect")) {
+                            
                             ForEach (0 ..< engageTimer.noiseArray.count) {
                                 Text(self.engageTimer.noiseArray[$0])
                             }
