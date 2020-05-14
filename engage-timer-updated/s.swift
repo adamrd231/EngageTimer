@@ -27,88 +27,92 @@ init() { self.interstitial = Interstitial() }
 // User Interface Views
 var body: some View {
     NavigationView {
-        Form {
-            // Rounds Stack
-            HStack {
-                Text("Round").font(.largeTitle)
-                Spacer()
-                Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: textSize))
-                Text("OF")
-                Text("\(self.engageTimer.totalRounds)").font(.custom("DS-Digital", size: textSize))
-                
-                }.padding(5)
-                    
-            // Time Remaining Stack
-            HStack {
-                Text("Time").font(.largeTitle)
-                Spacer()
-                Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60))
-                    .font(.custom("DS-Digital", size: textSize))
-                    // Timer runs function every second
-                    .onReceive(timer) { _ in
-                        self.runEngageTimer()
-                    }
-            }.padding(5)
-                    
-           // Rest Stack
-           // ==========
-           HStack {
-               Text("Rest").font(.largeTitle)
-               Spacer()
-               Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60))
-                   .font(.custom("DS-Digital", size: textSize))
-           }.padding(5)
-       
-
-           // Random Noise Choice & Count
-           HStack {
-            if self.engageTimer.usingRandomNoise {
-                Text("\(self.engageTimer.noiseArray[engageTimer.noiseChoice])")
-                    .font(.largeTitle).bold()
-                Spacer()
-                Text("\(self.engageTimer.noiseTotal)")
-                    .font(.custom("DS-Digital", size: textSize))
-            } else {
-                EmptyView()
-                }
-            }.padding(5)
-               
-            // Engage Button Action & Design
-            VStack (alignment: .center) {
-                Button(action: {
-                    self.pressedEngageTimerButton()
-                })
-                { Text("\(self.engageTimer.buttonTitle)") }
-                    .font(.title)
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .padding(10)
-                    .background(Capsule().stroke(lineWidth: 2))
-                    .foregroundColor(.primary)
-                
-            }.padding(5)
-            
-            // Pause Button Action & Design
+        GeometryReader { geometry in
             VStack {
-                Button(action: {
-                    self.pressedPauseButton()
-                    }
-                ) { Text("\(self.engageTimer.pauseButtonTitle)") }
-                      .font(.title)
-                      .frame(minWidth: 0, maxWidth: .infinity)
-                      .padding(10)
-                      .background(Capsule().stroke(lineWidth: 2))
-                    .foregroundColor(buttonColor)
-            }
-                .padding(5)
-                .disabled(self.engageTimer.buttonTitle == "Engage")
-            
-            HStack{
+             // Rounds Stack
+             HStack {
+                 Text("Round").font(.largeTitle)
+                 Spacer()
+                Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: self.textSize))
+                 Text("OF")
+                Text("\(self.engageTimer.totalRounds)").font(.custom("DS-Digital", size: self.textSize))
+                 
+             }.padding().frame(height: geometry.size.height / 7)
+                     
+             // Time Remaining Stack
+             HStack {
+                 Text("Time").font(.largeTitle)
+                 Spacer()
+                 Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60))
+                    .font(.custom("DS-Digital", size: self.textSize))
+                     // Timer runs function every second
+                    .onReceive(self.timer) { _ in
+                         self.runEngageTimer()
+                     }
+             }.padding().frame(height: geometry.size.height / 7)
+                     
+            // Rest Stack
+            // ==========
+            HStack {
+                Text("Rest").font(.largeTitle)
                 Spacer()
-                BannerVC().frame(width: 320, height: 50, alignment: .center)
-                Spacer()
-            }
+                Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60))
+                    .font(.custom("DS-Digital", size: self.textSize))
+            }.padding().frame(height: geometry.size.height / 7)
+
+            // Random Noise Choice & Count
+            HStack {
+             if self.engageTimer.usingRandomNoise {
+                Text("\(self.engageTimer.noiseArray[self.engageTimer.noiseChoice])")
+                     .font(.largeTitle).bold()
+                 Spacer()
+                 Text("\(self.engageTimer.noiseTotal)")
+                    .font(.custom("DS-Digital", size: self.textSize))
+             } else {
+                 EmptyView()
+                 }
+             }.padding().frame(height: geometry.size.height / 7)
+                
+             // Engage Button Action & Design
+             VStack (alignment: .center) {
+                 Button(action: {
+                     self.pressedEngageTimerButton()
+                 })
+                 { Text("\(self.engageTimer.buttonTitle)")
+                     .frame(minWidth: 0, maxWidth: .infinity)
+                     .contentShape(Rectangle())
+                     .font(.title)
+                     .padding()
+                     .background(Capsule().stroke(lineWidth: 2))
+                     .foregroundColor(.primary)
+                     
+                 }
+             }.padding().frame(height: geometry.size.height / 7)
+             
+             // Pause Button Action & Design
+             VStack {
+                 Button(action: {
+                     self.pressedPauseButton()
+                     }
+                 ) { Text("\(self.engageTimer.pauseButtonTitle)")
+                     .font(.title)
+                     .frame(minWidth: 0, maxWidth: .infinity)
+                     .padding()
+                     .background(Capsule().stroke(lineWidth: 2))
+                    .foregroundColor(self.buttonColor) }
+             }
+                 .padding().frame(height: geometry.size.height / 7)
+                 .disabled(self.engageTimer.buttonTitle == "Engage")
+             
+             HStack{
+                 Spacer()
+                 BannerVC().frame(width: 320, height: 50, alignment: .center)
+                 Spacer()
+             }.frame(height: geometry.size.height / 7)
+        }
+        
             
-        }// Form Close
+            }// Geometry Close
          // Navigation Bar Layout and Design
             .navigationBarTitle("Engage Timer", displayMode: .large)
             .navigationBarItems(
@@ -122,7 +126,7 @@ var body: some View {
                 }
                     .disabled(self.engageTimer.buttonTitle != "Engage"))
         
-    } // Navigation View Close
+        } // Navigation View Close
   // Present options sheet using binded variable and pass environment object
 .sheet(isPresented: $showSheet) {
     if self.sheetSelection == 1 {
@@ -339,7 +343,8 @@ func checkInterstitialCount() {
 // =====================================================================
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        EngageTimerView().environmentObject(EngageTimer()).colorScheme(.dark)
+        EngageTimerView().environmentObject(EngageTimer())
+            .colorScheme(.dark)
     }
 }
 }
