@@ -103,6 +103,10 @@ class EngageTimer: ObservableObject, Identifiable {
         randomArray = []
         let range = time - 3
         
+        if noiseTotal == 0 {
+            return
+        }
+        
         for _ in 1...noiseTotal {
             randomNumber = Int.random(in: 2...range)
             
