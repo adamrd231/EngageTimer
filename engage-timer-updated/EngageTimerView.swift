@@ -195,6 +195,7 @@ func runEngageTimer() {
     
 func pressedEngageTimerButton() {
     // If Timer is running, stop Timer
+    UIApplication.shared.isIdleTimerDisabled = false
     if self.engageTimer.timerIsRunning == true {
           self.cancelTimer()
           self.engageTimer.resetAllValues()
@@ -211,6 +212,7 @@ func pressedEngageTimerButton() {
         
     // Starts the timer if it has not been started before.
       } else {
+        UIApplication.shared.isIdleTimerDisabled = true
           // Capture reset values if timer is starting
           self.engageTimer.fillResetValues()
         // Create random number array
@@ -261,7 +263,9 @@ final private class BannerVC: UIViewControllerRepresentable  {
          let view = GADBannerView(adSize: kGADAdSizeBanner)
 
          let viewController = UIViewController()
-         view.adUnitID = "ca-app-pub-4186253562269967/1729357442"
+        view.adUnitID = "ca-app-pub-4186253562269967/1729357442"
+        // Fake Mob
+        // view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
          view.rootViewController = viewController
          viewController.view.addSubview(view)
          viewController.view.frame = CGRect(origin: .zero, size: kGADAdSizeBanner.size)
@@ -275,6 +279,8 @@ final private class BannerVC: UIViewControllerRepresentable  {
     
 final class Interstitial:NSObject, GADInterstitialDelegate{
     var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
+    // FakeMob
+    // var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
     
     override init() {
         super.init()
@@ -299,6 +305,8 @@ final class Interstitial:NSObject, GADInterstitialDelegate{
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
+        // Fake Mob
+        // self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         LoadInterstitial()
     }
 }
