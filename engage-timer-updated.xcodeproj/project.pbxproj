@@ -37,7 +37,7 @@
 		6650BC6C2464BBD000030695 /* Whistle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Whistle.mp3; sourceTree = "<group>"; };
 		6650BC6E2464BCAF00030695 /* Bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bell.mp3; sourceTree = "<group>"; };
 		66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEngageTimerOptionsView.swift; sourceTree = "<group>"; };
-		66CBF15E23ED19A70022F015 /* engage-timer-updated.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "engage-timer-updated.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		66CBF15E23ED19A70022F015 /* Engage Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Engage Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66CBF16123ED19A70022F015 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66CBF16323ED19A70022F015 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		66CBF16523ED19A70022F015 /* EngageTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngageTimerView.swift; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		66CBF15F23ED19A70022F015 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				66CBF15E23ED19A70022F015 /* engage-timer-updated.app */,
+				66CBF15E23ED19A70022F015 /* Engage Timer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,7 +161,7 @@
 			);
 			name = "engage-timer-updated";
 			productName = "engage-timer-updated";
-			productReference = 66CBF15E23ED19A70022F015 /* engage-timer-updated.app */;
+			productReference = 66CBF15E23ED19A70022F015 /* Engage Timer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -400,9 +400,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = design.rdconcepts.engager;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Engage Timer";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -422,9 +422,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.3;
+				MARKETING_VERSION = 2.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = design.rdconcepts.engager;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Engage Timer";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
