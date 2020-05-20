@@ -12,13 +12,14 @@ struct EditEngageTimerOptionsView: View {
     
     @EnvironmentObject var engageTimer: EngageTimer
     @State var round = 1
-    @State var noiseSelection: String = "Test"
+    @State var randomSpeed = 1.0
     
     var body: some View {
         
     NavigationView {
-        VStack{
+        VStack {
             Form {
+                
                 HStack {
                 Text("Rounds")
                     Spacer()
@@ -44,7 +45,7 @@ struct EditEngageTimerOptionsView: View {
                             self.engageTimer.noiseTotal = self.engageTimer.time / 5
                         }
                         }).labelsHidden()
-//                    Stepper("", value: $engageTimer.time, in: 10...639, step: 10).labelsHidden()
+
                 }.padding()
                 
                 HStack {
@@ -54,7 +55,6 @@ struct EditEngageTimerOptionsView: View {
                     Stepper("", value: $engageTimer.rest, in: 0...639, step: 5).labelsHidden()
                     }.padding()
                     
-                
                 HStack {
                     Toggle(isOn: $engageTimer.usingRandomNoise) {
                                       Text("Random Effect")
@@ -68,42 +68,39 @@ struct EditEngageTimerOptionsView: View {
                         Text("\(self.engageTimer.noiseTotal)")
                         Stepper("", value: $engageTimer.noiseTotal, in: 0...engageTimer.time / 5).labelsHidden()
                     }
-                        }.padding()
-                
+                }.padding()
                 
                 HStack {
-                    if engageTimer.usingRandomNoise {
-                      
-                        Picker(selection: $engageTimer.noiseChoice, label: Text("Sound Effect")) {
-                            
-                            ForEach (0 ..< engageTimer.noiseArray.count) {
-                                Text(self.engageTimer.noiseArray[$0])
-                            }
-                        }
-                        
-                    }
-                    }.padding()
-                                  
-                                  
-
-              
+                if engageTimer.usingRandomNoise {
+                       Picker(selection: $engageTimer.noiseChoice, label: Text("Sound Effect")) {
+                           
+                           ForEach (0 ..< engageTimer.noiseArray.count) {
+                               Text(self.engageTimer.noiseArray[$0])
+                           }
+                       }
+                     }
+                   }.padding()
                     
-            .navigationBarTitle("Edit Options")
-        }
-        Text("Swipe Down To Save").padding()
+                HStack {
+                    Text("\(self.randomSpeed) seconds in between random count. ")
+                    Slider(value: $randomSpeed, in: 0...5, step: 1.0)
+                }.padding()
+//
+//
+//        Text("Swipe Down To Save").padding()
             
         } // Form Closure
+            
         } // Main VStack Closure
+        .navigationBarTitle("Edit Options")
     } // Nav CLosure
 } // View Closure
 
-func makeRandomNumberArray(_ number: Int) -> [Int] {
-    return (0..<number).map { _ in .random(in: 1...20) }
-}
  
 
 struct EditEngageTimerOptionsView_Previews: PreviewProvider {
     static var previews: some View {
         EditEngageTimerOptionsView().environmentObject(EngageTimer())
     }
+}
 }

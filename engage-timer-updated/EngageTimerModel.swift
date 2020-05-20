@@ -42,6 +42,12 @@ class EngageTimer: ObservableObject, Identifiable {
         }
     }
     
+    @Published var randomCountSpeed = UserDefaults.standard.double(forKey: "randomCountSpeed") {
+        didSet {
+            UserDefaults.standard.set(self.randomCountSpeed, forKey: "randomCountSpeed")
+        }
+    }
+    
     @Published var usingRandomNoise = true
     
     @Published var noiseChoice = UserDefaults.standard.integer(forKey: "noiseChoice") {

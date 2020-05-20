@@ -35,6 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             engageTimer.time = 300
             engageTimer.rest = 60
             engageTimer.noiseChoice = 0
+            engageTimer.randomCountSpeed = 1
             engageTimer.noiseTotal = 10
             UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
