@@ -22,6 +22,20 @@ class EngageTimer: ObservableObject, Identifiable {
     
     @Published var time = UserDefaults.standard.integer(forKey: "time") {
         didSet {
+//         Check to make sure the random count wont crash the app
+            if randomCountSpeed == 3 {
+                if time / 10 < noiseTotal {
+                    noiseTotal = time / 10
+                }
+            } else if randomCountSpeed == 2 {
+                if time / 5 < noiseTotal {
+                    self.noiseTotal = time / 5
+                }
+            } else if randomCountSpeed == 1 {
+                if time - 3 < noiseTotal {
+                    noiseTotal = time - 3
+                }
+            }
             UserDefaults.standard.set(self.time, forKey: "time")
         }
     }
@@ -34,21 +48,49 @@ class EngageTimer: ObservableObject, Identifiable {
     
     @Published var noiseTotal = UserDefaults.standard.integer(forKey: "noiseTotal") {
         didSet {
-                if time / 5 < noiseTotal {
-                    noiseTotal = time / 5
+                // Check to make sure the random count wont crash the app
+                if randomCountSpeed == 3 {
+                    if time / 10 < noiseTotal {
+                        noiseTotal = time / 10
+                    }
+                } else if randomCountSpeed == 2 {
+                    if time / 5 < noiseTotal {
+                        noiseTotal = time / 5
+                    }
+                } else if randomCountSpeed == 1 {
+                    if time - 3 < noiseTotal {
+                        noiseTotal = time - 3
+                    }
                 }
-                print(noiseTotal)
             UserDefaults.standard.set(self.noiseTotal, forKey: "noiseTotal")
         }
     }
     
-    @Published var randomCountSpeed = UserDefaults.standard.double(forKey: "randomCountSpeed") {
+    @Published var randomCountSpeed: Float  = UserDefaults.standard.float(forKey: "randomCountSpeed") {
         didSet {
+                // Check to make sure the random count wont crash the app
+                if randomCountSpeed == 3 {
+                    if time / 10 < noiseTotal {
+                        noiseTotal = time / 10
+                    }
+                } else if randomCountSpeed == 2 {
+                    if time / 5 < noiseTotal {
+                        noiseTotal = time / 5
+                    }
+                } else if randomCountSpeed == 1 {
+                    if time - 3 < noiseTotal {
+                        noiseTotal = time - 3
+                    }
+                }
             UserDefaults.standard.set(self.randomCountSpeed, forKey: "randomCountSpeed")
         }
     }
     
-    @Published var usingRandomNoise = true
+    @Published var usingRandomNoise = UserDefaults.standard.bool(forKey: "usingRandomNoise") {
+        didSet {
+            UserDefaults.standard.set(self.usingRandomNoise, forKey: "usingRandomNoise")
+        }
+    }
     
     @Published var noiseChoice = UserDefaults.standard.integer(forKey: "noiseChoice") {
         didSet {
@@ -107,21 +149,53 @@ class EngageTimer: ObservableObject, Identifiable {
         
     func createRandomNumberArray() {
         randomArray = []
-        let range = time - 3
+        var range = time - 2
+        
+        
         
         if noiseTotal == 0 {
             return
         }
         
         for _ in 1...noiseTotal {
-            randomNumber = Int.random(in: 2...range)
+            randomNumber = Int.random(in: 1...range)
             
-            while randomArray.contains(randomNumber) || randomArray.contains(randomNumber + 1) || randomArray.contains(randomNumber - 1) || randomArray.contains(randomNumber + 2) || randomArray.contains(randomNumber - 2) {
-                randomNumber = Int.random(in: 2...range)
+            if randomCountSpeed == 1 {
+                print("using random count = 1")
+               // 1 second minmum between each count
+               while randomArray.contains(randomNumber) {
+                   randomNumber = Int.random(in: 1...range)
+               }
+            } else if randomCountSpeed == 2 {
+                print("using random count = 3")
+                // 4 second minmum between each count
+                while randomArray.contains(randomNumber) || randomArray.contains(randomNumber - 1) || randomArray.contains(randomNumber + 1) || randomArray.contains(randomNumber - 2) || randomArray.contains(randomNumber + 2)  {
+                    randomNumber = Int.random(in: 1...range)
+                }
+            } else if randomCountSpeed == 3 {
+                range = time - 5
+                
+                print("using random count = 5")
+               while randomArray.contains(randomNumber) || randomArray.contains(randomNumber - 1) || randomArray.contains(randomNumber + 1) || randomArray.contains(randomNumber - 2) || randomArray.contains(randomNumber + 2) || randomArray.contains(randomNumber + 3) || randomArray.contains(randomNumber - 3) || randomArray.contains(randomNumber + 4) || randomArray.contains(randomNumber - 4) || randomArray.contains(randomNumber + 5) || randomArray.contains(randomNumber - 5) {
+                    randomNumber = Int.random(in: 2...range)
+                }
             }
+           
+            // check if the random number generated matches any of the numbers in the random array
+            // check to see if the random number matches any of the surrounding numbers in the random array
+            // allow user to set range of how many numbers are checked
             randomArray.append(randomNumber)
             
+            
+//            while randomArray.contains(randomNumber) {
+//                randomNumber = Int.random(in: 2...range)
+//            }
+//
+//
+//            randomArray.append(randomNumber)
+            
         }
+        print(randomArray)
     }
     
 }

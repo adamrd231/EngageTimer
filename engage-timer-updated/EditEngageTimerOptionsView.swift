@@ -12,7 +12,6 @@ struct EditEngageTimerOptionsView: View {
     
     @EnvironmentObject var engageTimer: EngageTimer
     @State var round = 1
-    @State var randomSpeed = 1.0
     
     var body: some View {
         
@@ -31,20 +30,7 @@ struct EditEngageTimerOptionsView: View {
                 Text("Time")
                 Spacer()
                     Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60))
-                    
-                    Stepper("\(engageTimer.time)", onIncrement: {
-                        self.engageTimer.time += 10
-                    }, onDecrement: {
-                        if self.engageTimer.time == 0 {
-                            self.engageTimer.time += 10
-                        } else {
-                            self.engageTimer.time -= 10
-                        }
-
-                        if self.engageTimer.time / 5 < self.engageTimer.noiseTotal {
-                            self.engageTimer.noiseTotal = self.engageTimer.time / 5
-                        }
-                        }).labelsHidden()
+                    Stepper("", value: $engageTimer.time, in: 10...1200, step: 10).labelsHidden()
 
                 }.padding()
                 
@@ -58,7 +44,7 @@ struct EditEngageTimerOptionsView: View {
                 HStack {
                     Toggle(isOn: $engageTimer.usingRandomNoise) {
                                       Text("Random Effect")
-                                  }
+                    }
                 }.padding()
                 
                 HStack {
@@ -66,7 +52,9 @@ struct EditEngageTimerOptionsView: View {
                     Text("Noise Count")
                     Spacer()
                         Text("\(self.engageTimer.noiseTotal)")
-                        Stepper("", value: $engageTimer.noiseTotal, in: 0...engageTimer.time / 5).labelsHidden()
+                    Stepper("", value: $engageTimer.noiseTotal, in: 1...engageTimer.time).labelsHidden()
+                  
+                       
                     }
                 }.padding()
                 
@@ -80,10 +68,32 @@ struct EditEngageTimerOptionsView: View {
                        }
                      }
                    }.padding()
+                
+                VStack() {
+                   
+                   if engageTimer.usingRandomNoise {
+                    HStack {
+                        
+                        Slider(value: $engageTimer.randomCountSpeed, in: 1...3, step: 1.0)
+                        
+                        Button(action: {
+                            print("Pressed Info Button")
+                        }) {
+                            Image(systemName: "questionmark.circle")
+                        }.padding(.leading)
+                    }
                     
-                HStack {
-                    Text("\(self.randomSpeed) seconds in between random count. ")
-                    Slider(value: $randomSpeed, in: 0...5, step: 1.0)
+                    HStack {
+                        if self.engageTimer.randomCountSpeed == 1.0 {
+                            Text("1 Second Between Counts")
+                        } else if self.engageTimer.randomCountSpeed == 2.0 {
+                            Text("5 Seconds Between Counts")
+                        } else {
+                            Text("10 Seconds Between Counts")
+                        }
+                       
+                    }.padding(.bottom)
+                    }
                 }.padding()
 //
 //

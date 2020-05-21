@@ -162,7 +162,7 @@ func runEngageTimer() {
         }
         self.engageTimer.time -= 1
 
-        if self.engageTimer.randomArray.contains(self.engageTimer.time) {
+        if self.engageTimer.randomArray.contains(self.engageTimer.time) && self.engageTimer.usingRandomNoise == true {
             playSound(sound: "\(self.engageTimer.noiseArray[engageTimer.noiseChoice])", type: "mp3")
             self.engageTimer.noiseTotal -= 1
         }
