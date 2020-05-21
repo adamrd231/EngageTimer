@@ -61,10 +61,18 @@ var body: some View {
             }.padding().frame(height: geometry.size.height / 7)
 
             // Random Noise Choice & Count
-            HStack {
+                HStack(alignment: .center) {
              if self.engageTimer.usingRandomNoise {
+                if Int(self.engageTimer.randomCountSpeed) == 3 {
+                    Text("Slow").font(.largeTitle)
+                } else if Int(self.engageTimer.randomCountSpeed) == 2 {
+                    Text("Medium").font(.largeTitle)
+                } else {
+                    Text("Fast").font(.largeTitle)
+                }
+                
                 Text("\(self.engageTimer.noiseArray[self.engageTimer.noiseChoice])")
-                     .font(.largeTitle).bold()
+                .font(.largeTitle).bold()
                  Spacer()
                  Text("\(self.engageTimer.noiseTotal)")
                     .font(.custom("DS-Digital", size: self.textSize))
@@ -114,17 +122,23 @@ var body: some View {
             
             }// Geometry Close
          // Navigation Bar Layout and Design
-            .navigationBarTitle("Engage Timer", displayMode: .large)
+            .navigationBarTitle("Engage Timer")
             .navigationBarItems(
-                leading: Button("About") {
+                leading: Button(action: {
                     self.sheetSelection = 1
                     self.showSheet = true
+                }) {
+                        Image(systemName: "questionmark.circle")
+                        Text("About")
                 }
-                ,trailing: Button("Edit") {
+                ,trailing: Button(action: {
                     self.sheetSelection = 2
                     self.showSheet = true
+                }) {
+                    Image(systemName: "slider.horizontal.3")
+                    Text("Edit")
                 }
-                    .disabled(self.engageTimer.buttonTitle != "Engage"))
+                .disabled(self.engageTimer.buttonTitle != "Engage"))
         
         } // Navigation View Close
   // Present options sheet using binded variable and pass environment object

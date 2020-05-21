@@ -97,10 +97,10 @@ struct EditEngageTimerOptionsView: View {
                 }.padding()
 //
 //
-//        Text("Swipe Down To Save").padding()
+       
             
         } // Form Closure
-            
+          Text("Swipe Down To Save").padding()
         } // Main VStack Closure
         .navigationBarTitle("Edit Options")
     } // Nav CLosure
