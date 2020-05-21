@@ -18,10 +18,10 @@ struct ExplanationView: View {
                     .frame(height: geo.size.height / 4)
                 Text("The Engage Timer.")
                     .font(.title)
-                Text("The Engage Timer was developed to help bring a true random element into our fitness routines. Developing reflexes and fast twitch muscles comes from reacting to something that you can plan on. I hope you enjoy this timer. \n\nQuestions: contact@rdConcepts.design")
+                Text("The Engage Timer was developed to help bring a true random element into our fitness routines. Developing reflexes and fast twitch muscles comes from reacting to something that you can plan on. I hope you enjoy this timer. \n\nQuestions: contact@rdConcepts.design").fixedSize(horizontal: false, vertical: true)
                     .font(.body).padding()
                     .frame(width: geo.size.width * 0.9)
-                Text("Swipe Down To Return").padding().font(.subheadline)
+                Text("Swipe Down To Return").padding().font(.subheadline).fixedSize(horizontal: false, vertical: true)
             }
         }
     }

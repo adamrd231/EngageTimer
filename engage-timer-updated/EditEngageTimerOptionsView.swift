@@ -13,6 +13,12 @@ struct EditEngageTimerOptionsView: View {
     @EnvironmentObject var engageTimer: EngageTimer
     @State var round = 1
     
+    @State var onColor = Color(UIColor.systemBlue)
+    @State var offColor = Color(UIColor.systemGray)
+    @State var thumbColor = Color.white
+    
+    @State var showingVariableCountExplanationView = false
+    
     var body: some View {
         
     NavigationView {
@@ -42,9 +48,27 @@ struct EditEngageTimerOptionsView: View {
                     }.padding()
                     
                 HStack {
-                    Toggle(isOn: $engageTimer.usingRandomNoise) {
-                                      Text("Random Effect")
-                    }
+                    
+                    Text("Random Effect")
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 25, style: .circular)
+                        .fill(engageTimer.usingRandomNoise ? onColor : offColor)
+                        .frame(width: 75, height: 35)
+                    .overlay(
+                        Circle()
+                        .fill(thumbColor)
+                            .shadow(radius: 1, x: 0, y: 1)
+                            .padding(1.5)
+                            .offset(x: engageTimer.usingRandomNoise ? 20 : -20)
+                            .animation(Animation.easeInOut(duration: 0.3))
+                            .onTapGesture { self.engageTimer.usingRandomNoise.toggle() }
+                    )
+                    
+                    
+                    
+//                    Toggle(isOn: $engageTimer.usingRandomNoise) {
+//                                      Text("Random Effect")
+//                    }
                 }.padding()
                 
                 HStack {
@@ -77,6 +101,7 @@ struct EditEngageTimerOptionsView: View {
                         Slider(value: $engageTimer.randomCountSpeed, in: 1...3, step: 1.0)
                         
                         Button(action: {
+                            self.showingVariableCountExplanationView = true
                             print("Pressed Info Button")
                         }) {
                             Image(systemName: "questionmark.circle")
@@ -87,9 +112,9 @@ struct EditEngageTimerOptionsView: View {
                         if self.engageTimer.randomCountSpeed == 1.0 {
                             Text("1 Second Between Counts")
                         } else if self.engageTimer.randomCountSpeed == 2.0 {
-                            Text("5 Seconds Between Counts")
+                            Text("3 Seconds Between Counts")
                         } else {
-                            Text("10 Seconds Between Counts")
+                            Text("7 Seconds Between Counts")
                         }
                        
                     }.padding(.bottom)
@@ -104,6 +129,9 @@ struct EditEngageTimerOptionsView: View {
         } // Main VStack Closure
         .navigationBarTitle("Edit Options")
     } // Nav CLosure
+        .sheet(isPresented: $showingVariableCountExplanationView) {
+            VariableCountExplanationView()
+        }
 } // View Closure
 
  
