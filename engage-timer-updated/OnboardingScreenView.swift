@@ -11,10 +11,11 @@ import SwiftUI
 struct OnboardingScreenView: View {
     
     @State var step = 1
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack {
-            Color(.systemGray5).edgesIgnoringSafeArea(.all)
+            Color(.systemGray6).edgesIgnoringSafeArea([.top,.bottom])
             
             // Main Body for Onboarding Screen
             VStack {
@@ -35,22 +36,41 @@ struct OnboardingScreenView: View {
                    
                    // 2nd Explanation Body
                        VStack(alignment: .center, spacing: 10) {
-                        Image("jump-rope")
+                        Image("gear")
                         Text("User Settings").font(.title).bold()
                         Text("Rounds, Time & Rest").bold()
                         Text("Fully functional round timer, customize number of rounds, time and rest.")
                         Text("Random Element, Noise and Frequency").bold()
-                        Text("The engage element is a random sound that is randomized before every round, training reflexes to something that can not be anticipated.")
+                        Text("The engage element is a random sound that is randomized before every round, total amount of counts and how the amount of  minimum time between each count.")
                             .fixedSize(horizontal: false, vertical: true)
                             .frame(width: gr.frame(in: .global).width - 40)
             
-                        
                        }.frame(width: gr.frame(in: .global).width - 13)
                         .animation(Animation.interpolatingSpring(stiffness: 40, damping: 10).delay(0.05))
                        
                    // 3rd Explanation Body
                        VStack(alignment: .center, spacing: 25) {
-                           Text("Workout Ideas")
+                        Text("Workout Ideas").font(.title).bold()
+                        Text("When the Engager Sounds...")
+                        HStack{
+                            VStack {
+                                Image("jumprope")
+                                Text("Double")
+                                Text("Jump")
+                            }
+                            VStack {
+                                Image("running")
+                                Text("Sprint or")
+                                Text("Jog")
+                            }
+                         VStack {
+                             Image("shadowboxing")
+                             Text("Block or")
+                             Text("Strike")
+                         }
+                            
+                        }
+                           
                         .animation(Animation.interpolatingSpring(stiffness: 40, damping: 10).delay(0.05))
                        }.frame(width: gr.frame(in: .global).width)
                         
@@ -62,7 +82,7 @@ struct OnboardingScreenView: View {
                         //.frame(maxHeight: .infinity)
                     .offset(x: self.step == 1 ? gr.frame(in: .global).width : self.step == 2 ? 0 : -gr.frame(in: .global).width)
                     .animation(Animation.interpolatingSpring(stiffness: 40, damping: 10))
-                }
+                }.edgesIgnoringSafeArea([.top, .bottom])
                 .padding()
                 
                     
@@ -94,12 +114,14 @@ struct OnboardingScreenView: View {
                                 .foregroundColor(.primary)
                                 .scaleEffect(step == 3 ? 2 : 1.6)
                         }
+                        
 
                     }
                 
                 // Button to close onboarding and get to the App.
                 
                 Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
                     print("Pressed Button")
                 }) {
                     Text("Let's Go Already!")

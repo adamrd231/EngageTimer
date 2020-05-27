@@ -11,7 +11,6 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var engageTimer = EngageTimer()
-    var firstTimeUser:Bool?
     var window: UIWindow?
 
 
@@ -29,7 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            print("launched before")
         } else {
             print("First Launch, do setup.")
-            firstTimeUser = true
             engageTimer.round = 1
             engageTimer.totalRounds = 5
             engageTimer.time = 300

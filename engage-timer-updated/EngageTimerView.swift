@@ -17,6 +17,7 @@ struct EngageTimerView: View {
 @State var sheetSelection = 1
 @State var textSize = CGFloat(70)
     
+ @State var firsTimeOnScreen = UserDefaults.standard.bool(forKey: "firsTimeOnScreen")
 // Admob
 var interstitial:Interstitial
 init() { self.interstitial = Interstitial() }
@@ -84,6 +85,7 @@ var body: some View {
              // Engage Button Action & Design
              VStack (alignment: .center) {
                  Button(action: {
+                    print(self.firsTimeOnScreen)
                      self.pressedEngageTimerButton()
                  })
                  { Text("\(self.engageTimer.buttonTitle)")
@@ -141,18 +143,23 @@ var body: some View {
                 .disabled(self.engageTimer.buttonTitle != "Engage"))
         
         } // Navigation View Close
+        .onAppear() {
+            if self.firsTimeOnScreen == false {
+                self.showSheet = true
+            }
+    }
   // Present options sheet using binded variable and pass environment object
 .sheet(isPresented: $showSheet) {
     if self.sheetSelection == 1 {
-        ExplanationView()
+        OnboardingScreenView()
     }
     if self.sheetSelection == 2 {
         EditEngageTimerOptionsView().environmentObject(self.engageTimer)
     }
     }
 
-//.sheet(isPresented: $explanationViewIsVisible) { ExplanationView() }
 } // View Closure
+    
 
     
     

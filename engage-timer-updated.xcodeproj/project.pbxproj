@@ -77,6 +77,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		669A00E6247E046100AADAC7 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				6650BC6E2464BCAF00030695 /* Bell.mp3 */,
+				662D955B245CAEE30067A952 /* Clap.mp3 */,
+				6650BC6C2464BBD000030695 /* Whistle.mp3 */,
+				6629071B2458C92600EFF54D /* boxing-bell-1.wav */,
+				6629071C2458C92600EFF54D /* boxing-bell-3.wav */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		66CBF15523ED19A70022F015 = {
 			isa = PBXGroup;
 			children = (
@@ -105,19 +117,15 @@
 				66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */,
 				66E983FC2464B30D005B9FE8 /* ExplanationView.swift */,
 				661C4CCB2476528500D28D52 /* VariableCountExplanationView.swift */,
+				669A00E2247D908700AADAC7 /* OnboardingScreenView.swift */,
+				66E21A642461005700A7F9F1 /* EngageButton.swift */,
+				662907192458C80500EFF54D /* sounds.swift */,
 				66CBF16723ED19AA0022F015 /* Assets.xcassets */,
 				66CBF16C23ED19AA0022F015 /* LaunchScreen.storyboard */,
 				66CBF16F23ED19AA0022F015 /* Info.plist */,
-				66E21A642461005700A7F9F1 /* EngageButton.swift */,
 				66CBF17523ED1DA00022F015 /* Fonts */,
 				66CBF16923ED19AA0022F015 /* Preview Content */,
-				662907192458C80500EFF54D /* sounds.swift */,
-				6650BC6E2464BCAF00030695 /* Bell.mp3 */,
-				662D955B245CAEE30067A952 /* Clap.mp3 */,
-				6650BC6C2464BBD000030695 /* Whistle.mp3 */,
-				6629071B2458C92600EFF54D /* boxing-bell-1.wav */,
-				6629071C2458C92600EFF54D /* boxing-bell-3.wav */,
-				669A00E2247D908700AADAC7 /* OnboardingScreenView.swift */,
+				669A00E6247E046100AADAC7 /* Sound */,
 			);
 			path = "engage-timer-updated";
 			sourceTree = "<group>";
