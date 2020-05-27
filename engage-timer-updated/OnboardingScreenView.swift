@@ -139,6 +139,6 @@ struct OnboardingScreenView: View {
 
 struct OnboardingScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingScreenView().colorScheme(.dark)
+        OnboardingScreenView()
     }
 }

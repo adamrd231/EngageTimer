@@ -145,6 +145,7 @@ var body: some View {
         } // Navigation View Close
         .onAppear() {
             if self.firsTimeOnScreen == false {
+                UserDefaults.standard.set(true, forKey: "firsTimeOnScreen")
                 self.showSheet = true
             }
     }
