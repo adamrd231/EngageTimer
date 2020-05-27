@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4D746393F7038F44A9FA1384 /* libPods-engage-timer-updated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1456B105882C4053CC06E7B /* libPods-engage-timer-updated.a */; };
-		660931E5246C9D1C00D1AAEA /* engage-icon-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 660931E4246C9D1C00D1AAEA /* engage-icon-transparent.png */; };
 		661C4CCC2476528500D28D52 /* VariableCountExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661C4CCB2476528500D28D52 /* VariableCountExplanationView.swift */; };
 		6629071A2458C80500EFF54D /* sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662907192458C80500EFF54D /* sounds.swift */; };
 		6629071D2458C92600EFF54D /* boxing-bell-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6629071B2458C92600EFF54D /* boxing-bell-1.wav */; };
@@ -16,6 +15,7 @@
 		662D955C245CAEE40067A952 /* Clap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 662D955B245CAEE30067A952 /* Clap.mp3 */; };
 		6650BC6D2464BBD000030695 /* Whistle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6650BC6C2464BBD000030695 /* Whistle.mp3 */; };
 		6650BC6F2464BCAF00030695 /* Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6650BC6E2464BCAF00030695 /* Bell.mp3 */; };
+		669A00E3247D908700AADAC7 /* OnboardingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A00E2247D908700AADAC7 /* OnboardingScreenView.swift */; };
 		66B5A52E2456413D005A2D4F /* EditEngageTimerOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */; };
 		66CBF16223ED19A70022F015 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CBF16123ED19A70022F015 /* AppDelegate.swift */; };
 		66CBF16423ED19A70022F015 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CBF16323ED19A70022F015 /* SceneDelegate.swift */; };
@@ -30,7 +30,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		660931E4246C9D1C00D1AAEA /* engage-icon-transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "engage-icon-transparent.png"; sourceTree = "<group>"; };
 		661C4CCB2476528500D28D52 /* VariableCountExplanationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableCountExplanationView.swift; sourceTree = "<group>"; };
 		662907192458C80500EFF54D /* sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sounds.swift; sourceTree = "<group>"; };
 		6629071B2458C92600EFF54D /* boxing-bell-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "boxing-bell-1.wav"; sourceTree = "<group>"; };
@@ -38,6 +37,7 @@
 		662D955B245CAEE30067A952 /* Clap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Clap.mp3; sourceTree = "<group>"; };
 		6650BC6C2464BBD000030695 /* Whistle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Whistle.mp3; sourceTree = "<group>"; };
 		6650BC6E2464BCAF00030695 /* Bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bell.mp3; sourceTree = "<group>"; };
+		669A00E2247D908700AADAC7 /* OnboardingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreenView.swift; sourceTree = "<group>"; };
 		66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEngageTimerOptionsView.swift; sourceTree = "<group>"; };
 		66CBF15E23ED19A70022F015 /* Engage Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Engage Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66CBF16123ED19A70022F015 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,7 +100,6 @@
 			children = (
 				66CBF16123ED19A70022F015 /* AppDelegate.swift */,
 				66CBF16323ED19A70022F015 /* SceneDelegate.swift */,
-				662907192458C80500EFF54D /* sounds.swift */,
 				66E88EB32453AD590076865F /* EngageTimerModel.swift */,
 				66CBF16523ED19A70022F015 /* EngageTimerView.swift */,
 				66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */,
@@ -109,15 +108,16 @@
 				66CBF16723ED19AA0022F015 /* Assets.xcassets */,
 				66CBF16C23ED19AA0022F015 /* LaunchScreen.storyboard */,
 				66CBF16F23ED19AA0022F015 /* Info.plist */,
+				66E21A642461005700A7F9F1 /* EngageButton.swift */,
 				66CBF17523ED1DA00022F015 /* Fonts */,
 				66CBF16923ED19AA0022F015 /* Preview Content */,
-				660931E4246C9D1C00D1AAEA /* engage-icon-transparent.png */,
+				662907192458C80500EFF54D /* sounds.swift */,
 				6650BC6E2464BCAF00030695 /* Bell.mp3 */,
 				662D955B245CAEE30067A952 /* Clap.mp3 */,
 				6650BC6C2464BBD000030695 /* Whistle.mp3 */,
 				6629071B2458C92600EFF54D /* boxing-bell-1.wav */,
 				6629071C2458C92600EFF54D /* boxing-bell-3.wav */,
-				66E21A642461005700A7F9F1 /* EngageButton.swift */,
+				669A00E2247D908700AADAC7 /* OnboardingScreenView.swift */,
 			);
 			path = "engage-timer-updated";
 			sourceTree = "<group>";
@@ -207,7 +207,6 @@
 			files = (
 				66CBF16E23ED19AA0022F015 /* LaunchScreen.storyboard in Resources */,
 				662D955C245CAEE40067A952 /* Clap.mp3 in Resources */,
-				660931E5246C9D1C00D1AAEA /* engage-icon-transparent.png in Resources */,
 				6629071D2458C92600EFF54D /* boxing-bell-1.wav in Resources */,
 				6629071E2458C92600EFF54D /* boxing-bell-3.wav in Resources */,
 				66CBF16B23ED19AA0022F015 /* Preview Assets.xcassets in Resources */,
@@ -259,6 +258,7 @@
 				66CBF16623ED19A70022F015 /* EngageTimerView.swift in Sources */,
 				66E983FD2464B30D005B9FE8 /* ExplanationView.swift in Sources */,
 				66E21A652461005800A7F9F1 /* EngageButton.swift in Sources */,
+				669A00E3247D908700AADAC7 /* OnboardingScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
