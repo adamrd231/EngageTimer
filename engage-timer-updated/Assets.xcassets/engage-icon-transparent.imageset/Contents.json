@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "engage-icon-transparent.png",
+      "filename" : "engage-icon100.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "engage-icon200.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "engage-icon300.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

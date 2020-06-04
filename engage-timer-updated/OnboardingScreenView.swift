@@ -25,9 +25,9 @@ struct OnboardingScreenView: View {
                 GeometryReader { gr in
                     HStack {
                         // 1st Explanation Body
-                       VStack(spacing: 15) {
-                           Image("engage-200").padding()
-                        Text("Are you ready to get engaged with your workouts? The Engage Timer is a round timer that can simulate having a coach with you anywhere you are.")
+                       VStack() {
+                           Image("engage-icon-transparent").padding()
+                        Text("Are you ready to get engaged with your workouts? The Engage Timer is a round timer that can simulate having a coach with you anywhere you go.")
                             .fixedSize(horizontal: false, vertical: true)
                             .frame(width: gr.frame(in: .global).width - 40)
                             
@@ -37,11 +37,11 @@ struct OnboardingScreenView: View {
                    // 2nd Explanation Body
                        VStack(alignment: .center, spacing: 10) {
                         Image("gear")
-                        Text("User Settings").font(.title).bold()
                         Text("Rounds, Time & Rest").bold()
-                        Text("Fully functional round timer, customize number of rounds, time and rest.")
+                        Text("Adjust the fully functional round timer to your number of rounds, time and rest.")
+                            .fixedSize(horizontal: false, vertical: true)
                         Text("Random Element, Noise and Frequency").bold()
-                        Text("The engage element is a random sound that is randomized before every round, total amount of counts and how the amount of  minimum time between each count.")
+                        Text("To help create the feeling of engagement, adjust the random count total and interval, adjusting the min amount of time between counts. The Engage Timer randomizes this count between rounds.")
                             .fixedSize(horizontal: false, vertical: true)
                             .frame(width: gr.frame(in: .global).width - 40)
             
@@ -49,24 +49,21 @@ struct OnboardingScreenView: View {
                         .animation(Animation.interpolatingSpring(stiffness: 40, damping: 10).delay(0.05))
                        
                    // 3rd Explanation Body
-                       VStack(alignment: .center, spacing: 25) {
-                        Text("Workout Ideas").font(.title).bold()
-                        Text("When the Engager Sounds...")
+                       VStack(alignment: .center) {
+                        Text("Examples for Use").font(.title).bold()
+                        Text("When the Engager Sounds Change From...")
                         HStack{
                             VStack {
                                 Image("jumprope")
-                                Text("Double")
-                                Text("Jump")
+                                Text("Double jump during jump roping").fixedSize(horizontal: false, vertical: true)
                             }
                             VStack {
                                 Image("running")
-                                Text("Sprint or")
-                                Text("Jog")
+                                Text("Switch from sprinting to jogging.").fixedSize(horizontal: false, vertical: true)
                             }
                          VStack {
                              Image("shadowboxing")
-                             Text("Block or")
-                             Text("Strike")
+                             Text("On the count block or strike").fixedSize(horizontal: false, vertical: true)
                          }
                             
                         }
@@ -80,7 +77,7 @@ struct OnboardingScreenView: View {
                         // Controls placement of each group based on step variable
                         .frame(width: gr.frame(in: .global).width * 3)
                         //.frame(maxHeight: .infinity)
-                    .offset(x: self.step == 1 ? gr.frame(in: .global).width : self.step == 2 ? 0 : -gr.frame(in: .global).width)
+                        .offset(x: self.step == 1 ? gr.frame(in: .global).width : self.step == 2 ? 0 : -gr.frame(in: .global).width)
                     .animation(Animation.interpolatingSpring(stiffness: 40, damping: 10))
                 }.edgesIgnoringSafeArea([.top, .bottom])
                 .padding()
@@ -135,7 +132,10 @@ struct OnboardingScreenView: View {
             } // Close Main V-Stack
         } // Close Z-Stack
     } // Close Body View
+
 } // Close OnboardingScreenView
+
+
 
 struct OnboardingScreenView_Previews: PreviewProvider {
     static var previews: some View {

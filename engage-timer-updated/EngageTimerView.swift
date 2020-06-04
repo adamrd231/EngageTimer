@@ -28,136 +28,146 @@ init() { self.interstitial = Interstitial() }
 // User Interface Views
 var body: some View {
     NavigationView {
-        GeometryReader { geometry in
-            VStack {
-             // Rounds Stack
-             HStack {
-                 Text("Round").font(.largeTitle)
-                 Spacer()
-                Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: self.textSize))
-                 Text("OF")
-                Text("\(self.engageTimer.totalRounds)").font(.custom("DS-Digital", size: self.textSize))
-                 
-             }.padding().frame(height: geometry.size.height / 7)
-                     
-             // Time Remaining Stack
-             HStack {
-                 Text("Time").font(.largeTitle)
-                 Spacer()
-                 Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60))
-                    .font(.custom("DS-Digital", size: self.textSize))
-                     // Timer runs function every second
-                    .onReceive(self.timer) { _ in
-                         self.runEngageTimer()
-                     }
-             }.padding().frame(height: geometry.size.height / 7)
-                     
-            // Rest Stack
-            // ==========
-            HStack {
-                Text("Rest").font(.largeTitle)
-                Spacer()
-                Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60))
-                    .font(.custom("DS-Digital", size: self.textSize))
-            }.padding().frame(height: geometry.size.height / 7)
-
-            // Random Noise Choice & Count
-                HStack(alignment: .center) {
-             if self.engageTimer.usingRandomNoise {
-                if Int(self.engageTimer.randomCountSpeed) == 3 {
-                    Text("Slow").font(.largeTitle)
-                } else if Int(self.engageTimer.randomCountSpeed) == 2 {
-                    Text("Medium").font(.largeTitle)
-                } else {
-                    Text("Fast").font(.largeTitle)
-                }
-                
-                Text("\(self.engageTimer.noiseArray[self.engageTimer.noiseChoice])")
-                .font(.largeTitle).bold()
-                 Spacer()
-                 Text("\(self.engageTimer.noiseTotal)")
-                    .font(.custom("DS-Digital", size: self.textSize))
-             } else {
-                 EmptyView()
-                 }
-             }.padding().frame(height: geometry.size.height / 7)
-                
-             // Engage Button Action & Design
-             VStack (alignment: .center) {
-                 Button(action: {
-                    print(self.firsTimeOnScreen)
-                     self.pressedEngageTimerButton()
-                 })
-                 { Text("\(self.engageTimer.buttonTitle)")
-                     .frame(minWidth: 0, maxWidth: .infinity)
-                     .contentShape(Rectangle())
-                     .font(.title)
-                     .padding()
-                     .background(Capsule().stroke(lineWidth: 2))
-                     .foregroundColor(.primary)
         
-                 }
-             }.padding().frame(height: geometry.size.height / 7)
-             
-             // Pause Button Action & Design
-             VStack {
-                 Button(action: {
-                     self.pressedPauseButton()
-                     }
-                 ) { Text("\(self.engageTimer.pauseButtonTitle)")
-                     .font(.title)
-                     .frame(minWidth: 0, maxWidth: .infinity)
-                     .padding()
-                     .background(Capsule().stroke(lineWidth: 2))
-                    .foregroundColor(self.buttonColor) }
-             }
-                 .padding().frame(height: geometry.size.height / 7)
-                 .disabled(self.engageTimer.buttonTitle == "Engage")
-             
-             HStack{
-                 Spacer()
-                 BannerVC().frame(width: 320, height: 50, alignment: .center)
-                 Spacer()
-             }.frame(height: 50)
+        ZStack {
+            // Setup backgound Color`
+            Color(.systemGray6).edgesIgnoringSafeArea([.top,.bottom])
+            
+            GeometryReader { geometry in
+                        VStack {
+                         // Rounds Stack
+                         HStack {
+                             Text("Round").font(.largeTitle)
+                             Spacer()
+                            Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: self.textSize))
+                             Text("OF")
+                            Text("\(self.engageTimer.totalRounds)").font(.custom("DS-Digital", size: self.textSize))
+                             
+                         }.padding().frame(height: geometry.size.height / 7)
+                                 
+                         // Time Remaining Stack
+                         HStack {
+                             Text("Time").font(.largeTitle)
+                             Spacer()
+                             Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60))
+                                .font(.custom("DS-Digital", size: self.textSize))
+                                 // Timer runs function every second
+                                .onReceive(self.timer) { _ in
+                                     self.runEngageTimer()
+                                 }
+                         }.padding().frame(height: geometry.size.height / 7)
+                                 
+                        // Rest Stack
+                        // ==========
+                        HStack {
+                            Text("Rest").font(.largeTitle)
+                            Spacer()
+                            Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60))
+                                .font(.custom("DS-Digital", size: self.textSize))
+                        }.padding().frame(height: geometry.size.height / 7)
+
+                        // Random Noise Choice & Count
+                            HStack(alignment: .center) {
+                         if self.engageTimer.usingRandomNoise {
+                            if Int(self.engageTimer.randomCountSpeed) == 3 {
+                                Text("Slow").font(.largeTitle)
+                            } else if Int(self.engageTimer.randomCountSpeed) == 2 {
+                                Text("Medium").font(.largeTitle)
+                            } else {
+                                Text("Fast").font(.largeTitle)
+                            }
+                            
+                            Text("\(self.engageTimer.noiseArray[self.engageTimer.noiseChoice])")
+                            .font(.largeTitle).bold()
+                             Spacer()
+                             Text("\(self.engageTimer.noiseTotal)")
+                                .font(.custom("DS-Digital", size: self.textSize))
+                         } else {
+                             EmptyView()
+                             }
+                         }.padding().frame(height: geometry.size.height / 7)
+                            
+                         // Engage Button Action & Design
+                         VStack (alignment: .center) {
+                             Button(action: {
+                                print(self.firsTimeOnScreen)
+                                 self.pressedEngageTimerButton()
+                             })
+                             { Text("\(self.engageTimer.buttonTitle)")
+                                 .frame(minWidth: 0, maxWidth: .infinity)
+                                 .contentShape(Rectangle())
+                                 .font(.title)
+                                 .padding()
+                                 .background(Capsule().stroke(lineWidth: 2))
+                                 .foregroundColor(.primary)
+                    
+                             }
+                         }.padding().frame(height: geometry.size.height / 7)
+                         
+                         // Pause Button Action & Design
+                         VStack {
+                             Button(action: {
+                                 self.pressedPauseButton()
+                                 }
+                             ) { Text("\(self.engageTimer.pauseButtonTitle)")
+                                 .font(.title)
+                                 .frame(minWidth: 0, maxWidth: .infinity)
+                                 .padding()
+                                 .background(Capsule().stroke(lineWidth: 2))
+                                .foregroundColor(self.buttonColor) }
+                         }
+                             .padding().frame(height: geometry.size.height / 7)
+                             .disabled(self.engageTimer.buttonTitle == "Engage")
+                         
+                         HStack{
+                             Spacer()
+                             BannerVC().frame(width: 320, height: 50, alignment: .center)
+                             Spacer()
+                         }.frame(height: 50)
+                    }
+                    
+                        
+                        }// Geometry Close
+                     // Navigation Bar Layout and Design
+                        .navigationBarTitle("Engage Timer")
+                        .navigationBarItems(
+                            leading: Button(action: {
+                                self.sheetSelection = 1
+                                self.showSheet = true
+                            }) {
+                                    Image(systemName: "questionmark.circle")
+                                    Text("About")
+                            }
+                            ,trailing: Button(action: {
+                                self.sheetSelection = 2
+                                self.showSheet = true
+                            }) {
+                                Image(systemName: "slider.horizontal.3")
+                                Text("Edit")
+                            }
+                            .disabled(self.engageTimer.buttonTitle != "Engage"))
+                    
+                    } // Navigation View Close
+                    .onAppear() {
+                        if self.firsTimeOnScreen == false {
+                            UserDefaults.standard.set(true, forKey: "firsTimeOnScreen")
+                            self.showSheet = true
+                        }
+                }
+                    
+                    
+              // Present options sheet using binded variable and pass environment object
+            .sheet(isPresented: $showSheet) {
+                if self.sheetSelection == 1 {
+                    OnboardingScreenView()
+                }
+                if self.sheetSelection == 2 {
+                    EditEngageTimerOptionsView().environmentObject(self.engageTimer)
+                }
+                }
         }
         
-            
-            }// Geometry Close
-         // Navigation Bar Layout and Design
-            .navigationBarTitle("Engage Timer")
-            .navigationBarItems(
-                leading: Button(action: {
-                    self.sheetSelection = 1
-                    self.showSheet = true
-                }) {
-                        Image(systemName: "questionmark.circle")
-                        Text("About")
-                }
-                ,trailing: Button(action: {
-                    self.sheetSelection = 2
-                    self.showSheet = true
-                }) {
-                    Image(systemName: "slider.horizontal.3")
-                    Text("Edit")
-                }
-                .disabled(self.engageTimer.buttonTitle != "Engage"))
         
-        } // Navigation View Close
-        .onAppear() {
-            if self.firsTimeOnScreen == false {
-                UserDefaults.standard.set(true, forKey: "firsTimeOnScreen")
-                self.showSheet = true
-            }
-    }
-  // Present options sheet using binded variable and pass environment object
-.sheet(isPresented: $showSheet) {
-    if self.sheetSelection == 1 {
-        OnboardingScreenView()
-    }
-    if self.sheetSelection == 2 {
-        EditEngageTimerOptionsView().environmentObject(self.engageTimer)
-    }
-    }
 
 } // View Closure
     

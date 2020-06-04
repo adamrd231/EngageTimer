@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "shadowboxing.png",
+      "filename" : "punch100.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "punch200.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "punch300.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

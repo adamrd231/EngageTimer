@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "jumprope.png",
+      "filename" : "jumprope100.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "jumprope200.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "jumprope300.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
