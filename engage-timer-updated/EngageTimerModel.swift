@@ -13,6 +13,17 @@ class EngageTimer: ObservableObject, Identifiable {
     
     @Published var round = 1
     
+    @Published var prepCountDown = UserDefaults.standard.integer(forKey: "prepCountDown") {
+        didSet {
+            UserDefaults.standard.set(self.prepCountDown, forKey: "prepCountDown")
+        }
+    }
+    
+    @Published var usingPrepCountDown = UserDefaults.standard.bool(forKey: "usingPrepCountDown") {
+        didSet {
+            UserDefaults.standard.set(self.usingPrepCountDown, forKey: "usingPrepCountDown")
+        }
+    }
     // State variable to countdown rounds instead of counting up
     @Published var totalRounds = UserDefaults.standard.integer(forKey: "totalRounds") {
         didSet {
@@ -101,18 +112,23 @@ class EngageTimer: ObservableObject, Identifiable {
     @Published var noiseArray = ["Clap", "Bell", "Whistle"]
     @Published var buttonTitle = "Engage"
     @Published var timerIsRunning = false
-    
     @Published var pauseButtonTitle = "Pause"
+    
+    // Reset Values
     @Published var timeReset = 0
     @Published var restReset = 0
     @Published var roundReset = 0
     @Published var noiseCountReset = 0
+    @Published var prepCountDownReset = 0
     
+    // Random Array and Random Number Placeholder used to create random sequence.
     @Published var randomArray:[Int] = []
     @Published var randomNumber = 1
     
     
     
+    
+    // Functions
     func resetAllValues() {
         round = roundReset
         time = timeReset
@@ -122,6 +138,7 @@ class EngageTimer: ObservableObject, Identifiable {
         round = roundReset
         // Reset Noise Total
         noiseTotal = noiseCountReset
+        prepCountDown = prepCountDownReset
     }
 
     func resetTimeAndRest() {
@@ -140,6 +157,7 @@ class EngageTimer: ObservableObject, Identifiable {
         timeReset = time
         restReset = rest
         noiseCountReset = noiseTotal
+        prepCountDownReset = prepCountDown
     }
 
     func resetRandomNoiseCount() {
@@ -150,8 +168,6 @@ class EngageTimer: ObservableObject, Identifiable {
     func createRandomNumberArray() {
         randomArray = []
         var range = time - 2
-        
-        
         
         if noiseTotal == 0 {
             return
@@ -180,22 +196,8 @@ class EngageTimer: ObservableObject, Identifiable {
                     randomNumber = Int.random(in: 2...range)
                 }
             }
-           
-            // check if the random number generated matches any of the numbers in the random array
-            // check to see if the random number matches any of the surrounding numbers in the random array
-            // allow user to set range of how many numbers are checked
             randomArray.append(randomNumber)
-            
-            
-//            while randomArray.contains(randomNumber) {
-//                randomNumber = Int.random(in: 2...range)
-//            }
-//
-//
-//            randomArray.append(randomNumber)
-            
         }
-        print(randomArray)
     }
     
 }

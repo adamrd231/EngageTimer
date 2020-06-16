@@ -24,16 +24,42 @@ struct EditEngageTimerOptionsView: View {
     NavigationView {
         VStack {
             Form {
+                HStack {
+                    Text("Get Ready Timer").bold()
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 25, style: .circular)
+                        .fill(engageTimer.usingPrepCountDown ? onColor : offColor)
+                        .frame(width: 75, height: 35)
+                    .overlay(
+                        Circle()
+                        .fill(thumbColor)
+                            .shadow(radius: 1, x: 0, y: 1)
+                            .padding(1.5)
+                            .offset(x: engageTimer.usingPrepCountDown ? 20 : -20)
+                            .animation(Animation.easeInOut(duration: 0.3))
+                            .onTapGesture { self.engageTimer.usingPrepCountDown.toggle() }
+                    )
+                }.padding()
                 
                 HStack {
-                Text("Rounds")
+                    if engageTimer.usingPrepCountDown {
+                        Text("Prep Time").bold()
+                        Spacer()
+                            Text(String(format: "%01i:%02i", self.engageTimer.prepCountDown / 60, self.engageTimer.prepCountDown % 60))
+                        Stepper("", value: $engageTimer.prepCountDown, in: 0...10, step: 1).labelsHidden()
+                    }
+                
+                    }.padding()
+                
+                HStack {
+                Text("Rounds").bold()
                     Spacer()
                     Text("\(self.engageTimer.totalRounds)")
                     Stepper("\(self.engageTimer.totalRounds)", value: $engageTimer.totalRounds, in: 0...25).labelsHidden()
                 }.padding()
                 
                 HStack {
-                Text("Time")
+                Text("Time").bold()
                 Spacer()
                     Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60))
                     Stepper("", value: $engageTimer.time, in: 10...1200, step: 10).labelsHidden()
@@ -41,15 +67,18 @@ struct EditEngageTimerOptionsView: View {
                 }.padding()
                 
                 HStack {
-                Text("Rest")
+                Text("Rest").bold()
                 Spacer()
                     Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60))
                     Stepper("", value: $engageTimer.rest, in: 0...639, step: 5).labelsHidden()
                     }.padding()
-                    
+              
+                
+                
+                
                 HStack {
                     
-                    Text("Random Effect")
+                    Text("Random Effect").bold()
                     Spacer()
                     RoundedRectangle(cornerRadius: 25, style: .circular)
                         .fill(engageTimer.usingRandomNoise ? onColor : offColor)
@@ -63,17 +92,11 @@ struct EditEngageTimerOptionsView: View {
                             .animation(Animation.easeInOut(duration: 0.3))
                             .onTapGesture { self.engageTimer.usingRandomNoise.toggle() }
                     )
-                    
-                    
-                    
-//                    Toggle(isOn: $engageTimer.usingRandomNoise) {
-//                                      Text("Random Effect")
-//                    }
                 }.padding()
                 
                 HStack {
                 if engageTimer.usingRandomNoise {
-                    Text("Noise Count")
+                    Text("Noise Count").bold()
                     Spacer()
                         Text("\(self.engageTimer.noiseTotal)")
                     Stepper("", value: $engageTimer.noiseTotal, in: 1...engageTimer.time).labelsHidden()
@@ -84,7 +107,7 @@ struct EditEngageTimerOptionsView: View {
                 
                 HStack {
                 if engageTimer.usingRandomNoise {
-                       Picker(selection: $engageTimer.noiseChoice, label: Text("Sound Effect")) {
+                       Picker(selection: $engageTimer.noiseChoice, label: Text("Sound Effect").bold()) {
                            
                            ForEach (0 ..< engageTimer.noiseArray.count) {
                                Text(self.engageTimer.noiseArray[$0])
@@ -110,11 +133,11 @@ struct EditEngageTimerOptionsView: View {
                     
                     HStack {
                         if self.engageTimer.randomCountSpeed == 1.0 {
-                            Text("1 Second Between Counts")
+                            Text("Min 1 second between counts")
                         } else if self.engageTimer.randomCountSpeed == 2.0 {
-                            Text("3 Seconds Between Counts")
+                            Text("Min 3 seconds between counts")
                         } else {
-                            Text("7 Seconds Between Counts")
+                            Text("Min 7 seconds between counts")
                         }
                        
                     }.padding(.bottom)

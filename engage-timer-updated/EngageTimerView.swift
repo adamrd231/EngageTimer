@@ -147,7 +147,7 @@ var body: some View {
                             }
                             .disabled(self.engageTimer.buttonTitle != "Engage"))
                     
-                    } // Navigation View Close
+                    } // ZStack Close
                     .onAppear() {
                         if self.firsTimeOnScreen == false {
                             UserDefaults.standard.set(true, forKey: "firsTimeOnScreen")
@@ -165,7 +165,7 @@ var body: some View {
                     EditEngageTimerOptionsView().environmentObject(self.engageTimer)
                 }
                 }
-        }
+        } // Navigation View Close
         
         
 
@@ -184,16 +184,32 @@ var buttonColor: Color {
 
 func runEngageTimer() {
     
+    // Check to see if it is the last round, if yes, reduce rest count to 0 since the user is done.
     if self.engageTimer.round == self.engageTimer.totalRounds {
         self.engageTimer.rest = 0
     }
     
-    if self.engageTimer.time > 0 {
+    // Start the countdown with the prep countdown
+    if self.engageTimer.prepCountDown > 0 && self.engageTimer.usingPrepCountDown == true {
+
+        self.engageTimer.buttonTitle = self.engageTimer.prepCountDown.description
+        self.engageTimer.prepCountDown -= 1
+       
+        
+        
+    } else if self.engageTimer.time > 0 {
+
+        // If this is the start of the round, sound the starting bell
         if self.engageTimer.time == self.engageTimer.timeReset {
             playSound(sound: "boxing-bell-1", type: "wav")
         }
+        
+        self.engageTimer.buttonTitle = "Stop"
+        
+        // Reduce time count by 1
         self.engageTimer.time -= 1
 
+        // If this count is within the randomly generated array, sound the random noise that the user has input, IF the user if using the random count
         if self.engageTimer.randomArray.contains(self.engageTimer.time) && self.engageTimer.usingRandomNoise == true {
             playSound(sound: "\(self.engageTimer.noiseArray[engageTimer.noiseChoice])", type: "mp3")
             self.engageTimer.noiseTotal -= 1
@@ -253,7 +269,6 @@ func pressedEngageTimerButton() {
           self.instanstiateTimer()
         // Start running the new timer (Uses func runEngageTimer)
           self.timer.connect()
-          self.engageTimer.buttonTitle = "Stop"
     }
 }
 
@@ -292,12 +307,12 @@ func cancelTimer() {
 final private class BannerVC: UIViewControllerRepresentable  {
 
      func makeUIViewController(context: Context) -> UIViewController {
-         let view = GADBannerView(adSize: kGADAdSizeBanner)
+        let view = GADBannerView(adSize: kGADAdSizeBanner)
 
-         let viewController = UIViewController()
-        view.adUnitID = "ca-app-pub-4186253562269967/1729357442"
+        let viewController = UIViewController()
+        // view.adUnitID = "ca-app-pub-4186253562269967/1729357442"
         // Fake Mob
-        // view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
          view.rootViewController = viewController
          viewController.view.addSubview(view)
          viewController.view.frame = CGRect(origin: .zero, size: kGADAdSizeBanner.size)
@@ -310,9 +325,9 @@ final private class BannerVC: UIViewControllerRepresentable  {
  }
     
 final class Interstitial:NSObject, GADInterstitialDelegate{
-    var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
+    // var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
     // FakeMob
-    // var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+    var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
     
     override init() {
         super.init()
@@ -336,9 +351,9 @@ final class Interstitial:NSObject, GADInterstitialDelegate{
     }
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
+        // self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
         // Fake Mob
-        // self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         LoadInterstitial()
     }
 }

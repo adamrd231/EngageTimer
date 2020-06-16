@@ -35,7 +35,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             engageTimer.noiseChoice = 0
             engageTimer.randomCountSpeed = 2
             engageTimer.noiseTotal = 10
-            UserDefaults.standard.set(true, forKey: "usingRandomNoise")
+            engageTimer.prepCountDown = 3
+            engageTimer.usingPrepCountDown = true
+            engageTimer.usingRandomNoise = true
+//            UserDefaults.standard.set(true, forKey: "usingPrepCountDown")
+//            UserDefaults.standard.set(true, forKey: "usingRandomNoise")
             UserDefaults.standard.set(true, forKey: "launchedBefore")
         }
         
