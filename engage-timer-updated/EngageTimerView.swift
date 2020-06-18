@@ -19,7 +19,7 @@ struct EngageTimerView: View {
 @State var textSize = CGFloat(70)
 @State var firsTimeOnScreen = UserDefaults.standard.bool(forKey: "firsTimeOnScreen")
     
-    
+@Environment(\.presentationMode) var presentationMode
     
 // Admob
 var interstitial:Interstitial
@@ -33,7 +33,7 @@ var body: some View {
     NavigationView {
         
         ZStack {
-            // Setup backgound Color`
+            // Setup backgound Color
             Color(.systemGray6).edgesIgnoringSafeArea([.top,.bottom])
             
             GeometryReader { geometry in
@@ -189,19 +189,19 @@ func runEngageTimer() {
     
     // Start the countdown with the prep countdown
     if self.engageTimer.prepCountDown > 0 && self.engageTimer.usingPrepCountDown == true {
-
+        // Update the start button tiwth the prepcountdown timer info
         self.engageTimer.buttonTitle = self.engageTimer.prepCountDown.description
+        // reduce the count by one
         self.engageTimer.prepCountDown -= 1
-       
-        
-        
+
+    // Start the countdown for the time in that round
     } else if self.engageTimer.time > 0 {
 
         // If this is the start of the round, sound the starting bell
         if self.engageTimer.time == self.engageTimer.timeReset {
             playSound(sound: "boxing-bell-1", type: "wav")
         }
-        
+        // Update the button title to show user they can choose to stop now.
         self.engageTimer.buttonTitle = "Stop"
         
         // Reduce time count by 1
@@ -253,10 +253,11 @@ func pressedEngageTimerButton() {
       } else if self.engageTimer.pauseButtonTitle == "Re-start" {
           self.cancelTimer()
         playSound(sound: "stop-button", type: "wav")
-          self.engageTimer.resetTimeAndRest()
-          self.engageTimer.buttonTitle = "Engage"
-          self.engageTimer.pauseButtonTitle = "Pause"
-        self.checkInterstitialCount()
+            self.engageTimer.resetTimeAndRest()
+            self.engageTimer.resetPrepCount()
+            self.engageTimer.buttonTitle = "Engage"
+            self.engageTimer.pauseButtonTitle = "Pause"
+            self.checkInterstitialCount()
         
     // Starts the timer if it has not been started before.
       } else {
@@ -275,19 +276,25 @@ func pressedEngageTimerButton() {
 }
     
 func pressedPauseButton() {
+    
+    // Check to see if the timer is running
     if self.engageTimer.timerIsRunning == true {
-       //Pause the Timer
-       self.cancelTimer()
+        // If yes, Pause the Timer
+        self.cancelTimer()
+        // Play the pause sound
         playSound(sound: "pause", type: "wav")
-       self.engageTimer.pauseButtonTitle = "Re-start"
+        // Change the button title to show the user they can re-start the timer
+        self.engageTimer.pauseButtonTitle = "Re-start"
+        // Change the button title to show the user they can stop the timer
+        self.engageTimer.buttonTitle = "Stop"
 
      } else if self.engageTimer.buttonTitle == "Engage" {
        return
    } else {
-       // Restart the Timer
+        // Restart the Timer
         playSound(sound: "pause", type: "wav")
-       self.instanstiateTimer()
-       self.timer.connect()
+        self.instanstiateTimer()
+        self.timer.connect()
         
        self.engageTimer.pauseButtonTitle = "Pause"
      }

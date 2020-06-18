@@ -17,11 +17,14 @@ struct EditEngageTimerOptionsView: View {
     @State var offColor = Color(UIColor.systemGray)
     @State var thumbColor = Color.white
     
+    // Variables that help control the flow of the app, changing screens or releasing to the main screen
     @State var showingVariableCountExplanationView = false
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         
     NavigationView {
+            
         VStack {
             Form {
                 HStack {
@@ -148,15 +151,22 @@ struct EditEngageTimerOptionsView: View {
        
             
         } // Form Closure
-          Text("Swipe Down To Save").padding()
+          Button(action: {
+                  self.presentationMode.wrappedValue.dismiss()
+              }) {
+                  Text("Swipe Down To Save")
+              }.padding()
+          } // Nav CLosure
+              .navigationBarTitle("Edit Options")
+              .sheet(isPresented: $showingVariableCountExplanationView) {
+                  VariableCountExplanationView()
+              }
         } // Main VStack Closure
-        .navigationBarTitle("Edit Options")
-    } // Nav CLosure
-        .sheet(isPresented: $showingVariableCountExplanationView) {
-            VariableCountExplanationView()
-        }
+        // Text("Swipe Down To Save").padding()
+        
+    
 } // View Closure
-
+    
  
 
 struct EditEngageTimerOptionsView_Previews: PreviewProvider {

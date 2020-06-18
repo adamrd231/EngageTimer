@@ -9,12 +9,33 @@
 import SwiftUI
 
 struct VariableCountExplanationView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
-        VStack(alignment: .center){
-            Text("Random Count Spacing").font(.title).bold()
-            Text("This variable counter is used to adjust the amount of space in between random counts. When adjusting the setting, the random count will automatically be reduced to accomodate the larger gaps in time, 1 second between counts allows for a lot more random counts then 3 or 7 seconds.").fixedSize(horizontal: false, vertical: true).padding()
-            Text("Swipe Down To Close").bold()
-            }.padding()
+        
+        ZStack {
+            
+            Color(.systemGray6).edgesIgnoringSafeArea(.all)
+            VStack {
+                VStack(alignment: .center){
+                Text("Random Count Spacing").font(.title).bold()
+                Text("This variable counter is used to adjust the amount of space in between random counts. When adjusting the setting, you are controlling the minimum time that will be gauranteed between sounds. \n A one second minimum setting will alow for more counts than a three or seven second minimum settings.").fixedSize(horizontal: false, vertical: true).padding()
+                
+                }.padding()
+                
+                VStack {
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("Swipe Down To Save").bold()
+                    }.padding()
+                }
+            }
+            
+            
+        }
+        
         
     }
 }
