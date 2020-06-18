@@ -19,6 +19,8 @@ struct EngageTimerView: View {
 @State var textSize = CGFloat(70)
 @State var firsTimeOnScreen = UserDefaults.standard.bool(forKey: "firsTimeOnScreen")
     
+    
+    
 // Admob
 var interstitial:Interstitial
 init() { self.interstitial = Interstitial() }
@@ -310,9 +312,10 @@ final private class BannerVC: UIViewControllerRepresentable  {
         let view = GADBannerView(adSize: kGADAdSizeBanner)
 
         let viewController = UIViewController()
-        // view.adUnitID = "ca-app-pub-4186253562269967/1729357442"
+        // Real Mob
+        view.adUnitID = "ca-app-pub-4186253562269967/1729357442"
         // Fake Mob
-        view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        // view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
          view.rootViewController = viewController
          viewController.view.addSubview(view)
          viewController.view.frame = CGRect(origin: .zero, size: kGADAdSizeBanner.size)
@@ -325,9 +328,10 @@ final private class BannerVC: UIViewControllerRepresentable  {
  }
     
 final class Interstitial:NSObject, GADInterstitialDelegate{
-    // var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
+    // Real Mob
+    var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
     // FakeMob
-    var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+    // var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
     
     override init() {
         super.init()
@@ -351,9 +355,10 @@ final class Interstitial:NSObject, GADInterstitialDelegate{
     }
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        // self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
+        // Real Mob
+        self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
         // Fake Mob
-        self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        // self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         LoadInterstitial()
     }
 }

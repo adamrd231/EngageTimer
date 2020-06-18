@@ -16,8 +16,6 @@
 		6650BC6D2464BBD000030695 /* Whistle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6650BC6C2464BBD000030695 /* Whistle.mp3 */; };
 		6650BC6F2464BCAF00030695 /* Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6650BC6E2464BCAF00030695 /* Bell.mp3 */; };
 		669A00E3247D908700AADAC7 /* OnboardingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A00E2247D908700AADAC7 /* OnboardingScreenView.swift */; };
-		66A3A172249AD30D00026D01 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66A3A170249AD30D00026D01 /* IntentsUI.framework */; };
-		66A3A173249AD30D00026D01 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66A3A171249AD30D00026D01 /* Intents.framework */; };
 		66A3A17B249BE1CA00026D01 /* start-button.wav in Resources */ = {isa = PBXBuildFile; fileRef = 66A3A178249BE1CA00026D01 /* start-button.wav */; };
 		66A3A17C249BE1CA00026D01 /* stop-button.wav in Resources */ = {isa = PBXBuildFile; fileRef = 66A3A179249BE1CA00026D01 /* stop-button.wav */; };
 		66A3A17D249BE1CA00026D01 /* pause.wav in Resources */ = {isa = PBXBuildFile; fileRef = 66A3A17A249BE1CA00026D01 /* pause.wav */; };
@@ -68,8 +66,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66A3A173249AD30D00026D01 /* Intents.framework in Frameworks */,
-				66A3A172249AD30D00026D01 /* IntentsUI.framework in Frameworks */,
 				4D746393F7038F44A9FA1384 /* libPods-engage-timer-updated.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,7 +423,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.2;
+				MARKETING_VERSION = 2.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = design.rdconcepts.engager;
 				PRODUCT_NAME = "Engage Timer";
 				SWIFT_VERSION = 5.0;
@@ -450,7 +446,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.2;
+				MARKETING_VERSION = 2.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = design.rdconcepts.engager;
 				PRODUCT_NAME = "Engage Timer";
 				SWIFT_VERSION = 5.0;
