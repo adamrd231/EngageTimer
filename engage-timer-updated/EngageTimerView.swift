@@ -5,10 +5,11 @@
 
 import SwiftUI
 import GoogleMobileAds
+import IntentsUI
 
 struct EngageTimerView: View {
 //Properties
-// =========
+// =====================================================
 @EnvironmentObject var engageTimer: EngageTimer
 @State var timer = Timer.publish(every: 1, on: .main, in: .common)
 
@@ -16,16 +17,16 @@ struct EngageTimerView: View {
 @State var showSheet = false
 @State var sheetSelection = 1
 @State var textSize = CGFloat(70)
+@State var firsTimeOnScreen = UserDefaults.standard.bool(forKey: "firsTimeOnScreen")
     
- @State var firsTimeOnScreen = UserDefaults.standard.bool(forKey: "firsTimeOnScreen")
 // Admob
 var interstitial:Interstitial
 init() { self.interstitial = Interstitial() }
 @State var interstitialCount = 0
-    
-// ================================================================
+
     
 // User Interface Views
+// ======================================================
 var body: some View {
     NavigationView {
         
@@ -170,17 +171,12 @@ var body: some View {
         
 
 } // View Closure
-    
-
-    
-    
-    
+     
 // Methods
-// =============================================
+// ======================================================
 var buttonColor: Color {
     return self.engageTimer.buttonTitle == "Engage" ? .secondary : .primary
 }
-
 
 func runEngageTimer() {
     
@@ -246,6 +242,7 @@ func pressedEngageTimerButton() {
     UIApplication.shared.isIdleTimerDisabled = false
     if self.engageTimer.timerIsRunning == true {
           self.cancelTimer()
+        playSound(sound: "stop-button", type: "wav")
           self.engageTimer.resetAllValues()
           self.engageTimer.buttonTitle = "Engage"
         self.checkInterstitialCount()
@@ -253,6 +250,7 @@ func pressedEngageTimerButton() {
     // Timer has run some, but the user wants to reset to original settings
       } else if self.engageTimer.pauseButtonTitle == "Re-start" {
           self.cancelTimer()
+        playSound(sound: "stop-button", type: "wav")
           self.engageTimer.resetTimeAndRest()
           self.engageTimer.buttonTitle = "Engage"
           self.engageTimer.pauseButtonTitle = "Pause"
@@ -269,22 +267,26 @@ func pressedEngageTimerButton() {
           self.instanstiateTimer()
         // Start running the new timer (Uses func runEngageTimer)
           self.timer.connect()
+        
+        playSound(sound: "start-button", type: "wav")
     }
 }
-
     
 func pressedPauseButton() {
     if self.engageTimer.timerIsRunning == true {
        //Pause the Timer
        self.cancelTimer()
+        playSound(sound: "pause", type: "wav")
        self.engageTimer.pauseButtonTitle = "Re-start"
 
      } else if self.engageTimer.buttonTitle == "Engage" {
        return
    } else {
        // Restart the Timer
+        playSound(sound: "pause", type: "wav")
        self.instanstiateTimer()
        self.timer.connect()
+        
        self.engageTimer.pauseButtonTitle = "Pause"
      }
 }
@@ -299,11 +301,9 @@ func cancelTimer() {
     timer.connect().cancel()
     self.engageTimer.timerIsRunning = false
 }
-
-    
     
 // Google ADMOB
-// ==================================
+// ================================================================
 final private class BannerVC: UIViewControllerRepresentable  {
 
      func makeUIViewController(context: Context) -> UIViewController {
@@ -358,7 +358,6 @@ final class Interstitial:NSObject, GADInterstitialDelegate{
     }
 }
     
-        
 func checkInterstitialCount() {
     self.interstitialCount += 1
     if self.interstitialCount == 3 {
@@ -367,8 +366,8 @@ func checkInterstitialCount() {
         self.interstitialCount = 0
     }
 }
- 
-
+    
+//Preview Provider
 // =====================================================================
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -376,4 +375,5 @@ struct ContentView_Previews: PreviewProvider {
             .colorScheme(.dark)
     }
 }
-}
+    
+} // Overall EngageTimer Struct view closeure

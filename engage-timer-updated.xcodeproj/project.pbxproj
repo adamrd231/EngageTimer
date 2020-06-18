@@ -16,6 +16,11 @@
 		6650BC6D2464BBD000030695 /* Whistle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6650BC6C2464BBD000030695 /* Whistle.mp3 */; };
 		6650BC6F2464BCAF00030695 /* Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6650BC6E2464BCAF00030695 /* Bell.mp3 */; };
 		669A00E3247D908700AADAC7 /* OnboardingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A00E2247D908700AADAC7 /* OnboardingScreenView.swift */; };
+		66A3A172249AD30D00026D01 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66A3A170249AD30D00026D01 /* IntentsUI.framework */; };
+		66A3A173249AD30D00026D01 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66A3A171249AD30D00026D01 /* Intents.framework */; };
+		66A3A17B249BE1CA00026D01 /* start-button.wav in Resources */ = {isa = PBXBuildFile; fileRef = 66A3A178249BE1CA00026D01 /* start-button.wav */; };
+		66A3A17C249BE1CA00026D01 /* stop-button.wav in Resources */ = {isa = PBXBuildFile; fileRef = 66A3A179249BE1CA00026D01 /* stop-button.wav */; };
+		66A3A17D249BE1CA00026D01 /* pause.wav in Resources */ = {isa = PBXBuildFile; fileRef = 66A3A17A249BE1CA00026D01 /* pause.wav */; };
 		66B5A52E2456413D005A2D4F /* EditEngageTimerOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */; };
 		66CBF16223ED19A70022F015 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CBF16123ED19A70022F015 /* AppDelegate.swift */; };
 		66CBF16423ED19A70022F015 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CBF16323ED19A70022F015 /* SceneDelegate.swift */; };
@@ -36,6 +41,12 @@
 		6650BC6C2464BBD000030695 /* Whistle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Whistle.mp3; sourceTree = "<group>"; };
 		6650BC6E2464BCAF00030695 /* Bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bell.mp3; sourceTree = "<group>"; };
 		669A00E2247D908700AADAC7 /* OnboardingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreenView.swift; sourceTree = "<group>"; };
+		66A3A16F249AD2EA00026D01 /* Engage Timer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Engage Timer.entitlements"; sourceTree = "<group>"; };
+		66A3A170249AD30D00026D01 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		66A3A171249AD30D00026D01 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		66A3A178249BE1CA00026D01 /* start-button.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "start-button.wav"; sourceTree = "<group>"; };
+		66A3A179249BE1CA00026D01 /* stop-button.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "stop-button.wav"; sourceTree = "<group>"; };
+		66A3A17A249BE1CA00026D01 /* pause.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pause.wav; sourceTree = "<group>"; };
 		66B5A52D2456413D005A2D4F /* EditEngageTimerOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEngageTimerOptionsView.swift; sourceTree = "<group>"; };
 		66CBF15E23ED19A70022F015 /* Engage Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Engage Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66CBF16123ED19A70022F015 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +68,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66A3A173249AD30D00026D01 /* Intents.framework in Frameworks */,
+				66A3A172249AD30D00026D01 /* IntentsUI.framework in Frameworks */,
 				4D746393F7038F44A9FA1384 /* libPods-engage-timer-updated.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,6 +94,9 @@
 				6650BC6C2464BBD000030695 /* Whistle.mp3 */,
 				6629071B2458C92600EFF54D /* boxing-bell-1.wav */,
 				6629071C2458C92600EFF54D /* boxing-bell-3.wav */,
+				66A3A17A249BE1CA00026D01 /* pause.wav */,
+				66A3A178249BE1CA00026D01 /* start-button.wav */,
+				66A3A179249BE1CA00026D01 /* stop-button.wav */,
 			);
 			path = Sound;
 			sourceTree = "<group>";
@@ -106,6 +122,7 @@
 		66CBF16023ED19A70022F015 /* engage-timer-updated */ = {
 			isa = PBXGroup;
 			children = (
+				66A3A16F249AD2EA00026D01 /* Engage Timer.entitlements */,
 				66CBF16123ED19A70022F015 /* AppDelegate.swift */,
 				66CBF16323ED19A70022F015 /* SceneDelegate.swift */,
 				66E88EB32453AD590076865F /* EngageTimerModel.swift */,
@@ -143,6 +160,8 @@
 		AAE4A6EFAFC6803BB77A879F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				66A3A171249AD30D00026D01 /* Intents.framework */,
+				66A3A170249AD30D00026D01 /* IntentsUI.framework */,
 				F1456B105882C4053CC06E7B /* libPods-engage-timer-updated.a */,
 			);
 			name = Frameworks;
@@ -210,12 +229,15 @@
 				66CBF16E23ED19AA0022F015 /* LaunchScreen.storyboard in Resources */,
 				662D955C245CAEE40067A952 /* Clap.mp3 in Resources */,
 				6629071D2458C92600EFF54D /* boxing-bell-1.wav in Resources */,
+				66A3A17C249BE1CA00026D01 /* stop-button.wav in Resources */,
 				6629071E2458C92600EFF54D /* boxing-bell-3.wav in Resources */,
 				66CBF16B23ED19AA0022F015 /* Preview Assets.xcassets in Resources */,
 				6650BC6D2464BBD000030695 /* Whistle.mp3 in Resources */,
 				66CBF16823ED19AA0022F015 /* Assets.xcassets in Resources */,
+				66A3A17B249BE1CA00026D01 /* start-button.wav in Resources */,
 				6650BC6F2464BCAF00030695 /* Bell.mp3 in Resources */,
 				66CBF17A23ED1FC50022F015 /* DS-DIGI.TTF in Resources */,
+				66A3A17D249BE1CA00026D01 /* pause.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +417,7 @@
 			baseConfigurationReference = 6D705BCB0310B7DB9D151024 /* Pods-engage-timer-updated.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "engage-timer-updated/Engage Timer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"engage-timer-updated/Preview Content\"";
 				DEVELOPMENT_TEAM = 6SFM579B5E;
@@ -417,6 +440,7 @@
 			baseConfigurationReference = 9841058B02E7FB9FE2476B10 /* Pods-engage-timer-updated.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "engage-timer-updated/Engage Timer.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"engage-timer-updated/Preview Content\"";
 				DEVELOPMENT_TEAM = 6SFM579B5E;
