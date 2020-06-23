@@ -33,8 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             engageTimer.time = 300
             engageTimer.rest = 60
             engageTimer.noiseChoice = 0
-            engageTimer.randomCountSpeed = 2
-            engageTimer.noiseTotal = 10
+
             engageTimer.prepCountDown = 3
             engageTimer.usingPrepCountDown = true
             engageTimer.usingRandomNoise = true

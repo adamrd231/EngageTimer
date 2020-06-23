@@ -71,23 +71,12 @@ var body: some View {
 
                         // Random Noise Choice & Count
                             HStack(alignment: .center) {
-                         if self.engageTimer.usingRandomNoise {
-                            if Int(self.engageTimer.randomCountSpeed) == 3 {
-                                Text("Slow").font(.largeTitle)
-                            } else if Int(self.engageTimer.randomCountSpeed) == 2 {
-                                Text("Medium").font(.largeTitle)
-                            } else {
                                 Text("Fast").font(.largeTitle)
-                            }
-                            
-                            Text("\(self.engageTimer.noiseArray[self.engageTimer.noiseChoice])")
-                            .font(.largeTitle).bold()
-                             Spacer()
-                             Text("\(self.engageTimer.noiseTotal)")
+                                Text("\(self.engageTimer.noiseArray[self.engageTimer.noiseChoice])")
+                                .font(.largeTitle).bold()
+                                Spacer()
+                                Text("9")
                                 .font(.custom("DS-Digital", size: self.textSize))
-                         } else {
-                             EmptyView()
-                             }
                          }.padding().frame(height: geometry.size.height / 7)
                             
                          // Engage Button Action & Design
@@ -210,7 +199,7 @@ func runEngageTimer() {
         // If this count is within the randomly generated array, sound the random noise that the user has input, IF the user if using the random count
         if self.engageTimer.randomArray.contains(self.engageTimer.time) && self.engageTimer.usingRandomNoise == true {
             playSound(sound: "\(self.engageTimer.noiseArray[engageTimer.noiseChoice])", type: "mp3")
-            self.engageTimer.noiseTotal -= 1
+
         }
 
     } else if self.engageTimer.rest > 0 {

@@ -27,6 +27,85 @@ struct EditEngageTimerOptionsView: View {
             
         VStack {
             Form {
+                
+                Section {
+                  HStack {
+                    Text("Rounds").bold()
+                        Spacer()
+                        Text("\(self.engageTimer.totalRounds)")
+                        Stepper("\(self.engageTimer.totalRounds)", value: $engageTimer.totalRounds, in: 0...25).labelsHidden()
+                    }.padding()
+                    
+                    HStack {
+                    Text("Time").bold()
+                    Spacer()
+                        Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60))
+                        Stepper("", value: $engageTimer.time, in: 10...1200, step: 10).labelsHidden()
+
+                    }.padding()
+                    
+                    HStack {
+                    Text("Rest").bold()
+                    Spacer()
+                        Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60))
+                        Stepper("", value: $engageTimer.rest, in: 0...639, step: 5).labelsHidden()
+                        }.padding()
+                }
+
+                
+               Section {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Engage Timer Cues").bold()
+                        if engageTimer.usingRandomNoise {
+                            Text("Sound effects between")
+                            Text("\(self.engageTimer.lowerRange) and \(self.engageTimer.upperRange) seconds")
+                        }
+                    }
+                    
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 25, style: .circular)
+                        .fill(engageTimer.usingRandomNoise ? onColor : offColor)
+                        .frame(width: 75, height: 35)
+                    .overlay(
+                        Circle()
+                        .fill(thumbColor)
+                            .shadow(radius: 1, x: 0, y: 1)
+                            .padding(1.5)
+                            .offset(x: engageTimer.usingRandomNoise ? 20 : -20)
+                            .animation(Animation.easeInOut(duration: 0.3))
+                            .onTapGesture { self.engageTimer.usingRandomNoise.toggle() }
+                    )
+                }.padding()
+                
+               if engageTimer.usingRandomNoise {
+                    HStack {
+                           Text("\(self.engageTimer.lowerRange)")
+                           Stepper("", value: $engageTimer.lowerRange, in: 0...10, step: 1).labelsHidden()
+                            Spacer()
+                            Text("\(self.engageTimer.upperRange)")
+                            Stepper("", value: $engageTimer.upperRange, in: 0...10, step: 1).labelsHidden()
+        
+                           }.padding()
+                       }
+                
+                      if engageTimer.usingRandomNoise {
+                       HStack {
+                       
+                              Picker(selection: $engageTimer.noiseChoice, label: Text("Choose Sound Effect").bold()) {
+                                  
+                                  ForEach (0 ..< engageTimer.noiseArray.count) {
+                                      Text(self.engageTimer.noiseArray[$0])
+                                  }
+                              }
+                            }.padding()
+                          }
+                }
+                
+                
+                
+
+                
                 HStack {
                     Text("Get Ready Timer").bold()
                     Spacer()
@@ -44,108 +123,16 @@ struct EditEngageTimerOptionsView: View {
                     )
                 }.padding()
                 
-                HStack {
-                    if engageTimer.usingPrepCountDown {
+                if engageTimer.usingPrepCountDown {
+                    HStack{
                         Text("Prep Time").bold()
                         Spacer()
-                            Text(String(format: "%01i:%02i", self.engageTimer.prepCountDown / 60, self.engageTimer.prepCountDown % 60))
+                        Text(String(format: "%01i:%02i", self.engageTimer.prepCountDown / 60, self.engageTimer.prepCountDown % 60))
                         Stepper("", value: $engageTimer.prepCountDown, in: 0...10, step: 1).labelsHidden()
-                    }
-                
                     }.padding()
-                
-                HStack {
-                Text("Rounds").bold()
-                    Spacer()
-                    Text("\(self.engageTimer.totalRounds)")
-                    Stepper("\(self.engageTimer.totalRounds)", value: $engageTimer.totalRounds, in: 0...25).labelsHidden()
-                }.padding()
-                
-                HStack {
-                Text("Time").bold()
-                Spacer()
-                    Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60))
-                    Stepper("", value: $engageTimer.time, in: 10...1200, step: 10).labelsHidden()
-
-                }.padding()
-                
-                HStack {
-                Text("Rest").bold()
-                Spacer()
-                    Text(String(format: "%01i:%02i", self.engageTimer.rest / 60, self.engageTimer.rest % 60))
-                    Stepper("", value: $engageTimer.rest, in: 0...639, step: 5).labelsHidden()
-                    }.padding()
-              
-                
-                
-                
-                HStack {
-                    
-                    Text("Random Effect").bold()
-                    Spacer()
-                    RoundedRectangle(cornerRadius: 25, style: .circular)
-                        .fill(engageTimer.usingRandomNoise ? onColor : offColor)
-                        .frame(width: 75, height: 35)
-                    .overlay(
-                        Circle()
-                        .fill(thumbColor)
-                            .shadow(radius: 1, x: 0, y: 1)
-                            .padding(1.5)
-                            .offset(x: engageTimer.usingRandomNoise ? 20 : -20)
-                            .animation(Animation.easeInOut(duration: 0.3))
-                            .onTapGesture { self.engageTimer.usingRandomNoise.toggle() }
-                    )
-                }.padding()
-                
-                HStack {
-                if engageTimer.usingRandomNoise {
-                    Text("Noise Count").bold()
-                    Spacer()
-                        Text("\(self.engageTimer.noiseTotal)")
-                    Stepper("", value: $engageTimer.noiseTotal, in: 1...engageTimer.time).labelsHidden()
-                  
-                       
-                    }
-                }.padding()
-                
-                HStack {
-                if engageTimer.usingRandomNoise {
-                       Picker(selection: $engageTimer.noiseChoice, label: Text("Sound Effect").bold()) {
-                           
-                           ForEach (0 ..< engageTimer.noiseArray.count) {
-                               Text(self.engageTimer.noiseArray[$0])
-                           }
-                       }
-                     }
-                   }.padding()
-                
-                VStack() {
-                   
-                   if engageTimer.usingRandomNoise {
-                    HStack {
-                        
-                        Slider(value: $engageTimer.randomCountSpeed, in: 1...3, step: 1.0)
-                        
-                        Button(action: {
-                            self.showingVariableCountExplanationView = true
-                            print("Pressed Info Button")
-                        }) {
-                            Image(systemName: "questionmark.circle")
-                        }.padding(.leading)
-                    }
-                    
-                    HStack {
-                        if self.engageTimer.randomCountSpeed == 1.0 {
-                            Text("Min 1 second between counts")
-                        } else if self.engageTimer.randomCountSpeed == 2.0 {
-                            Text("Min 3 seconds between counts")
-                        } else {
-                            Text("Min 7 seconds between counts")
-                        }
-                       
-                    }.padding(.bottom)
-                    }
-                }.padding()
+                } else {
+                    EmptyView()
+                }
 //
 //
        
