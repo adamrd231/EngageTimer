@@ -37,7 +37,7 @@ var body: some View {
             Color(.systemGray6).edgesIgnoringSafeArea([.top,.bottom])
             
             GeometryReader { geometry in
-                        VStack {
+                VStack(alignment: .leading) {
                          // Rounds Stack
                          HStack {
                              Text("Round").font(.largeTitle)
@@ -70,14 +70,23 @@ var body: some View {
                         }.padding().frame(height: geometry.size.height / 7)
 
                         // Random Noise Choice & Count
-                            HStack(alignment: .center) {
-                                Text("Fast").font(.largeTitle)
-                                Text("\(self.engageTimer.noiseArray[self.engageTimer.noiseChoice])")
-                                .font(.largeTitle).bold()
-                                Spacer()
-                                Text("9")
-                                .font(.custom("DS-Digital", size: self.textSize))
-                         }.padding().frame(height: geometry.size.height / 7)
+                        VStack {
+                            if self.engageTimer.usingRandomNoise {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text("Engager On").font(.largeTitle)
+                                        Text("\(self.engageTimer.lowerRange)-\(self.engageTimer.upperRange) second spacing")
+                                    }
+                                    Spacer()
+                                    Text(String(self.engageTimer.randomCount)).font(.custom("DS-Digital", size: self.textSize))
+                                }
+                                
+                                
+                            } else {
+                                Text("Engager is Off").font(.largeTitle)
+                            }
+                           
+                        }.padding().frame(height: geometry.size.height / 7).padding(.bottom)
                             
                          // Engage Button Action & Design
                          VStack (alignment: .center) {
@@ -199,6 +208,7 @@ func runEngageTimer() {
         // If this count is within the randomly generated array, sound the random noise that the user has input, IF the user if using the random count
         if self.engageTimer.randomArray.contains(self.engageTimer.time) && self.engageTimer.usingRandomNoise == true {
             playSound(sound: "\(self.engageTimer.noiseArray[engageTimer.noiseChoice])", type: "mp3")
+            self.engageTimer.randomCount -= 1
 
         }
 
@@ -251,10 +261,11 @@ func pressedEngageTimerButton() {
     // Starts the timer if it has not been started before.
       } else {
         UIApplication.shared.isIdleTimerDisabled = true
-          // Capture reset values if timer is starting
-          self.engageTimer.fillResetValues()
+          
         // Create random number array
         self.engageTimer.createRandomNumberArray()
+        // Capture reset values if timer is starting
+        self.engageTimer.fillResetValues()
         // Create new timer
           self.instanstiateTimer()
         // Start running the new timer (Uses func runEngageTimer)
@@ -309,9 +320,9 @@ final private class BannerVC: UIViewControllerRepresentable  {
 
         let viewController = UIViewController()
         // Real Mob
-        view.adUnitID = "ca-app-pub-4186253562269967/1729357442"
+        // view.adUnitID = "ca-app-pub-4186253562269967/1729357442"
         // Fake Mob
-        // view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
          view.rootViewController = viewController
          viewController.view.addSubview(view)
          viewController.view.frame = CGRect(origin: .zero, size: kGADAdSizeBanner.size)
@@ -325,9 +336,9 @@ final private class BannerVC: UIViewControllerRepresentable  {
     
 final class Interstitial:NSObject, GADInterstitialDelegate{
     // Real Mob
-    var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
+    // var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
     // FakeMob
-    // var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+    var interstitial:GADInterstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
     
     override init() {
         super.init()
@@ -352,9 +363,9 @@ final class Interstitial:NSObject, GADInterstitialDelegate{
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
         // Real Mob
-        self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
+        // self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-4186253562269967/5998934622")
         // Fake Mob
-        // self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         LoadInterstitial()
     }
 }

@@ -57,45 +57,6 @@ class EngageTimer: ObservableObject, Identifiable {
         }
     }
     
-//    @Published var noiseTotal = UserDefaults.standard.integer(forKey: "noiseTotal") {
-//        didSet {
-//                // Check to make sure the random count wont crash the app
-//                if randomCountSpeed == 3 {
-//                    if time / 10 < noiseTotal {
-//                        noiseTotal = time / 10
-//                    }
-//                } else if randomCountSpeed == 2 {
-//                    if time / 5 < noiseTotal {
-//                        noiseTotal = time / 5
-//                    }
-//                } else if randomCountSpeed == 1 {
-//                    if time - 3 < noiseTotal {
-//                        noiseTotal = time - 3
-//                    }
-//                }
-//            UserDefaults.standard.set(self.noiseTotal, forKey: "noiseTotal")
-//        }
-//    }
-//
-//    @Published var randomCountSpeed: Float  = UserDefaults.standard.float(forKey: "randomCountSpeed") {
-//        didSet {
-//                // Check to make sure the random count wont crash the app
-//                if randomCountSpeed == 3 {
-//                    if time / 10 < noiseTotal {
-//                        noiseTotal = time / 10
-//                    }
-//                } else if randomCountSpeed == 2 {
-//                    if time / 5 < noiseTotal {
-//                        noiseTotal = time / 5
-//                    }
-//                } else if randomCountSpeed == 1 {
-//                    if time - 3 < noiseTotal {
-//                        noiseTotal = time - 3
-//                    }
-//                }
-//            UserDefaults.standard.set(self.randomCountSpeed, forKey: "randomCountSpeed")
-//        }
-//    }
     
     @Published var usingRandomNoise = UserDefaults.standard.bool(forKey: "usingRandomNoise") {
         didSet {
@@ -126,6 +87,8 @@ class EngageTimer: ObservableObject, Identifiable {
     @Published var randomNumber = 1
     @Published var lowerRange = 1
     @Published var upperRange = 5
+    @Published var countingNumber = 1
+    @Published var randomCount = 1
     
     
     
@@ -165,6 +128,7 @@ class EngageTimer: ObservableObject, Identifiable {
         restReset = rest
         // noiseCountReset = noiseTotal
         prepCountDownReset = prepCountDown
+        randomCount = randomArray.count
     }
 
     func resetRandomNoiseCount() {
@@ -174,37 +138,13 @@ class EngageTimer: ObservableObject, Identifiable {
         
     func createRandomNumberArray() {
         randomArray = []
-        var range = time - 2
-        
-//        if noiseTotal == 0 {
-//            return
-//        }
-        
-//        for _ in 1...noiseTotal {
-//            randomNumber = Int.random(in: 1...range)
-//
-//            if randomCountSpeed == 1 {
-//                print("using random count = 1")
-//               // 1 second minmum between each count
-//               while randomArray.contains(randomNumber) {
-//                   randomNumber = Int.random(in: 1...range)
-//               }
-//            } else if randomCountSpeed == 2 {
-//                print("using random count = 3")
-//                // 4 second minmum between each count
-//                while randomArray.contains(randomNumber) || randomArray.contains(randomNumber - 1) || randomArray.contains(randomNumber + 1) || randomArray.contains(randomNumber - 2) || randomArray.contains(randomNumber + 2)  {
-//                    randomNumber = Int.random(in: 1...range)
-//                }
-//            } else if randomCountSpeed == 3 {
-//                range = time - 5
-//
-//                print("using random count = 5")
-//               while randomArray.contains(randomNumber) || randomArray.contains(randomNumber - 1) || randomArray.contains(randomNumber + 1) || randomArray.contains(randomNumber - 2) || randomArray.contains(randomNumber + 2) || randomArray.contains(randomNumber + 3) || randomArray.contains(randomNumber - 3) || randomArray.contains(randomNumber + 4) || randomArray.contains(randomNumber - 4) || randomArray.contains(randomNumber + 5) || randomArray.contains(randomNumber - 5) {
-//                    randomNumber = Int.random(in: 2...range)
-//                }
-//            }
-//            randomArray.append(randomNumber)
-//        }
+
+        while countingNumber < time {
+            let randomNumber = Int.random(in: lowerRange...upperRange)
+            countingNumber += randomNumber
+            randomArray.append(countingNumber)
+        }
+        print(randomArray)
     }
     
 }

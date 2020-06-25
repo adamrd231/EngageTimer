@@ -2,7 +2,10 @@
 # platform :ios, '13.2'
 
 target 'engage-timer-updated' do
-  # Comment the next line if you don't want to use dynamic frameworks
 
-    pod 'Google-Mobile-Ads-SDK'
+    	pod 'Google-Mobile-Ads-SDK'
+
+	# add the Firebase pod for Google Analytics
+	pod 'Firebase/Analytics'
+
 end

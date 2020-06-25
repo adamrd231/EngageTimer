@@ -79,13 +79,17 @@ struct EditEngageTimerOptionsView: View {
                 }.padding()
                 
                if engageTimer.usingRandomNoise {
-                    HStack {
-                           Text("\(self.engageTimer.lowerRange)")
-                           Stepper("", value: $engageTimer.lowerRange, in: 0...10, step: 1).labelsHidden()
+                    VStack {
+                        HStack{
+                            Text("Lower range: \(self.engageTimer.lowerRange) Seconds")
                             Spacer()
-                            Text("\(self.engageTimer.upperRange)")
-                            Stepper("", value: $engageTimer.upperRange, in: 0...10, step: 1).labelsHidden()
-        
+                            Stepper("", value: $engageTimer.lowerRange, in: 1...120, step: 1).labelsHidden()
+                        }
+                        HStack {
+                            Text("Upper range: \(self.engageTimer.upperRange) Seconds")
+                            Spacer()
+                            Stepper("", value: $engageTimer.upperRange, in: 1...120, step: 1).labelsHidden()
+                        }
                            }.padding()
                        }
                 

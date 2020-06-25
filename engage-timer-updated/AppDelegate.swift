@@ -9,16 +9,23 @@
 import UIKit
 import GoogleMobileAds
 import AVFoundation
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var window: UIWindow?
 
-var firstTimeUser = false
+    var firstTimeUser = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
         // Setup google admob instance
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
+        // Capture app information for Firebase
+        FirebaseApp.configure()
         
         // Change options for audio session to keep users background music playing.
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)

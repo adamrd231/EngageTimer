@@ -27,6 +27,7 @@
 		66CBF16B23ED19AA0022F015 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66CBF16A23ED19AA0022F015 /* Preview Assets.xcassets */; };
 		66CBF16E23ED19AA0022F015 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66CBF16C23ED19AA0022F015 /* LaunchScreen.storyboard */; };
 		66CBF17A23ED1FC50022F015 /* DS-DIGI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 66CBF17923ED1FC40022F015 /* DS-DIGI.TTF */; };
+		66DCAA3024A2BE02006D2E10 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66DCAA2F24A2BE02006D2E10 /* GoogleService-Info.plist */; };
 		66E88EB42453AD590076865F /* EngageTimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E88EB32453AD590076865F /* EngageTimerModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		66CBF16D23ED19AA0022F015 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66CBF16F23ED19AA0022F015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66CBF17923ED1FC40022F015 /* DS-DIGI.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGI.TTF"; sourceTree = "<group>"; };
+		66DCAA2F24A2BE02006D2E10 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		66E88EB32453AD590076865F /* EngageTimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngageTimerModel.swift; sourceTree = "<group>"; };
 		6D705BCB0310B7DB9D151024 /* Pods-engage-timer-updated.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-engage-timer-updated.debug.xcconfig"; path = "Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated.debug.xcconfig"; sourceTree = "<group>"; };
 		9841058B02E7FB9FE2476B10 /* Pods-engage-timer-updated.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-engage-timer-updated.release.xcconfig"; path = "Target Support Files/Pods-engage-timer-updated/Pods-engage-timer-updated.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				662907192458C80500EFF54D /* sounds.swift */,
 				66CBF16723ED19AA0022F015 /* Assets.xcassets */,
 				66CBF16C23ED19AA0022F015 /* LaunchScreen.storyboard */,
+				66DCAA2F24A2BE02006D2E10 /* GoogleService-Info.plist */,
 				66CBF16F23ED19AA0022F015 /* Info.plist */,
 				66CBF17523ED1DA00022F015 /* Fonts */,
 				66CBF16923ED19AA0022F015 /* Preview Content */,
@@ -222,6 +225,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66DCAA3024A2BE02006D2E10 /* GoogleService-Info.plist in Resources */,
 				66CBF16E23ED19AA0022F015 /* LaunchScreen.storyboard in Resources */,
 				662D955C245CAEE40067A952 /* Clap.mp3 in Resources */,
 				6629071D2458C92600EFF54D /* boxing-bell-1.wav in Resources */,
