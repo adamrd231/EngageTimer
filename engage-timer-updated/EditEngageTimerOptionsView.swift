@@ -58,8 +58,8 @@ struct EditEngageTimerOptionsView: View {
                     VStack(alignment: .leading) {
                         Text("Engage Timer Cues").bold()
                         if engageTimer.usingRandomNoise {
-                            Text("Sound effects between")
-                            Text("\(self.engageTimer.lowerRange) and \(self.engageTimer.upperRange) seconds")
+                            Text("FX between \(self.engageTimer.lowerRange) and \(self.engageTimer.upperRange)")
+                            Text("\(engageTimer.randomCount) engage cue total")
                         }
                     }
                     
@@ -90,7 +90,7 @@ struct EditEngageTimerOptionsView: View {
                             Spacer()
                             Stepper("", value: $engageTimer.upperRange, in: 1...120, step: 1).labelsHidden()
                         }
-                           }.padding()
+                        }.padding()
                        }
                 
                       if engageTimer.usingRandomNoise {
@@ -141,7 +141,7 @@ struct EditEngageTimerOptionsView: View {
 //
        
             
-        } // Form Closure
+            } // Form Closure
           Button(action: {
                   self.presentationMode.wrappedValue.dismiss()
               }) {
@@ -153,8 +153,14 @@ struct EditEngageTimerOptionsView: View {
                   VariableCountExplanationView()
               }
         } // Main VStack Closure
-        // Text("Swipe Down To Save").padding()
         
+        .onDisappear() {
+            // Create random number array
+            self.engageTimer.createRandomNumberArray()
+            print(self.engageTimer.randomArray)
+            // Capture reset values if timer is starting
+            self.engageTimer.fillResetValues()
+        }        
     
 } // View Closure
     

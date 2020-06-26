@@ -35,7 +35,6 @@ var body: some View {
         ZStack {
             // Setup backgound Color
             Color(.systemGray6).edgesIgnoringSafeArea([.top,.bottom])
-            
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
                          // Rounds Stack
@@ -45,7 +44,6 @@ var body: some View {
                             Text("\(self.engageTimer.round)").font(.custom("DS-Digital", size: self.textSize))
                              Text("OF")
                             Text("\(self.engageTimer.totalRounds)").font(.custom("DS-Digital", size: self.textSize))
-                             
                          }.padding().frame(height: geometry.size.height / 7)
                                  
                          // Time Remaining Stack
@@ -54,10 +52,6 @@ var body: some View {
                              Spacer()
                              Text(String(format: "%01i:%02i", self.engageTimer.time / 60, self.engageTimer.time % 60))
                                 .font(.custom("DS-Digital", size: self.textSize))
-                                 // Timer runs function every second
-                                .onReceive(self.timer) { _ in
-                                     self.runEngageTimer()
-                                 }
                          }.padding().frame(height: geometry.size.height / 7)
                                  
                         // Rest Stack
@@ -76,7 +70,7 @@ var body: some View {
                                     VStack(alignment: .leading) {
                                         Text("Engager On").font(.largeTitle)
                                         Text("\(self.engageTimer.lowerRange)-\(self.engageTimer.upperRange) second spacing")
-                                    }
+                                        }
                                     Spacer()
                                     Text(String(self.engageTimer.randomCount)).font(.custom("DS-Digital", size: self.textSize))
                                 }
@@ -91,7 +85,6 @@ var body: some View {
                          // Engage Button Action & Design
                          VStack (alignment: .center) {
                              Button(action: {
-                                print(self.firsTimeOnScreen)
                                  self.pressedEngageTimerButton()
                              })
                              { Text("\(self.engageTimer.buttonTitle)")
@@ -118,7 +111,7 @@ var body: some View {
                                 .foregroundColor(self.buttonColor) }
                          }
                              .padding().frame(height: geometry.size.height / 7)
-                             .disabled(self.engageTimer.buttonTitle == "Engage")
+                         .disabled(self.engageTimer.buttonTitle == "Engage")
                          
                          HStack{
                              Spacer()
@@ -149,11 +142,21 @@ var body: some View {
                             .disabled(self.engageTimer.buttonTitle != "Engage"))
                     
                     } // ZStack Close
+                    .onReceive(self.timer) { _ in
+                        self.runEngageTimer()
+            }
                     .onAppear() {
+                        // If the users first login, show the explantion screen
                         if self.firsTimeOnScreen == false {
                             UserDefaults.standard.set(true, forKey: "firsTimeOnScreen")
                             self.showSheet = true
                         }
+                        
+                        // Create random number array
+                        self.engageTimer.createRandomNumberArray()
+                        print(self.engageTimer.randomArray)
+                        // Capture reset values if timer is starting
+                        self.engageTimer.fillResetValues()
                 }
                     
                     
@@ -187,20 +190,16 @@ func runEngageTimer() {
     
     // Start the countdown with the prep countdown
     if self.engageTimer.prepCountDown > 0 && self.engageTimer.usingPrepCountDown == true {
-        // Update the start button tiwth the prepcountdown timer info
-        self.engageTimer.buttonTitle = self.engageTimer.prepCountDown.description
         // reduce the count by one
         self.engageTimer.prepCountDown -= 1
-
+    }
+        
     // Start the countdown for the time in that round
-    } else if self.engageTimer.time > 0 {
-
+    else if self.engageTimer.time > 0 {
         // If this is the start of the round, sound the starting bell
         if self.engageTimer.time == self.engageTimer.timeReset {
             playSound(sound: "boxing-bell-1", type: "wav")
         }
-        // Update the button title to show user they can choose to stop now.
-        self.engageTimer.buttonTitle = "Stop"
         
         // Reduce time count by 1
         self.engageTimer.time -= 1
@@ -209,7 +208,6 @@ func runEngageTimer() {
         if self.engageTimer.randomArray.contains(self.engageTimer.time) && self.engageTimer.usingRandomNoise == true {
             playSound(sound: "\(self.engageTimer.noiseArray[engageTimer.noiseChoice])", type: "mp3")
             self.engageTimer.randomCount -= 1
-
         }
 
     } else if self.engageTimer.rest > 0 {
@@ -225,13 +223,12 @@ func runEngageTimer() {
         self.engageTimer.resetTimeAndRest()
         
         // need to also reset the random noise count
-        self.engageTimer.resetRandomNoiseCount()
-        self.engageTimer.createRandomNumberArray()
+        // self.engageTimer.createRandomNumberArray()
 
     } else {
         print("ending timer")
         playSound(sound: "boxing-bell-3", type: "wav")
-        self.engageTimer.buttonTitle = "Engage"
+        // self.engageTimer.buttonTitle = "Engage"
         engageTimer.resetAllValues()
         self.cancelTimer()
         self.interstitial.showAd()
@@ -239,66 +236,69 @@ func runEngageTimer() {
 }
     
 func pressedEngageTimerButton() {
-    // If Timer is running, stop Timer
-    UIApplication.shared.isIdleTimerDisabled = false
-    if self.engageTimer.timerIsRunning == true {
-          self.cancelTimer()
-        playSound(sound: "stop-button", type: "wav")
-          self.engageTimer.resetAllValues()
-          self.engageTimer.buttonTitle = "Engage"
-        self.checkInterstitialCount()
-        
-    // Timer has run some, but the user wants to reset to original settings
-      } else if self.engageTimer.pauseButtonTitle == "Re-start" {
-          self.cancelTimer()
-        playSound(sound: "stop-button", type: "wav")
-            self.engageTimer.resetTimeAndRest()
-            self.engageTimer.resetPrepCount()
-            self.engageTimer.buttonTitle = "Engage"
-            self.engageTimer.pauseButtonTitle = "Pause"
-            self.checkInterstitialCount()
-        
-    // Starts the timer if it has not been started before.
-      } else {
+    // Check the status of the timer
+    if self.engageTimer.timerIsRunning == false && self.engageTimer.pauseButtonIsPressed == false {
+        // reflect that the timer is running
+        self.engageTimer.timerIsRunning = true
+        // Start the timer
         UIApplication.shared.isIdleTimerDisabled = true
-          
-        // Create random number array
-        self.engageTimer.createRandomNumberArray()
-        // Capture reset values if timer is starting
-        self.engageTimer.fillResetValues()
+//        // Create random number array
+//        self.engageTimer.createRandomNumberArray()
+//        // Capture reset values if timer is starting
+//        self.engageTimer.fillResetValues()
         // Create new timer
-          self.instanstiateTimer()
+        self.instanstiateTimer()
         // Start running the new timer (Uses func runEngageTimer)
-          self.timer.connect()
-        
+        self.timer.connect()
+        // Play the sound that matches the starting button
         playSound(sound: "start-button", type: "wav")
+    } else {
+        // Stop the Timer
+        self.engageTimer.timerIsRunning = false
+        self.engageTimer.pauseButtonIsPressed = false
+        self.cancelTimer()
+        self.engageTimer.resetAllValues()
+        playSound(sound: "stop-button", type: "wav")
     }
+    
+     setButtonTitles()
 }
     
 func pressedPauseButton() {
-    
     // Check to see if the timer is running
-    if self.engageTimer.timerIsRunning == true {
+    if self.engageTimer.timerIsRunning == true && self.engageTimer.pauseButtonIsPressed == false {
         // If yes, Pause the Timer
         self.cancelTimer()
         // Play the pause sound
         playSound(sound: "pause", type: "wav")
-        // Change the button title to show the user they can re-start the timer
-        self.engageTimer.pauseButtonTitle = "Re-start"
-        // Change the button title to show the user they can stop the timer
-        self.engageTimer.buttonTitle = "Stop"
+        self.engageTimer.pauseButtonIsPressed = true
 
-     } else if self.engageTimer.buttonTitle == "Engage" {
-       return
    } else {
         // Restart the Timer
         playSound(sound: "pause", type: "wav")
         self.instanstiateTimer()
         self.timer.connect()
         
-       self.engageTimer.pauseButtonTitle = "Pause"
+        self.engageTimer.pauseButtonIsPressed = false
      }
+    
+    setButtonTitles()
 }
+    
+    func setButtonTitles() {
+        if self.engageTimer.timerIsRunning == false && self.engageTimer.pauseButtonIsPressed == false {
+            self.engageTimer.buttonTitle = "Engage"
+        } else {
+            self.engageTimer.buttonTitle = "Reset"
+        }
+        
+        if self.engageTimer.pauseButtonIsPressed == true {
+            self.engageTimer.pauseButtonTitle = "Resume"
+        } else {
+            self.engageTimer.pauseButtonTitle = "Pause"
+        }
+    }
+    
     
 func instanstiateTimer() {
     self.engageTimer.timerIsRunning = true

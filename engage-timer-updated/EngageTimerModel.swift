@@ -33,20 +33,6 @@ class EngageTimer: ObservableObject, Identifiable {
     
     @Published var time = UserDefaults.standard.integer(forKey: "time") {
         didSet {
-//         Check to make sure the random count wont crash the app
-//            if randomCountSpeed == 3 {
-//                if time / 10 < noiseTotal {
-//                    noiseTotal = time / 10
-//                }
-//            } else if randomCountSpeed == 2 {
-//                if time / 5 < noiseTotal {
-//                    self.noiseTotal = time / 5
-//                }
-//            } else if randomCountSpeed == 1 {
-//                if time - 3 < noiseTotal {
-//                    noiseTotal = time - 3
-//                }
-//            }
             UserDefaults.standard.set(self.time, forKey: "time")
         }
     }
@@ -73,6 +59,7 @@ class EngageTimer: ObservableObject, Identifiable {
     @Published var noiseArray = ["Clap", "Bell", "Whistle"]
     @Published var buttonTitle = "Engage"
     @Published var timerIsRunning = false
+    @Published var pauseButtonIsPressed = false
     @Published var pauseButtonTitle = "Pause"
     
     // Reset Values
@@ -87,7 +74,6 @@ class EngageTimer: ObservableObject, Identifiable {
     @Published var randomNumber = 1
     @Published var lowerRange = 1
     @Published var upperRange = 5
-    @Published var countingNumber = 1
     @Published var randomCount = 1
     
     
@@ -131,19 +117,18 @@ class EngageTimer: ObservableObject, Identifiable {
         randomCount = randomArray.count
     }
 
-    func resetRandomNoiseCount() {
-        // noiseTotal = noiseCountReset
-    }
 
         
     func createRandomNumberArray() {
         randomArray = []
-
+        var countingNumber = 1
+        
         while countingNumber < time {
             let randomNumber = Int.random(in: lowerRange...upperRange)
             countingNumber += randomNumber
             randomArray.append(countingNumber)
         }
+        countingNumber = 1
         print(randomArray)
     }
     
